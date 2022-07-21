@@ -1,0 +1,69 @@
+# Book settings
+# Learn more at https://jupyterbook.org/customize/config.html
+
+title: Inference on Causal and Structural Parametters Using ML and AI
+author: Victor Chernozhukov
+logo: Figs/main_logo_ai_light.png
+
+execute:
+  execute_notebooks: force
+
+html:
+  use_issues_button: true
+  use_repository_button: true
+  use_edit_page_button: true
+
+repository:
+  url: https://github.com/d2cml-ai/14.388_R
+  branch: master
+  path_to_book: _build/jupyter_execute/
+
+# Launch button settings
+launch_buttons:
+  binder             : false
+  binderhub          : false
+  binderhub_url      : off
+  jupyterhub         : false
+  thebe              : false
+  colab              : false
+
+# Launch button settings
+launch_buttons:
+  notebook_interface: classic #jupyterlab
+  binderhub_url: https://mybinder.org
+  colab_url: https://colab.research.google.com
+  thebe: true
+
+latex:
+  latex_engine                : "pdflatex"
+  use_jupyterbook_latex       : true
+  latex_documents:
+    targetname: book.tex
+
+notebook_interface: "notebook"
+
+    
+sphinx:
+  config:
+    html_show_copyright: false
+    latex_toplevel_sectioning: 'section'
+#    latex_show_urls: 'footnote'
+    latex_elements.papersize: a4paper
+    latex_elements.pointsize: 12pt
+    
+
+# google_analytics:
+#   mytrackingcode: UA-205698170-1
+  
+
+
+# parse:
+#   myst_enable_extensions:
+#     # don't forget to list any other extensions you want enabled,
+#     # including those that are enabled by default!
+#     - amsmath
+
+
+
+# Add GitHub buttons to your book
+# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository

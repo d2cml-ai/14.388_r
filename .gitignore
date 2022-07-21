@@ -1,0 +1,5 @@
+# .github/
+r_notebooks/.ipynb_checkpoints/
+r_notebooks/*.r
+r_notebooks/*.rmd
+.ipynb_checkpoints/
