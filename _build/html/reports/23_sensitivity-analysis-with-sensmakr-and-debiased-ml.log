@@ -32,8 +32,16 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['x= model.matrix(~  femaleR + ageR + farmerR + herderR + pastvotedR + hhsizeR)', '', 'dim(x)', '', 'd= directlyharmedR']
-...
-['dml.darfur.sensitivity <- sensemakr(model = dml.darfur.model, ', '                                treatment = "resD")', 'summary(dml.darfur.sensitivity)', '', 'plot(dml.darfur.sensitivity,nlevels = 15)']
+# loads package
+
+install.packages("librarian")
+librarian::shelf(
+  sensemakr, hdm, lfe, randomForest, zoo
+  , survival
+)
+
+# loads data
+data("darfur")
+
 -------------------
 

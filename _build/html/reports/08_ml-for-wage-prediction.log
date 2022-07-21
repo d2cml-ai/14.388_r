@@ -32,8 +32,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['## Applying the methods', '# random forest', 'fit.rf       <- randomForest(formula_basic, ntree=2000, nodesize=5, data=data_train)', '# for tuning: adjust input "mtry" to change the number of variables randomly sampled as candidates at each split', '']
+['install.packages("librarian", quiet = T)', 'librarian::shelf(', '  tidyverse', '  , randomForest', '  , rpart']
 ...
-['R2.rf  <- 1-MSE.rf[1]/var(Y_test)', 'R2.boost  <- 1-MSE.boost[1]/var(Y_test)', '', '# printing R^2', 'cat("R^2 of the random forest and boosted trees:",R2.rf,R2.boost)']
+['  , hdm', '  , quiet = T', ')', 'data = read_csv("https://raw.githubusercontent.com/d2cml-ai/14.388_R/main/Data/wage2015_subsample_inference.csv", show_col_types = F)', 'dim(data)']
 -------------------
 
