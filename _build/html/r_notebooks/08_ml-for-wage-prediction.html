@@ -92,6 +92,11 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo_mit_r.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Inference on Causal and Structural Parametters Using ML and AI</h1>
@@ -232,13 +237,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="25_dml-for-ate-and-late-of-401-k-on-wealth.html">
-   25. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="26_r-weak-iv-experiments.html">
-   26. A Simple Example of Properties of IV estimator when Instruments are Weak
+   25. A Simple Example of Properties of IV estimator when Instruments are Weak
   </a>
  </li>
 </ul>
@@ -300,7 +300,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_R/master?urlpath=tree/_build/jupyter_execute/r_notebooks/08_ml-for-wage-prediction.ipynb"
+        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_r/master?urlpath=tree/_build/jupyter_execute/r_notebooks/08_ml-for-wage-prediction.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -318,7 +318,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_R/blob/master/_build/jupyter_execute/r_notebooks/08_ml-for-wage-prediction.ipynb"
+        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_r/blob/master/_build/jupyter_execute/r_notebooks/08_ml-for-wage-prediction.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -379,7 +379,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_R"
+        <a href="https://github.com/d2cml-ai/14.388_r"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -396,7 +396,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_R/issues/new?title=Issue%20on%20page%20%2Fr_notebooks/08_ml-for-wage-prediction.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/d2cml-ai/14.388_r/issues/new?title=Issue%20on%20page%20%2Fr_notebooks/08_ml-for-wage-prediction.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -413,7 +413,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_R/edit/master/_build/jupyter_execute/r_notebooks/08_ml-for-wage-prediction.ipynb"
+        <a href="https://github.com/d2cml-ai/14.388_r/edit/master/_build/jupyter_execute/r_notebooks/08_ml-for-wage-prediction.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -662,7 +662,37 @@ The preproccessed sample consists of <span class="math notranslate nohighlight">
   It may take some time.
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message in stock(..., lib = lib, update_all = update_all, quiet = quiet, :
+“
+  These packages failed to install:
+
+  &#39;glmnnet&#39;
+
+  Check the spelling and capitalisation of the names.
+
+  Are they Bioconductor packages? If so, please install Bioconductor
+  (BiocManager and BiocBase).
+
+  Are they from GitHub? If so, please supply both the GitHub username
+  and package name, e.g. DesiQuintans/librarian”
+</pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message in librarian::shelf(tidyverse, randomForest, rpart, glmnnet, gbm, :
+“
+  These packages are not installed, so they were not attached:
+
+  &#39;glmnnet&#39;
+
+  Did they fail to install? Are they spelled correctly?”
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>5150</li><li>21</li></ol>
+</div></div>
 </div>
 <p>The outcomes <span class="math notranslate nohighlight">\(Y_i\)</span>’s are hourly (log) wages of never-married workers living in the U.S. The raw regressors <span class="math notranslate nohighlight">\(Z_i\)</span>’s consist of a variety of characteristics, including experience, education and industry and occupation indicators.</p>
 <div class="cell docutils container">
@@ -914,17 +944,17 @@ In linear models, we estimate the prediction rule of the form</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading required package: Matrix
-
-
-Attaching package: ‘Matrix’
-
-
-The following objects are masked from ‘package:tidyr’:
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attaching package: ‘Matrix’
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The following objects are masked from ‘package:tidyr’:
 
     expand, pack, unpack
-
-
-Loaded glmnet 4.1-4
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loaded glmnet 4.1-4
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R^2 using cross-validation for lasso, ridge and elastic net in the basic model: 0.2203463 0.2055758 0.2192991
@@ -1020,7 +1050,7 @@ means the process of cutting down the branches of a tree. We apply pruning to th
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cex 0.438   xlim c(0, 1)   ylim c(0, 1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cex 0.45   xlim c(0, 1)   ylim c(0, 1)
 </pre></div>
 </div>
 <img alt="../_images/08_ml-for-wage-prediction_52_1.png" src="../_images/08_ml-for-wage-prediction_52_1.png" />
@@ -1071,14 +1101,6 @@ means the process of cutting down the branches of a tree. We apply pruning to th
 
 <span class="c1"># printing R^2</span>
 <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;R^2 of the random forest and boosted trees:&quot;</span><span class="p">,</span><span class="n">R2.rf</span><span class="p">,</span><span class="n">R2.boost</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OOB generally underestimates the optimal number of iterations although predictive performance is reasonably competitive. Using cv_folds&gt;1 when calling gbm usually results in improved predictive performance.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R^2 of the random forest and boosted trees: 0.26582 0.2675069
 </pre></div>
 </div>
 </div>
@@ -1296,7 +1318,7 @@ Coefficients:
     {
         requestKernel: true,
         binderOptions: {
-            repo: "d2cml-ai/14.388_R",
+            repo: "d2cml-ai/14.388_r",
             ref: "master",
         },
         codeMirrorConfig: {

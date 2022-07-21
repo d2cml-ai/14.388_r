@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="25. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models" href="25_dml-for-ate-and-late-of-401-k-on-wealth.html" />
+    <link rel="next" title="25. A Simple Example of Properties of IV estimator when Instruments are Weak" href="26_r-weak-iv-experiments.html" />
     <link rel="prev" title="23. Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr" href="23_sensitivity-analysis-with-sensmakr-and-debiased-ml.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -92,6 +92,11 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo_mit_r.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Inference on Causal and Structural Parametters Using ML and AI</h1>
@@ -232,13 +237,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="25_dml-for-ate-and-late-of-401-k-on-wealth.html">
-   25. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="26_r-weak-iv-experiments.html">
-   26. A Simple Example of Properties of IV estimator when Instruments are Weak
+   25. A Simple Example of Properties of IV estimator when Instruments are Weak
   </a>
  </li>
 </ul>
@@ -300,7 +300,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_R/master?urlpath=tree/_build/jupyter_execute/r_notebooks/24_debiased-ml-for-partially-linear-iv-model-in-r.ipynb"
+        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_r/master?urlpath=tree/_build/jupyter_execute/r_notebooks/24_debiased-ml-for-partially-linear-iv-model-in-r.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -318,7 +318,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_R/blob/master/_build/jupyter_execute/r_notebooks/24_debiased-ml-for-partially-linear-iv-model-in-r.ipynb"
+        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_r/blob/master/_build/jupyter_execute/r_notebooks/24_debiased-ml-for-partially-linear-iv-model-in-r.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -379,7 +379,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_R"
+        <a href="https://github.com/d2cml-ai/14.388_r"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -396,7 +396,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_R/issues/new?title=Issue%20on%20page%20%2Fr_notebooks/24_debiased-ml-for-partially-linear-iv-model-in-r.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/d2cml-ai/14.388_r/issues/new?title=Issue%20on%20page%20%2Fr_notebooks/24_debiased-ml-for-partially-linear-iv-model-in-r.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -413,7 +413,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_R/edit/master/_build/jupyter_execute/r_notebooks/24_debiased-ml-for-partially-linear-iv-model-in-r.ipynb"
+        <a href="https://github.com/d2cml-ai/14.388_r/edit/master/_build/jupyter_execute/r_notebooks/24_debiased-ml-for-partially-linear-iv-model-in-r.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -952,7 +952,7 @@ F-statistic(proj model): 3.461 on 1 and 62 DF, p-value: 0.06759
     {
         requestKernel: true,
         binderOptions: {
-            repo: "d2cml-ai/14.388_R",
+            repo: "d2cml-ai/14.388_r",
             ref: "master",
         },
         codeMirrorConfig: {
@@ -982,10 +982,10 @@ F-statistic(proj model): 3.461 on 1 and 62 DF, p-value: 0.06759
             <p class="prev-next-title"><span class="section-number">23. </span>Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="25_dml-for-ate-and-late-of-401-k-on-wealth.html" title="next page">
+    <a class='right-next' id="next-link" href="26_r-weak-iv-experiments.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">25. </span>Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models</p>
+        <p class="prev-next-title"><span class="section-number">25. </span>A Simple Example of Properties of IV estimator when Instruments are Weak</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

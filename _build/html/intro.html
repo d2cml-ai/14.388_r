@@ -89,6 +89,11 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo_mit_r.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Inference on Causal and Structural Parametters Using ML and AI</h1>
@@ -229,13 +234,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="r_notebooks/25_dml-for-ate-and-late-of-401-k-on-wealth.html">
-   25. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="r_notebooks/26_r-weak-iv-experiments.html">
-   26. A Simple Example of Properties of IV estimator when Instruments are Weak
+   25. A Simple Example of Properties of IV estimator when Instruments are Weak
   </a>
  </li>
 </ul>
@@ -311,7 +311,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_R"
+        <a href="https://github.com/d2cml-ai/14.388_r"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -328,7 +328,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_R/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/d2cml-ai/14.388_r/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -345,7 +345,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_R/edit/master/_build/jupyter_execute/intro.md"
+        <a href="https://github.com/d2cml-ai/14.388_r/edit/master/_build/jupyter_execute/intro.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -463,8 +463,7 @@ title="Print to PDF"
 <li class="toctree-l1"><a class="reference internal" href="r_notebooks/22_debiased-ml-for-partially-linear-model-in-r.html">22. Double/Debiased Machine Learning for the Partially Linear Regression Model.</a></li>
 <li class="toctree-l1"><a class="reference internal" href="r_notebooks/23_sensitivity-analysis-with-sensmakr-and-debiased-ml.html">23. Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr</a></li>
 <li class="toctree-l1"><a class="reference internal" href="r_notebooks/24_debiased-ml-for-partially-linear-iv-model-in-r.html">24. Double/Debiased ML for Partially Linear IV Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="r_notebooks/25_dml-for-ate-and-late-of-401-k-on-wealth.html">25. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="r_notebooks/26_r-weak-iv-experiments.html">26. A Simple Example of Properties of IV estimator when Instruments are Weak</a></li>
+<li class="toctree-l1"><a class="reference internal" href="r_notebooks/26_r-weak-iv-experiments.html">25. A Simple Example of Properties of IV estimator when Instruments are Weak</a></li>
 </ul>
 </div>
 </section>
@@ -473,7 +472,7 @@ title="Print to PDF"
     {
         requestKernel: true,
         binderOptions: {
-            repo: "d2cml-ai/14.388_R",
+            repo: "d2cml-ai/14.388_r",
             ref: "master",
         },
         codeMirrorConfig: {

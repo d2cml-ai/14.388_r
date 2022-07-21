@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>25. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
+    <title>Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="26. A Simple Example of Properties of IV estimator when Instruments are Weak" href="26_r-weak-iv-experiments.html" />
-    <link rel="prev" title="24. Double/Debiased ML for Partially Linear IV Model" href="24_debiased-ml-for-partially-linear-iv-model-in-r.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -92,6 +90,11 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo_mit_r.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Inference on Causal and Structural Parametters Using ML and AI</h1>
@@ -110,7 +113,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01_r-notebook-linear-model-overfiting.html">
    1. Simple Exercise on Overfitting
@@ -231,14 +234,9 @@ const thebe_selector_output = ".output, .cell_output"
    24. Double/Debiased ML for Partially Linear IV Model
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   25. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
-  </a>
- </li>
  <li class="toctree-l1">
   <a class="reference internal" href="26_r-weak-iv-experiments.html">
-   26. A Simple Example of Properties of IV estimator when Instruments are Weak
+   25. A Simple Example of Properties of IV estimator when Instruments are Weak
   </a>
  </li>
 </ul>
@@ -300,7 +298,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_R/master?urlpath=tree/_build/jupyter_execute/r_notebooks/25_dml-for-ate-and-late-of-401-k-on-wealth.ipynb"
+        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_r/master?urlpath=tree/_build/jupyter_execute/r_notebooks/25_dml-for-ate-and-late-of-401-k-on-wealth.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -318,7 +316,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_R/blob/master/_build/jupyter_execute/r_notebooks/25_dml-for-ate-and-late-of-401-k-on-wealth.ipynb"
+        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_r/blob/master/_build/jupyter_execute/r_notebooks/25_dml-for-ate-and-late-of-401-k-on-wealth.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -379,7 +377,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_R"
+        <a href="https://github.com/d2cml-ai/14.388_r"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -396,7 +394,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_R/issues/new?title=Issue%20on%20page%20%2Fr_notebooks/25_dml-for-ate-and-late-of-401-k-on-wealth.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/d2cml-ai/14.388_r/issues/new?title=Issue%20on%20page%20%2Fr_notebooks/25_dml-for-ate-and-late-of-401-k-on-wealth.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -413,7 +411,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_R/edit/master/_build/jupyter_execute/r_notebooks/25_dml-for-ate-and-late-of-401-k-on-wealth.ipynb"
+        <a href="https://github.com/d2cml-ai/14.388_r/edit/master/_build/jupyter_execute/r_notebooks/25_dml-for-ate-and-late-of-401-k-on-wealth.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -502,44 +500,44 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#impact-of-401-k-on-financial-wealth">
-   25.1. Impact of 401(k) on  Financial Wealth
+   Impact of 401(k) on  Financial Wealth
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#data">
-     25.1.1. Data
+     Data
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#double-ml-package">
-   25.2. Double ML package
+   Double ML package
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#estimating-the-ate-of-401-k-eligibility-on-net-financial-assets">
-   25.3. Estimating the ATE of 401(k) Eligibility on Net Financial Assets
+   Estimating the ATE of 401(k) Eligibility on Net Financial Assets
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#partially-linear-regression-models-plr">
-   25.4. Partially Linear Regression Models (PLR)
+   Partially Linear Regression Models (PLR)
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#interactive-regression-model-irm">
-   25.5. Interactive Regression Model (IRM)
+   Interactive Regression Model (IRM)
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#local-average-treatment-effects-of-401-k-participation-on-net-financial-assets">
-   25.6. Local Average Treatment Effects of 401(k) Participation on Net Financial Assets
+   Local Average Treatment Effects of 401(k) Participation on Net Financial Assets
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#interactive-iv-model-iivm">
-     25.6.1. Interactive IV Model (IIVM)
+     Interactive IV Model (IIVM)
     </a>
    </li>
   </ul>
@@ -565,44 +563,44 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#impact-of-401-k-on-financial-wealth">
-   25.1. Impact of 401(k) on  Financial Wealth
+   Impact of 401(k) on  Financial Wealth
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#data">
-     25.1.1. Data
+     Data
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#double-ml-package">
-   25.2. Double ML package
+   Double ML package
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#estimating-the-ate-of-401-k-eligibility-on-net-financial-assets">
-   25.3. Estimating the ATE of 401(k) Eligibility on Net Financial Assets
+   Estimating the ATE of 401(k) Eligibility on Net Financial Assets
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#partially-linear-regression-models-plr">
-   25.4. Partially Linear Regression Models (PLR)
+   Partially Linear Regression Models (PLR)
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#interactive-regression-model-irm">
-   25.5. Interactive Regression Model (IRM)
+   Interactive Regression Model (IRM)
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#local-average-treatment-effects-of-401-k-participation-on-net-financial-assets">
-   25.6. Local Average Treatment Effects of 401(k) Participation on Net Financial Assets
+   Local Average Treatment Effects of 401(k) Participation on Net Financial Assets
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#interactive-iv-model-iivm">
-     25.6.1. Interactive IV Model (IIVM)
+     Interactive IV Model (IIVM)
     </a>
    </li>
   </ul>
@@ -618,14 +616,14 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="inference-on-predictive-and-causal-effects-in-high-dimensional-nonlinear-models">
-<h1><span class="section-number">25. </span>Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models<a class="headerlink" href="#inference-on-predictive-and-causal-effects-in-high-dimensional-nonlinear-models" title="Permalink to this headline">#</a></h1>
+<h1>Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models<a class="headerlink" href="#inference-on-predictive-and-causal-effects-in-high-dimensional-nonlinear-models" title="Permalink to this headline">#</a></h1>
 <section id="impact-of-401-k-on-financial-wealth">
-<h2><span class="section-number">25.1. </span>Impact of 401(k) on  Financial Wealth<a class="headerlink" href="#impact-of-401-k-on-financial-wealth" title="Permalink to this headline">#</a></h2>
+<h2>Impact of 401(k) on  Financial Wealth<a class="headerlink" href="#impact-of-401-k-on-financial-wealth" title="Permalink to this headline">#</a></h2>
 <p>As a practical illustration of the methods developed in this lecture, we consider estimation of the effect of 401(k) eligibility and participation
 on accumulated assets. 401(k) plans are pension accounts sponsored by employers. The key problem in determining the effect of participation in 401(k) plans on accumulated assets is saver heterogeneity coupled with the fact that the decision to enroll in a 401(k) is non-random. It is generally recognized that some people have a higher preference for saving than others. It also seems likely that those individuals with high unobserved preference for saving would be most likely to choose to participate in tax-advantaged retirement savings plans and would tend to have otherwise high amounts of accumulated assets. The presence of unobserved savings preferences with these properties then implies that conventional estimates that do not account for saver heterogeneity and endogeneity of participation will be biased upward, tending to overstate the savings effects of 401(k) participation.</p>
 <p>One can argue that eligibility for enrolling in a 401(k) plan in this data can be taken as exogenous after conditioning on a few observables of which the most important for their argument is income. The basic idea is that, at least around the time 401(k)’s initially became available, people were unlikely to be basing their employment decisions on whether an employer offered a 401(k) but would instead focus on income and other aspects of the job.</p>
 <section id="data">
-<h3><span class="section-number">25.1.1. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h3>
+<h3>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h3>
 <p>The data set can be loaded from the <code class="docutils literal notranslate"><span class="pre">hdm</span></code> package for R by typing</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -714,7 +712,7 @@ on accumulated assets. 401(k) plans are pension accounts sponsored by employers.
 </section>
 </section>
 <section id="double-ml-package">
-<h2><span class="section-number">25.2. </span>Double ML package<a class="headerlink" href="#double-ml-package" title="Permalink to this headline">#</a></h2>
+<h2>Double ML package<a class="headerlink" href="#double-ml-package" title="Permalink to this headline">#</a></h2>
 <p>We are interested in valid estimators of the average treatment effect of <code class="docutils literal notranslate"><span class="pre">e401</span></code> and <code class="docutils literal notranslate"><span class="pre">p401</span></code> on <code class="docutils literal notranslate"><span class="pre">net_tfa</span></code>. To get those estimators, we use the <code class="docutils literal notranslate"><span class="pre">DoubleML</span></code> package that internally builds on mlr3. You find additional information on the package on the package website <a class="reference external" href="https://docs.doubleml.org/">https://docs.doubleml.org/</a> and the R documentation page <a class="reference external" href="https://docs.doubleml.org/r/stable/">https://docs.doubleml.org/r/stable/</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -757,7 +755,7 @@ on accumulated assets. 401(k) plans are pension accounts sponsored by employers.
 <p>As mentioned, in the tutorial we use the meta package <code class="docutils literal notranslate"><span class="pre">mlr3</span></code> to generate predictions with machine learning methods. A comprehensive introduction and description of the <code class="docutils literal notranslate"><span class="pre">mlr3</span></code> package is provided in the <a class="reference external" href="https://mlr3book.mlr-org.com/">mlr3book</a>. A list of all learners that you can use in <code class="docutils literal notranslate"><span class="pre">mlr3</span></code> can be found <a class="reference external" href="https://mlr3extralearners.mlr-org.com/articles/learners/list_learners.html">here</a>. The entry in the columns <em>mlr3 Package</em> and <em>Packages</em> indicate which packages must be installed/loaded in your R session.</p>
 </section>
 <section id="estimating-the-ate-of-401-k-eligibility-on-net-financial-assets">
-<h2><span class="section-number">25.3. </span>Estimating the ATE of 401(k) Eligibility on Net Financial Assets<a class="headerlink" href="#estimating-the-ate-of-401-k-eligibility-on-net-financial-assets" title="Permalink to this headline">#</a></h2>
+<h2>Estimating the ATE of 401(k) Eligibility on Net Financial Assets<a class="headerlink" href="#estimating-the-ate-of-401-k-eligibility-on-net-financial-assets" title="Permalink to this headline">#</a></h2>
 <p>We first look at the treatment effect of e401 on net total financial assets. We give estimates of the ATE and ATT that corresponds to the linear model</p>
 <div class="math notranslate nohighlight">
 \[
@@ -789,7 +787,7 @@ Y = D \alpha + f(X)'\beta+ \epsilon,
 </div>
 </section>
 <section id="partially-linear-regression-models-plr">
-<h2><span class="section-number">25.4. </span>Partially Linear Regression Models (PLR)<a class="headerlink" href="#partially-linear-regression-models-plr" title="Permalink to this headline">#</a></h2>
+<h2>Partially Linear Regression Models (PLR)<a class="headerlink" href="#partially-linear-regression-models-plr" title="Permalink to this headline">#</a></h2>
 <p>We start using lasso to estimate the function <span class="math notranslate nohighlight">\(g_0\)</span> and <span class="math notranslate nohighlight">\(m_0\)</span> in the following PLR model:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1058,7 +1056,7 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 </div>
 </section>
 <section id="interactive-regression-model-irm">
-<h2><span class="section-number">25.5. </span>Interactive Regression Model (IRM)<a class="headerlink" href="#interactive-regression-model-irm" title="Permalink to this headline">#</a></h2>
+<h2>Interactive Regression Model (IRM)<a class="headerlink" href="#interactive-regression-model-irm" title="Permalink to this headline">#</a></h2>
 <p>Next, we consider estimation of average treatment effects when treatment effects are fully heterogeneous:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1290,9 +1288,9 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 substantially attenuated relative to the baseline estimate (<em>19559</em>) that does not account for confounding. They suggest much smaller causal effects of 401(k) eligiblity on financial asset holdings.</p>
 </section>
 <section id="local-average-treatment-effects-of-401-k-participation-on-net-financial-assets">
-<h2><span class="section-number">25.6. </span>Local Average Treatment Effects of 401(k) Participation on Net Financial Assets<a class="headerlink" href="#local-average-treatment-effects-of-401-k-participation-on-net-financial-assets" title="Permalink to this headline">#</a></h2>
+<h2>Local Average Treatment Effects of 401(k) Participation on Net Financial Assets<a class="headerlink" href="#local-average-treatment-effects-of-401-k-participation-on-net-financial-assets" title="Permalink to this headline">#</a></h2>
 <section id="interactive-iv-model-iivm">
-<h3><span class="section-number">25.6.1. </span>Interactive IV Model (IIVM)<a class="headerlink" href="#interactive-iv-model-iivm" title="Permalink to this headline">#</a></h3>
+<h3>Interactive IV Model (IIVM)<a class="headerlink" href="#interactive-iv-model-iivm" title="Permalink to this headline">#</a></h3>
 <p>Now, we consider estimation of local average treatment effects (LATE) of participation with the binary instrument <code class="docutils literal notranslate"><span class="pre">e401</span></code>. As before, <span class="math notranslate nohighlight">\(Y\)</span> denotes the outcome <code class="docutils literal notranslate"><span class="pre">net_tfa</span></code>, and <span class="math notranslate nohighlight">\(X\)</span> is the vector of covariates.  Here the structural equation model is:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1597,7 +1595,7 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
     {
         requestKernel: true,
         binderOptions: {
-            repo: "d2cml-ai/14.388_R",
+            repo: "d2cml-ai/14.388_r",
             ref: "master",
         },
         codeMirrorConfig: {
@@ -1620,20 +1618,6 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="24_debiased-ml-for-partially-linear-iv-model-in-r.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">24. </span>Double/Debiased ML for Partially Linear IV Model</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="26_r-weak-iv-experiments.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">26. </span>A Simple Example of Properties of IV estimator when Instruments are Weak</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
 </div>
             </footer>
         </div>
