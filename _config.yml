@@ -3,7 +3,7 @@
 
 title: Inference on Causal and Structural Parametters Using ML and AI
 author: Victor Chernozhukov
-logo: Figs/main_logo_ai_light.png
+logo: figs/logo_mit_r.png
 
 execute:
   execute_notebooks: force
@@ -14,7 +14,7 @@ html:
   use_edit_page_button: true
 
 repository:
-  url: https://github.com/d2cml-ai/14.388_R
+  url: https://github.com/d2cml-ai/14.388_r
   branch: master
   path_to_book: _build/jupyter_execute/
 
