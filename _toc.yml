@@ -30,5 +30,5 @@ chapters:
   - file: r_notebooks/22_debiased-ml-for-partially-linear-model-in-r
   - file: r_notebooks/23_sensitivity-analysis-with-sensmakr-and-debiased-ml
   - file: r_notebooks/24_debiased-ml-for-partially-linear-iv-model-in-r
-  - file: r_notebooks/25_dml-for-ate-and-late-of-401-k-on-wealth
+  # - file: r_notebooks/25_dml-for-ate-and-late-of-401-k-on-wealth
   - file: r_notebooks/26_r-weak-iv-experiments
