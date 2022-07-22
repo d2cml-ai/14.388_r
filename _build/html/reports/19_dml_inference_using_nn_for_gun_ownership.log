@@ -1,15 +1,4 @@
 Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.13/x64/lib/python3.8/site-packages/nbclient/client.py", line 730, in _async_poll_for_reply
-    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
-  File "/opt/hostedtoolcache/Python/3.8.13/x64/lib/python3.8/site-packages/nbclient/util.py", line 96, in ensure_async
-    result = await obj
-  File "/opt/hostedtoolcache/Python/3.8.13/x64/lib/python3.8/site-packages/jupyter_client/channels.py", line 230, in get_msg
-    raise Empty
-_queue.Empty
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
   File "/opt/hostedtoolcache/Python/3.8.13/x64/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
     executenb(
   File "/opt/hostedtoolcache/Python/3.8.13/x64/lib/python3.8/site-packages/nbclient/client.py", line 1204, in execute
@@ -22,18 +11,101 @@ Traceback (most recent call last):
     return future.result()
   File "/opt/hostedtoolcache/Python/3.8.13/x64/lib/python3.8/site-packages/nbclient/client.py", line 663, in async_execute
     await self.async_execute_cell(
-  File "/opt/hostedtoolcache/Python/3.8.13/x64/lib/python3.8/site-packages/nbclient/client.py", line 949, in async_execute_cell
-    exec_reply = await self.task_poll_for_reply
-  File "/opt/hostedtoolcache/Python/3.8.13/x64/lib/python3.8/site-packages/nbclient/client.py", line 754, in _async_poll_for_reply
-    await self._async_handle_timeout(timeout, cell)
-  File "/opt/hostedtoolcache/Python/3.8.13/x64/lib/python3.8/site-packages/nbclient/client.py", line 801, in _async_handle_timeout
-    raise CellTimeoutError.error_from_timeout_and_cell(
-nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
-The message was: Cell execution timed out.
-Here is a preview of the cell contents:
--------------------
-['# read in dataset', 'data <- read_csv("https://raw.githubusercontent.com/d2cml-ai/14.388_R/main/Data/gun_clean.csv", show_col_types = F) ', '', '', '################## Find Variable Names from the Dataset ###################']
-...
-['# partial out year and county fixed effects from variables in varlist', 'for(i in 1:length(varlist)){', '  form <- as.formula(paste(varlist[i], "~", paste(paste(year,collapse="+"),  paste(fixed,collapse="+"), sep="+")))', '  rdata[, varlist[i]] <- lm(form, data)$residuals', '}']
--------------------
+  File "/opt/hostedtoolcache/Python/3.8.13/x64/lib/python3.8/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.8.13/x64/lib/python3.8/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# read in dataset
+data <- read_csv("https://raw.githubusercontent.com/d2cml-ai/14.388_R/main/Data/gun_clean.csv", show_col_types = F) 
+
+
+################## Find Variable Names from the Dataset ###################
+
+varlist <- function (df=NULL,type=c("numeric","factor","character"), pattern="", exclude=NULL) {
+  vars <- character(0)
+  if (any(type %in% "numeric")) {
+    vars <- c(vars,names(df)[sapply(df,is.numeric)])
+  }
+  if (any(type %in% "factor")) {
+    vars <- c(vars,names(df)[sapply(df,is.factor)])
+  }  
+  if (any(type %in% "character")) {
+    vars <- c(vars,names(df)[sapply(df,is.character)])
+  }  
+  vars[(!vars %in% exclude) & grepl(vars,pattern=pattern)]
+}
+
+########################### Create Variables ##############################
+
+# dummy variables for year and county fixed effects
+fixed  <- grep("X_Jfips", names(data), value=TRUE, fixed=TRUE)
+year   <- varlist(data, pattern="X_Tyear")
+
+# census control variables
+census     <- NULL
+census_var <- c("^AGE", "^BN", "^BP", "^BZ", "^ED", "^EL","^HI", "^HS", "^INC", "^LF", "^LN", "^PI", "^PO", "^PP", "^PV", "^SPR", "^VS")
+
+for(i in 1:length(census_var)){
+  census  <- append(census, varlist(data, pattern=census_var[i]))
+}
+
+############################### Variables #################################
+
+# treatment variable
+d     <- "logfssl"
+
+# outcome variable
+y     <- "logghomr"
+
+# other control variables
+X1    <- c("logrobr", "logburg", "burg_missing", "robrate_missing")
+X2    <- c("newblack", "newfhh", "newmove", "newdens", "newmal")
+
+######################  Partial-out Fixed Effects #########################
+
+# new dataset for partialled-out variables
+rdata <- as.data.frame(data$CountyCode) 
+colnames(rdata) <- "CountyCode"
+
+# variables to partial-out
+varlist <- c(y, d,X1, X2, census)
+
+# partial out year and county fixed effects from variables in varlist
+for(i in 1:length(varlist)){
+  form <- as.formula(paste(varlist[i], "~", paste(paste(year,collapse="+"),  paste(fixed,collapse="+"), sep="+")))
+  rdata[, varlist[i]] <- lm(form, data)$residuals
+}
+------------------
+
+Error in open.connection(structure(4L, class = c("curl", "connection"), conn_id = <pointer: 0x559>), : HTTP error 404.
+Traceback:
+
+1. read_csv("https://raw.githubusercontent.com/d2cml-ai/14.388_R/main/Data/gun_clean.csv", 
+ .     show_col_types = F)
+2. vroom::vroom(file, delim = ",", col_names = col_names, col_types = col_types, 
+ .     col_select = {
+ .         {
+ .             col_select
+ .         }
+ .     }, id = id, .name_repair = name_repair, skip = skip, n_max = n_max, 
+ .     na = na, quote = quote, comment = comment, skip_empty_rows = skip_empty_rows, 
+ .     trim_ws = trim_ws, escape_double = TRUE, escape_backslash = FALSE, 
+ .     locale = locale, guess_max = guess_max, show_col_types = show_col_types, 
+ .     progress = progress, altrep = lazy, num_threads = num_threads)
+3. vroom_(file, delim = delim %||% col_types$delim, col_names = col_names, 
+ .     col_types = col_types, id = id, skip = skip, col_select = col_select, 
+ .     name_repair = .name_repair, na = na, quote = quote, trim_ws = trim_ws, 
+ .     escape_double = escape_double, escape_backslash = escape_backslash, 
+ .     comment = comment, skip_empty_rows = skip_empty_rows, locale = locale, 
+ .     guess_max = guess_max, n_max = n_max, altrep = vroom_altrep(altrep), 
+ .     num_threads = num_threads, progress = progress)
+4. (function (con, ...) 
+ . UseMethod("open"))(structure(4L, class = c("curl", "connection"
+ . ), conn_id = <pointer: 0x559>), "rb")
+5. open.connection(structure(4L, class = c("curl", "connection"), conn_id = <pointer: 0x559>), 
+ .     "rb")
+ERROR: Error in open.connection(structure(4L, class = c("curl", "connection"), conn_id = <pointer: 0x559>), : HTTP error 404.
+
 

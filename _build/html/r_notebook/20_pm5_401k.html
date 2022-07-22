@@ -1,0 +1,1760 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>20. DML for ATE and LATE of 401(k) on Wealth &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="21. Debiased ML for Partially Linear Model in R" href="21_identification_analysis_of_401_k_example_w_dags.html" />
+    <link rel="prev" title="19. DML inference using NN for gun ownership" href="19_dml_inference_using_nn_for_gun_ownership.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/mit.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Inference on Causal and Structural Parametters Using ML and AI</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_r_notebook_linear_model_overfiting.html">
+   1. Linear Model Overfiting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_ols_and_lasso_for_wage_prediction.html">
+   2. OLS and lasso for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_ols_and_lasso_for_gender_wage_gap_inference.html">
+   3. OLS and lasso for gender wage gap inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_r_notebook_some_rct_examples.html">
+   4. Some RCT Examples
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_r_notebook_analyzing_rct_with_precision.html">
+   5. Analyzing RCT reemployment experiment with Precision by Ajusting for Baseline Covariates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_analyzing_rct_reemployment_experiment.html">
+   6. Analyzing RCT reemployment experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_r_notebook_linear_penalized_regs.html">
+   7. Linear Penalized Regs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_ml_for_wage_prediction.html">
+   8. ML for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_r_notebook_experiment_on_orthogonal_learning.html">
+   9. Experiment on orthogonal Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_double_lasso_for_the_convergence_hypothesis.html">
+   10. Double Lasso for the convergence hypothesis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_heterogenous_wage_effects.html">
+   11. Heterogenous Wage Effects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_r_colliderbias_hollywood.html">
+   12. ColliderBias Hollywood
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13_deep_neural_networks_for_wage_prediction.html">
+   13. Deep Neural Networks for Wage Prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_automl_for_wage_prediction.html">
+   14. AutoML for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15_functional_approximation_by_nn_and_rf.html">
+   15. Functional Approximation By NN and RF
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_notebook_dagitty.html">
+   16. Notebook-DAGitty
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_notebook_dosearch.html">
+   17. Notebook-Dosearch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18_dml_inference_for_gun_ownership.html">
+   18. DML inference for gun ownership
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19_dml_inference_using_nn_for_gun_ownership.html">
+   19. DML inference using NN for gun ownership
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   20. DML for ATE and LATE of 401(k) on Wealth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21_identification_analysis_of_401_k_example_w_dags.html">
+   21. Debiased ML for Partially Linear Model in R
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22_debiased_ml_for_partially_linear_model_in_r.html">
+   22. Debiased ML for Partially Linear Model in R
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">
+   23. Sensitivity Analysis with Sensmakr and Debiased ML
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="24_debiased_ml_for_partially_linear_iv_model_in_r.html">
+   24. Debiased ML for Partially Linear IV Model in R
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_r_weak_iv_experiments.html">
+   25. Weak IV Experiments
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_r/master?urlpath=tree/_build/jupyter_execute/r_notebook/20_pm5_401k.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_r/blob/master/_build/jupyter_execute/r_notebook/20_pm5_401k.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_r"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_r/issues/new?title=Issue%20on%20page%20%2Fr_notebook/20_pm5_401k.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_r/edit/master/_build/jupyter_execute/r_notebook/20_pm5_401k.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/r_notebook/20_pm5_401k.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#impact-of-401-k-on-financial-wealth">
+   20.1. Impact of 401(k) on  Financial Wealth
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data">
+     20.1.1. Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#double-ml-package">
+   20.2. Double ML package
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#estimating-the-ate-of-401-k-eligibility-on-net-financial-assets">
+   20.3. Estimating the ATE of 401(k) Eligibility on Net Financial Assets
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#main-data">
+     20.3.1. Main data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#auxiliary-data">
+     20.3.2. Auxiliary data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#partially-linear-regression-models-plr">
+   20.4. Partially Linear Regression Models (PLR)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-ml-is-an-environment-info">
+     20.4.1. data_ml is an environment info
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interactive-regression-model-irm">
+   20.5. Interactive Regression Model (IRM)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#local-average-treatment-effects-of-401-k-participation-on-net-financial-assets">
+   20.6. Local Average Treatment Effects of 401(k) Participation on Net Financial Assets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interactive-iv-model-iivm">
+   20.7. Interactive IV Model (IIVM)
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>DML for ATE and LATE of 401(k) on Wealth</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#impact-of-401-k-on-financial-wealth">
+   20.1. Impact of 401(k) on  Financial Wealth
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data">
+     20.1.1. Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#double-ml-package">
+   20.2. Double ML package
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#estimating-the-ate-of-401-k-eligibility-on-net-financial-assets">
+   20.3. Estimating the ATE of 401(k) Eligibility on Net Financial Assets
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#main-data">
+     20.3.1. Main data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#auxiliary-data">
+     20.3.2. Auxiliary data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#partially-linear-regression-models-plr">
+   20.4. Partially Linear Regression Models (PLR)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-ml-is-an-environment-info">
+     20.4.1. data_ml is an environment info
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interactive-regression-model-irm">
+   20.5. Interactive Regression Model (IRM)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#local-average-treatment-effects-of-401-k-participation-on-net-financial-assets">
+   20.6. Local Average Treatment Effects of 401(k) Participation on Net Financial Assets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interactive-iv-model-iivm">
+   20.7. Interactive IV Model (IIVM)
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="dml-for-ate-and-late-of-401-k-on-wealth">
+<h1><span class="section-number">20. </span>DML for ATE and LATE of 401(k) on Wealth<a class="headerlink" href="#dml-for-ate-and-late-of-401-k-on-wealth" title="Permalink to this headline">#</a></h1>
+<section id="impact-of-401-k-on-financial-wealth">
+<h2><span class="section-number">20.1. </span>Impact of 401(k) on  Financial Wealth<a class="headerlink" href="#impact-of-401-k-on-financial-wealth" title="Permalink to this headline">#</a></h2>
+<p>As a practical illustration of the methods developed in this lecture, we consider estimation of the effect of 401(k) eligibility and participation
+on accumulated assets. 401(k) plans are pension accounts sponsored by employers. The key problem in determining the effect of participation in 401(k) plans on accumulated assets is saver heterogeneity coupled with the fact that the decision to enroll in a 401(k) is non-random. It is generally recognized that some people have a higher preference for saving than others. It also seems likely that those individuals with high unobserved preference for saving would be most likely to choose to participate in tax-advantaged retirement savings plans and would tend to have otherwise high amounts of accumulated assets. The presence of unobserved savings preferences with these properties then implies that conventional estimates that do not account for saver heterogeneity and endogeneity of participation will be biased upward, tending to overstate the savings effects of 401(k) participation.</p>
+<p>One can argue that eligibility for enrolling in a 401(k) plan in this data can be taken as exogenous after conditioning on a few observables of which the most important for their argument is income. The basic idea is that, at least around the time 401(k)’s initially became available, people were unlikely to be basing their employment decisions on whether an employer offered a 401(k) but would instead focus on income and other aspects of the job.</p>
+<section id="data">
+<h3><span class="section-number">20.1.1. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h3>
+<p>The data set can be loaded from the <code class="docutils literal notranslate"><span class="pre">hdm</span></code> package for R by typing</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;librarian&quot;</span><span class="p">)</span>
+<span class="n">librarian</span><span class="o">::</span><span class="nf">shelf</span><span class="p">(</span>
+  <span class="n">hdm</span><span class="p">,</span> <span class="n">ggplot2</span><span class="p">,</span> 
+  <span class="p">,</span> <span class="n">DoubleML</span>
+  <span class="p">,</span> <span class="n">mlr3learners</span>
+  <span class="p">,</span> <span class="n">mlr3</span>
+  <span class="p">,</span> <span class="n">data.table</span>
+  <span class="p">,</span> <span class="n">randomForest</span>
+  <span class="p">,</span> <span class="n">ranger</span>
+  <span class="p">,</span> <span class="n">xgboost</span>
+<span class="p">)</span>
+
+<span class="nf">library</span><span class="p">(</span><span class="n">hdm</span><span class="p">)</span> 
+<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<span class="nf">data</span><span class="p">(</span><span class="n">pension</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">&lt;-</span> <span class="n">pension</span> 
+<span class="nf">dim</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing package into ‘/home/runner/work/_temp/Library’
+(as ‘lib’ is unspecified)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  These packages will be installed:
+
+  &#39;ranger&#39;
+
+  It may take some time.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># save(data, file = &quot;../data/pension.RData&quot;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>See the “Details” section on the description of the data set, which can be accessed by</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># help(pension)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The data consist of 9,915 observations at the household level drawn from the 1991 Survey of Income and Program Participation (SIPP).  All the variables are referred to 1990. We use net financial assets (<em>net_tfa</em>) as the outcome variable, <span class="math notranslate nohighlight">\(Y\)</span>,  in our analysis. The net financial assets are computed as the sum of IRA balances, 401(k) balances, checking accounts, saving bonds, other interest-earning accounts, other interest-earning assets, stocks, and mutual funds less non mortgage debts.</p>
+<p>Among the <span class="math notranslate nohighlight">\(9915\)</span> individuals, <span class="math notranslate nohighlight">\(3682\)</span> are eligible to participate in the program. The variable <em>e401</em> indicates eligibility and <em>p401</em> indicates participation, respectively.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hist_e401</span> <span class="o">=</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">e401</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="n">e401</span><span class="p">)))</span> <span class="o">+</span> <span class="nf">geom_bar</span><span class="p">()</span>
+<span class="n">hist_e401</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/20_pm5_401k_9_0.png" src="../_images/20_pm5_401k_9_0.png" />
+</div>
+</div>
+<p>Eligibility is highly associated with financial wealth:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">dens_net_tfa</span> <span class="o">=</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">net_tfa</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="n">e401</span><span class="p">),</span> <span class="n">fill</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="n">e401</span><span class="p">))</span> <span class="p">)</span> <span class="o">+</span> 
+                    <span class="nf">geom_density</span><span class="p">()</span> <span class="o">+</span> <span class="nf">xlim</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">-20000</span><span class="p">,</span> <span class="m">150000</span><span class="p">))</span> <span class="o">+</span> 
+                    <span class="nf">facet_wrap</span><span class="p">(</span><span class="n">.</span><span class="o">~</span><span class="n">e401</span><span class="p">)</span> 
+                    
+<span class="n">dens_net_tfa</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
+“Removed 340 rows containing non-finite values (stat_density).”
+</pre></div>
+</div>
+<img alt="../_images/20_pm5_401k_11_1.png" src="../_images/20_pm5_401k_11_1.png" />
+</div>
+</div>
+<p>The unconditional APE of e401 is about <span class="math notranslate nohighlight">\(19559\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">e1</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">$</span><span class="n">e401</span><span class="o">==</span><span class="m">1</span><span class="p">,]</span>
+<span class="n">e0</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">$</span><span class="n">e401</span><span class="o">==</span><span class="m">0</span><span class="p">,]</span>
+<span class="nf">round</span><span class="p">(</span><span class="nf">mean</span><span class="p">(</span><span class="n">e1</span><span class="o">$</span><span class="n">net_tfa</span><span class="p">)</span><span class="o">-</span><span class="nf">mean</span><span class="p">(</span><span class="n">e0</span><span class="o">$</span><span class="n">net_tfa</span><span class="p">),</span><span class="m">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">19559</div></div>
+</div>
+<p>Among the <span class="math notranslate nohighlight">\(3682\)</span> individuals that  are eligible, <span class="math notranslate nohighlight">\(2594\)</span> decided to participate in the program. The unconditional APE of p401 is about <span class="math notranslate nohighlight">\(27372\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">$</span><span class="n">p401</span><span class="o">==</span><span class="m">1</span><span class="p">,]</span>
+<span class="n">p0</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">$</span><span class="n">p401</span><span class="o">==</span><span class="m">0</span><span class="p">,]</span>
+<span class="nf">round</span><span class="p">(</span><span class="nf">mean</span><span class="p">(</span><span class="n">p1</span><span class="o">$</span><span class="n">net_tfa</span><span class="p">)</span><span class="o">-</span><span class="nf">mean</span><span class="p">(</span><span class="n">p0</span><span class="o">$</span><span class="n">net_tfa</span><span class="p">),</span><span class="m">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">27372</div></div>
+</div>
+<p>As discussed, these estimates are biased since they do not account for saver heterogeneity and endogeneity of participation.</p>
+</section>
+</section>
+<section id="double-ml-package">
+<h2><span class="section-number">20.2. </span>Double ML package<a class="headerlink" href="#double-ml-package" title="Permalink to this headline">#</a></h2>
+<p>We are interested in valid estimators of the average treatment effect of <code class="docutils literal notranslate"><span class="pre">e401</span></code> and <code class="docutils literal notranslate"><span class="pre">p401</span></code> on <code class="docutils literal notranslate"><span class="pre">net_tfa</span></code>. To get those estimators, we use the <code class="docutils literal notranslate"><span class="pre">DoubleML</span></code> package that internally builds on mlr3. You find additional information on the package on the package website <a class="reference external" href="https://docs.doubleml.org/">https://docs.doubleml.org/</a> and the R documentation page <a class="reference external" href="https://docs.doubleml.org/r/stable/">https://docs.doubleml.org/r/stable/</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># installing Double ML</span>
+<span class="c1">#remotes::install_github(&quot;DoubleML/doubleml-for-r&quot;,quiet=TRUE)</span>
+
+
+<span class="c1"># loading the packages</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">DoubleML</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">mlr3learners</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">mlr3</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">data.table</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">randomForest</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As mentioned, in the tutorial we use the meta package <code class="docutils literal notranslate"><span class="pre">mlr3</span></code> to generate predictions with machine learning methods. A comprehensive introduction and description of the <code class="docutils literal notranslate"><span class="pre">mlr3</span></code> package is provided in the <a class="reference external" href="https://mlr3book.mlr-org.com/">mlr3book</a>. A list of all learners that you can use in <code class="docutils literal notranslate"><span class="pre">mlr3</span></code> can be found <a class="reference external" href="https://mlr3extralearners.mlr-org.com/articles/learners/list_learners.html">here</a>. The entry in the columns <em>mlr3 Package</em> and <em>Packages</em> indicate which packages must be installed/loaded in your R session.</p>
+</section>
+<section id="estimating-the-ate-of-401-k-eligibility-on-net-financial-assets">
+<h2><span class="section-number">20.3. </span>Estimating the ATE of 401(k) Eligibility on Net Financial Assets<a class="headerlink" href="#estimating-the-ate-of-401-k-eligibility-on-net-financial-assets" title="Permalink to this headline">#</a></h2>
+<p>We first look at the treatment effect of e401 on net total financial assets. We give estimates of the ATE and ATT that corresponds to the linear model</p>
+<p>\begin{equation*}
+Y = D \alpha + f(X)’\beta+ \epsilon,
+\end{equation*}</p>
+<p>where <span class="math notranslate nohighlight">\(f(X)\)</span> includes indicators of marital status, two-earner status, defined benefit pension status, IRA participation status, and home ownership status, and  orthogonal polynomials of degrees 2, 4, 6 and 8 in family size, education, age and  income, respectively. The dimensions of <span class="math notranslate nohighlight">\(f(X)\)</span> is 25.</p>
+<p>In the first step, we report estimates of the average treatment effect (ATE) of 401(k) eligibility on net financial assets both in the partially linear regression (PLR) model and in the interactive regression model (IRM) allowing for heterogeneous treatment effects.</p>
+<section id="main-data">
+<h3><span class="section-number">20.3.1. </span>Main data<a class="headerlink" href="#main-data" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Constructing the data (as DoubleMLData)</span>
+<span class="n">formula_flex</span> <span class="o">=</span> <span class="s">&quot;net_tfa ~ e401 + poly(age, 6, raw=TRUE) + poly(inc, 8, raw=TRUE) + poly(educ, 4, raw=TRUE) + poly(fsize, 2, raw=TRUE) + marr + twoearn + db + pira + hown&quot;</span>
+<span class="n">model_flex</span> <span class="o">=</span> <span class="nf">as.data.table</span><span class="p">(</span><span class="nf">model.frame</span><span class="p">(</span><span class="n">formula_flex</span><span class="p">,</span> <span class="n">pension</span><span class="p">))</span>
+<span class="n">x_cols</span> <span class="o">=</span> <span class="nf">colnames</span><span class="p">(</span><span class="n">model_flex</span><span class="p">)[</span><span class="o">-</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">)]</span>
+<span class="n">data_ml</span> <span class="o">=</span> <span class="n">DoubleMLData</span><span class="o">$</span><span class="nf">new</span><span class="p">(</span><span class="n">model_flex</span><span class="p">,</span> <span class="n">y_col</span> <span class="o">=</span> <span class="s">&quot;net_tfa&quot;</span><span class="p">,</span> <span class="n">d_cols</span> <span class="o">=</span> <span class="s">&quot;e401&quot;</span><span class="p">,</span> <span class="n">x_cols</span><span class="o">=</span><span class="n">x_cols</span><span class="p">)</span>
+
+
+<span class="n">p</span> <span class="o">&lt;-</span> <span class="nf">dim</span><span class="p">(</span><span class="n">model_flex</span><span class="p">)[</span><span class="m">2</span><span class="p">]</span><span class="m">-2</span>
+<span class="n">p</span>
+
+<span class="c1"># complex model with two-way interactions</span>
+<span class="n">data_interactions</span> <span class="o">=</span> <span class="nf">fetch_401k</span><span class="p">(</span><span class="n">polynomial_features</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">instrument</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">25</div></div>
+</div>
+</section>
+<section id="auxiliary-data">
+<h3><span class="section-number">20.3.2. </span>Auxiliary data<a class="headerlink" href="#auxiliary-data" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Constructing the data (as DoubleMLData)</span>
+<span class="n">formula_flex</span> <span class="o">=</span> <span class="s">&quot;net_tfa ~ e401 + poly(age, 6, raw=TRUE) + poly(inc, 6, raw=TRUE) + poly(educ, 4, raw=TRUE) + poly(fsize, 2, raw=TRUE) + marr + twoearn + db + pira + hown&quot;</span>
+<span class="n">model_flex</span> <span class="o">=</span> <span class="nf">as.data.table</span><span class="p">(</span><span class="nf">model.frame</span><span class="p">(</span><span class="n">formula_flex</span><span class="p">,</span> <span class="n">pension</span><span class="p">))</span>
+<span class="n">x_cols</span> <span class="o">=</span> <span class="nf">colnames</span><span class="p">(</span><span class="n">model_flex</span><span class="p">)[</span><span class="o">-</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">)]</span>
+<span class="n">data_ml_aux</span> <span class="o">=</span> <span class="n">DoubleMLData</span><span class="o">$</span><span class="nf">new</span><span class="p">(</span><span class="n">model_flex</span><span class="p">,</span> <span class="n">y_col</span> <span class="o">=</span> <span class="s">&quot;net_tfa&quot;</span><span class="p">,</span> <span class="n">d_cols</span> <span class="o">=</span> <span class="s">&quot;e401&quot;</span><span class="p">,</span> <span class="n">x_cols</span><span class="o">=</span><span class="n">x_cols</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="partially-linear-regression-models-plr">
+<h2><span class="section-number">20.4. </span>Partially Linear Regression Models (PLR)<a class="headerlink" href="#partially-linear-regression-models-plr" title="Permalink to this headline">#</a></h2>
+<p>We start using lasso to estimate the function <span class="math notranslate nohighlight">\(g_0\)</span> and <span class="math notranslate nohighlight">\(m_0\)</span> in the following PLR model:</p>
+<p>\begin{eqnarray}
+&amp;  Y = D\theta_0 + g_0(X) + \zeta,  &amp;  E[\zeta \mid D,X]= 0,\
+&amp; D = m_0(X) +  V,   &amp;  E[V \mid X] = 0.
+\end{eqnarray}</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Estimating the PLR</span>
+<span class="n">lgr</span><span class="o">::</span><span class="nf">get_logger</span><span class="p">(</span><span class="s">&quot;mlr3&quot;</span><span class="p">)</span><span class="o">$</span><span class="nf">set_threshold</span><span class="p">(</span><span class="s">&quot;warn&quot;</span><span class="p">)</span> 
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">123</span><span class="p">)</span>
+<span class="n">lasso</span> <span class="o">&lt;-</span> <span class="nf">lrn</span><span class="p">(</span><span class="s">&quot;regr.cv_glmnet&quot;</span><span class="p">,</span><span class="n">nfolds</span> <span class="o">=</span> <span class="m">5</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;lambda.min&quot;</span><span class="p">)</span>
+<span class="n">lasso_class</span> <span class="o">&lt;-</span> <span class="nf">lrn</span><span class="p">(</span><span class="s">&quot;classif.cv_glmnet&quot;</span><span class="p">,</span> <span class="n">nfolds</span> <span class="o">=</span> <span class="m">5</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;lambda.min&quot;</span><span class="p">)</span>
+
+<span class="n">dml_plr</span> <span class="o">&lt;-</span> <span class="n">DoubleMLPLR</span><span class="o">$</span><span class="nf">new</span><span class="p">(</span><span class="n">data_ml_aux</span><span class="p">,</span> <span class="n">ml_g</span> <span class="o">=</span> <span class="n">lasso</span><span class="p">,</span> <span class="n">ml_m</span> <span class="o">=</span> <span class="n">lasso_class</span><span class="p">,</span> <span class="n">n_folds</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
+<span class="n">dml_plr</span><span class="o">$</span><span class="nf">fit</span><span class="p">(</span><span class="n">store_predictions</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">dml_plr</span><span class="o">$</span><span class="nf">summary</span><span class="p">()</span>
+<span class="n">lasso_plr</span> <span class="o">&lt;-</span> <span class="n">dml_plr</span><span class="o">$</span><span class="n">coef</span>
+<span class="n">lasso_std_plr</span> <span class="o">&lt;-</span> <span class="n">dml_plr</span><span class="o">$</span><span class="n">se</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
+“The argument ml_g was renamed to ml_l. Please adapt the argument name accordingly. ml_g is redirected to ml_l.
+The redirection will be removed in a future version.”
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimates and significance testing of the effect of target variables
+     Estimate. Std. Error t value Pr(&gt;|t|)    
+e401      8952       1269   7.057  1.7e-12 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let us check the predictive performance of this model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">dml_plr</span><span class="o">$</span><span class="nf">params_names</span><span class="p">()</span>
+<span class="n">g_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_plr</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_l</span><span class="p">)</span> <span class="c1"># predictions of g_o</span>
+<span class="n">m_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_plr</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_m</span><span class="p">)</span> <span class="c1"># predictions of m_o</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'ml_l'</li><li>'ml_m'</li></ol>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># cross-fitted RMSE: outcome</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">pension</span><span class="o">$</span><span class="n">net_tfa</span><span class="p">)</span> <span class="c1"># true observations</span>
+<span class="n">theta</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">dml_plr</span><span class="o">$</span><span class="n">coef</span><span class="p">)</span> <span class="c1"># estimated regression coefficient</span>
+<span class="n">d</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">pension</span><span class="o">$</span><span class="n">e401</span><span class="p">)</span> 
+<span class="n">predictions_y</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">d</span><span class="o">*</span><span class="n">theta</span><span class="p">)</span><span class="o">+</span><span class="n">g_hat</span> <span class="c1"># predictions for y</span>
+<span class="n">lasso_y_rmse</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">predictions_y</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">lasso_y_rmse</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">53735.7401727581</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># cross-fitted RMSE: treatment</span>
+<span class="n">d</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">pension</span><span class="o">$</span><span class="n">e401</span><span class="p">)</span> 
+<span class="n">lasso_d_rmse</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">d</span><span class="o">-</span><span class="n">m_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">lasso_d_rmse</span>
+
+<span class="c1"># cross-fitted ce: treatment</span>
+<span class="nf">mean</span><span class="p">(</span><span class="nf">ifelse</span><span class="p">(</span><span class="n">m_hat</span> <span class="o">&gt;</span> <span class="m">0.5</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span> <span class="o">!=</span> <span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">0.444321259050954</div><div class="output text_html">0.31679273827534</div></div>
+</div>
+<p>Then, we repeat this procedure for various machine learning methods.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># install.packages( &quot;regr.ranger&quot; )</span>
+<span class="c1"># install.packages( &quot;classif.ranger&quot; )</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Random Forest</span>
+<span class="n">lgr</span><span class="o">::</span><span class="nf">get_logger</span><span class="p">(</span><span class="s">&quot;mlr3&quot;</span><span class="p">)</span><span class="o">$</span><span class="nf">set_threshold</span><span class="p">(</span><span class="s">&quot;warn&quot;</span><span class="p">)</span> 
+<span class="n">randomForest</span> <span class="o">&lt;-</span> <span class="nf">lrn</span><span class="p">(</span><span class="s">&quot;regr.ranger&quot;</span><span class="p">)</span>
+<span class="n">randomForest_class</span> <span class="o">&lt;-</span> <span class="nf">lrn</span><span class="p">(</span><span class="s">&quot;classif.ranger&quot;</span><span class="p">)</span>
+
+<span class="n">dml_plr</span> <span class="o">&lt;-</span> <span class="n">DoubleMLPLR</span><span class="o">$</span><span class="nf">new</span><span class="p">(</span><span class="n">data_ml_aux</span><span class="p">,</span> <span class="n">ml_g</span> <span class="o">=</span> <span class="n">randomForest</span><span class="p">,</span> <span class="n">ml_m</span> <span class="o">=</span> <span class="n">randomForest_class</span><span class="p">,</span> <span class="n">n_folds</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
+<span class="n">dml_plr</span><span class="o">$</span><span class="nf">fit</span><span class="p">(</span><span class="n">store_predictions</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span> <span class="c1"># set store_predictions=TRUE to evaluate the model</span>
+<span class="n">dml_plr</span><span class="o">$</span><span class="nf">summary</span><span class="p">()</span>
+<span class="n">forest_plr</span> <span class="o">&lt;-</span> <span class="n">dml_plr</span><span class="o">$</span><span class="n">coef</span>
+<span class="n">forest_std_plr</span> <span class="o">&lt;-</span> <span class="n">dml_plr</span><span class="o">$</span><span class="n">se</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
+“The argument ml_g was renamed to ml_l. Please adapt the argument name accordingly. ml_g is redirected to ml_l.
+The redirection will be removed in a future version.”
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimates and significance testing of the effect of target variables
+     Estimate. Std. Error t value Pr(&gt;|t|)    
+e401      8359       1267   6.599 4.14e-11 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Random Forest</span>
+<span class="c1"># lgr::get_logger(&quot;mlr3&quot;)$set_threshold(&quot;warn&quot;) </span>
+<span class="c1"># randomForest &lt;- lrn(&quot;regr.ranger&quot;)</span>
+<span class="c1"># randomForest_class &lt;- lrn(&quot;classif.ranger&quot;)</span>
+
+<span class="c1"># dml_plr &lt;- DoubleMLPLR$new(data_ml, ml_g = randomForest, ml_m = randomForest_class, n_folds=3)</span>
+<span class="c1"># dml_plr$fit(store_predictions=TRUE) # set store_predictions=TRUE to evaluate the model</span>
+<span class="c1"># dml_plr$summary()</span>
+<span class="c1"># forest_plr &lt;- dml_plr$coef</span>
+<span class="c1"># forest_std_plr &lt;- dml_plr$se</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="data-ml-is-an-environment-info">
+<h3><span class="section-number">20.4.1. </span>data_ml is an environment <a class="reference external" href="http://adv-r.had.co.nz/Environments.html">info</a><a class="headerlink" href="#data-ml-is-an-environment-info" title="Permalink to this headline">#</a></h3>
+<p>We can compare the accuracy of this model to the model that has been estimated with lasso.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Evaluation predictions</span>
+<span class="n">g_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_plr</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_l</span><span class="p">)</span> <span class="c1"># predictions of g_o</span>
+<span class="n">m_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_plr</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_m</span><span class="p">)</span> <span class="c1"># predictions of m_o</span>
+<span class="n">theta</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">dml_plr</span><span class="o">$</span><span class="n">coef</span><span class="p">)</span> <span class="c1"># estimated regression coefficient</span>
+<span class="n">predictions_y</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">d</span><span class="o">*</span><span class="n">theta</span><span class="p">)</span><span class="o">+</span><span class="n">g_hat</span> <span class="c1"># predictions for y</span>
+<span class="n">forest_y_rmse</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">predictions_y</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">forest_y_rmse</span>
+
+<span class="c1"># cross-fitted RMSE: treatment</span>
+<span class="n">forest_d_rmse</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">d</span><span class="o">-</span><span class="n">m_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">forest_d_rmse</span>
+
+<span class="c1"># cross-fitted ce: treatment</span>
+<span class="nf">mean</span><span class="p">(</span><span class="nf">ifelse</span><span class="p">(</span><span class="n">m_hat</span> <span class="o">&gt;</span> <span class="m">0.5</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span> <span class="o">!=</span> <span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">56078.7574444401</div><div class="output text_html">0.455818650233087</div><div class="output text_html">0.332425617750882</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">rpart</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Trees</span>
+<span class="n">lgr</span><span class="o">::</span><span class="nf">get_logger</span><span class="p">(</span><span class="s">&quot;mlr3&quot;</span><span class="p">)</span><span class="o">$</span><span class="nf">set_threshold</span><span class="p">(</span><span class="s">&quot;warn&quot;</span><span class="p">)</span> 
+
+<span class="n">trees</span> <span class="o">&lt;-</span> <span class="nf">lrn</span><span class="p">(</span><span class="s">&quot;regr.rpart&quot;</span><span class="p">)</span>
+<span class="n">trees_class</span> <span class="o">&lt;-</span> <span class="nf">lrn</span><span class="p">(</span><span class="s">&quot;classif.rpart&quot;</span><span class="p">)</span>
+
+<span class="n">dml_plr</span> <span class="o">&lt;-</span> <span class="n">DoubleMLPLR</span><span class="o">$</span><span class="nf">new</span><span class="p">(</span><span class="n">data_ml_aux</span><span class="p">,</span> <span class="n">ml_l</span> <span class="o">=</span> <span class="n">trees</span><span class="p">,</span> <span class="n">ml_m</span> <span class="o">=</span> <span class="n">trees_class</span><span class="p">,</span> <span class="n">n_folds</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
+<span class="n">dml_plr</span><span class="o">$</span><span class="nf">fit</span><span class="p">(</span><span class="n">store_predictions</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">dml_plr</span><span class="o">$</span><span class="nf">summary</span><span class="p">()</span>
+<span class="n">tree_plr</span> <span class="o">&lt;-</span> <span class="n">dml_plr</span><span class="o">$</span><span class="n">coef</span>
+<span class="n">tree_std_plr</span> <span class="o">&lt;-</span> <span class="n">dml_plr</span><span class="o">$</span><span class="n">se</span>
+
+<span class="c1"># Evaluation predictions</span>
+<span class="n">g_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_plr</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_l</span><span class="p">)</span> <span class="c1"># predictions of g_o</span>
+<span class="n">m_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_plr</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_m</span><span class="p">)</span> <span class="c1"># predictions of m_o</span>
+<span class="n">theta</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">dml_plr</span><span class="o">$</span><span class="n">coef</span><span class="p">)</span> <span class="c1"># estimated regression coefficient</span>
+<span class="n">predictions_y</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">d</span><span class="o">*</span><span class="n">theta</span><span class="p">)</span><span class="o">+</span><span class="n">g_hat</span> <span class="c1"># predictions for y</span>
+<span class="n">tree_y_rmse</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">predictions_y</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">tree_y_rmse</span>
+
+<span class="c1"># cross-fitted RMSE: treatment</span>
+<span class="n">tree_d_rmse</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">d</span><span class="o">-</span><span class="n">m_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">tree_d_rmse</span>
+
+<span class="c1"># cross-fitted ce: treatment</span>
+<span class="nf">mean</span><span class="p">(</span><span class="nf">ifelse</span><span class="p">(</span><span class="n">m_hat</span> <span class="o">&gt;</span> <span class="m">0.5</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span> <span class="o">!=</span> <span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimates and significance testing of the effect of target variables
+     Estimate. Std. Error t value Pr(&gt;|t|)    
+e401      8835       1317   6.708 1.98e-11 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+</pre></div>
+</div>
+<div class="output text_html">56708.5196086904</div><div class="output text_html">0.455388797440497</div><div class="output text_html">0.313666162380232</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Boosting</span>
+<span class="n">lgr</span><span class="o">::</span><span class="nf">get_logger</span><span class="p">(</span><span class="s">&quot;mlr3&quot;</span><span class="p">)</span><span class="o">$</span><span class="nf">set_threshold</span><span class="p">(</span><span class="s">&quot;warn&quot;</span><span class="p">)</span> 
+<span class="n">boost</span><span class="o">&lt;-</span> <span class="nf">lrn</span><span class="p">(</span><span class="s">&quot;regr.xgboost&quot;</span><span class="p">,</span><span class="n">objective</span><span class="o">=</span><span class="s">&quot;reg:squarederror&quot;</span><span class="p">)</span>
+<span class="n">boost_class</span> <span class="o">&lt;-</span> <span class="nf">lrn</span><span class="p">(</span><span class="s">&quot;classif.xgboost&quot;</span><span class="p">,</span><span class="n">objective</span> <span class="o">=</span> <span class="s">&quot;binary:logistic&quot;</span><span class="p">,</span><span class="n">eval_metric</span> <span class="o">=</span><span class="s">&quot;logloss&quot;</span><span class="p">)</span>
+
+<span class="n">dml_plr</span> <span class="o">&lt;-</span> <span class="n">DoubleMLPLR</span><span class="o">$</span><span class="nf">new</span><span class="p">(</span><span class="n">data_ml_aux</span><span class="p">,</span> <span class="n">ml_l</span> <span class="o">=</span> <span class="n">boost</span><span class="p">,</span> <span class="n">ml_m</span> <span class="o">=</span> <span class="n">boost_class</span><span class="p">,</span> <span class="n">n_folds</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
+<span class="n">dml_plr</span><span class="o">$</span><span class="nf">fit</span><span class="p">(</span><span class="n">store_predictions</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">dml_plr</span><span class="o">$</span><span class="nf">summary</span><span class="p">()</span>
+<span class="n">boost_plr</span> <span class="o">&lt;-</span> <span class="n">dml_plr</span><span class="o">$</span><span class="n">coef</span>
+<span class="n">boost_std_plr</span> <span class="o">&lt;-</span> <span class="n">dml_plr</span><span class="o">$</span><span class="n">se</span>
+
+<span class="c1"># Evaluation predictions</span>
+<span class="n">g_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_plr</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_l</span><span class="p">)</span> <span class="c1"># predictions of g_o</span>
+<span class="n">m_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_plr</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_m</span><span class="p">)</span> <span class="c1"># predictions of m_o</span>
+<span class="n">theta</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">dml_plr</span><span class="o">$</span><span class="n">coef</span><span class="p">)</span> <span class="c1"># estimated regression coefficient</span>
+<span class="n">predictions_y</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">d</span><span class="o">*</span><span class="n">theta</span><span class="p">)</span><span class="o">+</span><span class="n">g_hat</span> <span class="c1"># predictions for y</span>
+<span class="n">boost_y_rmse</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">predictions_y</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">boost_y_rmse</span>
+
+<span class="c1"># cross-fitted RMSE: treatment</span>
+<span class="n">boost_d_rmse</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">d</span><span class="o">-</span><span class="n">m_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">boost_d_rmse</span>
+
+<span class="c1"># cross-fitted ce: treatment</span>
+<span class="nf">mean</span><span class="p">(</span><span class="nf">ifelse</span><span class="p">(</span><span class="n">m_hat</span> <span class="o">&gt;</span> <span class="m">0.5</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span> <span class="o">!=</span> <span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimates and significance testing of the effect of target variables
+     Estimate. Std. Error t value Pr(&gt;|t|)    
+e401      8867       1342   6.606 3.95e-11 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+</pre></div>
+</div>
+<div class="output text_html">59816.1871849508</div><div class="output text_html">0.472680449674429</div><div class="output text_html">0.32375189107413</div></div>
+</div>
+<p>Let’s sum up the results:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">4</span><span class="p">)</span>
+<span class="n">table</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">lasso_plr</span><span class="p">,</span><span class="n">forest_plr</span><span class="p">,</span><span class="n">tree_plr</span><span class="p">,</span><span class="n">boost_plr</span><span class="p">)</span>
+<span class="n">table</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">lasso_std_plr</span><span class="p">,</span><span class="n">forest_std_plr</span><span class="p">,</span><span class="n">tree_std_plr</span><span class="p">,</span><span class="n">boost_std_plr</span><span class="p">)</span>
+<span class="n">table</span><span class="p">[</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">lasso_y_rmse</span><span class="p">,</span><span class="n">forest_y_rmse</span><span class="p">,</span><span class="n">tree_y_rmse</span><span class="p">,</span><span class="n">boost_y_rmse</span><span class="p">)</span>
+<span class="n">table</span><span class="p">[</span><span class="m">4</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">lasso_d_rmse</span><span class="p">,</span><span class="n">forest_d_rmse</span><span class="p">,</span><span class="n">tree_d_rmse</span><span class="p">,</span><span class="n">boost_d_rmse</span><span class="p">)</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">table</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Estimate&quot;</span><span class="p">,</span><span class="s">&quot;Std.Error&quot;</span><span class="p">,</span><span class="s">&quot;RMSE Y&quot;</span><span class="p">,</span><span class="s">&quot;RMSE D&quot;</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">table</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Lasso&quot;</span><span class="p">,</span><span class="s">&quot;Random Forest&quot;</span><span class="p">,</span><span class="s">&quot;Trees&quot;</span><span class="p">,</span><span class="s">&quot;Boosting&quot;</span><span class="p">)</span>
+<span class="n">table</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 4 × 4 of type dbl</caption>
+<thead>
+	<tr><th></th><th scope=col>Lasso</th><th scope=col>Random Forest</th><th scope=col>Trees</th><th scope=col>Boosting</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>Estimate</th><td>8.952253e+03</td><td>8.359373e+03</td><td>8.834641e+03</td><td>8.867423e+03</td></tr>
+	<tr><th scope=row>Std.Error</th><td>1.268614e+03</td><td>1.266746e+03</td><td>1.317080e+03</td><td>1.342332e+03</td></tr>
+	<tr><th scope=row>RMSE Y</th><td>5.373574e+04</td><td>5.607876e+04</td><td>5.670852e+04</td><td>5.981619e+04</td></tr>
+	<tr><th scope=row>RMSE D</th><td>4.443213e-01</td><td>4.558187e-01</td><td>4.553888e-01</td><td>4.726804e-01</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>The best model with lowest RMSE in both equation is the PLR model estimated via lasso. It gives the following estimate:</p>
+</section>
+</section>
+<section id="interactive-regression-model-irm">
+<h2><span class="section-number">20.5. </span>Interactive Regression Model (IRM)<a class="headerlink" href="#interactive-regression-model-irm" title="Permalink to this headline">#</a></h2>
+<p>Next, we consider estimation of average treatment effects when treatment effects are fully heterogeneous:</p>
+<p>\begin{eqnarray}\label{eq: HetPL1}
+&amp; Y  = g_0(D, X) + U,  &amp;  \quad E[U \mid X, D]= 0,\
+&amp; D  = m_0(X) + V,  &amp; \quad  E[V\mid X] = 0.
+\end{eqnarray}</p>
+<p>To reduce the disproportionate impact of extreme propensity score weights in the interactive model
+we trim the propensity scores which are close to the bounds.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">123</span><span class="p">)</span>
+<span class="n">lgr</span><span class="o">::</span><span class="nf">get_logger</span><span class="p">(</span><span class="s">&quot;mlr3&quot;</span><span class="p">)</span><span class="o">$</span><span class="nf">set_threshold</span><span class="p">(</span><span class="s">&quot;warn&quot;</span><span class="p">)</span> 
+<span class="n">dml_irm</span> <span class="o">=</span> <span class="n">DoubleMLIRM</span><span class="o">$</span><span class="nf">new</span><span class="p">(</span><span class="n">data_ml_aux</span><span class="p">,</span> <span class="n">ml_g</span> <span class="o">=</span> <span class="n">lasso</span><span class="p">,</span> 
+                          <span class="n">ml_m</span> <span class="o">=</span> <span class="n">lasso_class</span><span class="p">,</span> 
+                          <span class="n">trimming_threshold</span> <span class="o">=</span> <span class="m">0.01</span><span class="p">,</span> <span class="n">n_folds</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
+<span class="n">dml_irm</span><span class="o">$</span><span class="nf">fit</span><span class="p">(</span><span class="n">store_predictions</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">dml_irm</span><span class="o">$</span><span class="nf">summary</span><span class="p">()</span>
+<span class="n">lasso_irm</span> <span class="o">&lt;-</span> <span class="n">dml_irm</span><span class="o">$</span><span class="n">coef</span>
+<span class="n">lasso_std_irm</span> <span class="o">&lt;-</span> <span class="n">dml_irm</span><span class="o">$</span><span class="n">se</span>
+
+
+<span class="c1"># predictions</span>
+<span class="n">dml_irm</span><span class="o">$</span><span class="nf">params_names</span><span class="p">()</span>
+<span class="n">g0_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_irm</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_g0</span><span class="p">)</span> <span class="c1"># predictions of g_0(D=0, X)</span>
+<span class="n">g1_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_irm</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_g1</span><span class="p">)</span> <span class="c1"># predictions of g_0(D=1, X)</span>
+<span class="n">g_hat</span> <span class="o">&lt;-</span> <span class="n">d</span><span class="o">*</span><span class="n">g1_hat</span><span class="o">+</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">d</span><span class="p">)</span><span class="o">*</span><span class="n">g0_hat</span> <span class="c1"># predictions of g_0</span>
+<span class="n">m_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_irm</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_m</span><span class="p">)</span> <span class="c1"># predictions of m_o</span>
+
+
+<span class="c1"># cross-fitted RMSE: outcome</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">pension</span><span class="o">$</span><span class="n">net_tfa</span><span class="p">)</span> <span class="c1"># true observations</span>
+<span class="n">d</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">pension</span><span class="o">$</span><span class="n">e401</span><span class="p">)</span> 
+<span class="n">lasso_y_irm</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">g_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">lasso_y_irm</span>
+
+<span class="c1"># cross-fitted RMSE: treatment</span>
+<span class="n">lasso_d_irm</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">d</span><span class="o">-</span><span class="n">m_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">lasso_d_irm</span>
+
+<span class="c1"># cross-fitted ce: treatment</span>
+<span class="nf">mean</span><span class="p">(</span><span class="nf">ifelse</span><span class="p">(</span><span class="n">m_hat</span> <span class="o">&gt;</span> <span class="m">0.5</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span> <span class="o">!=</span> <span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimates and significance testing of the effect of target variables
+     Estimate. Std. Error t value Pr(&gt;|t|)    
+e401      7941       1106   7.177 7.15e-13 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'ml_g0'</li><li>'ml_g1'</li><li>'ml_m'</li></ol>
+</div><div class="output text_html">55439.5089355971</div><div class="output text_html">0.444057854588759</div><div class="output text_html">0.315380736258195</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">##### forest #####</span>
+
+<span class="n">dml_irm</span> <span class="o">=</span> <span class="n">DoubleMLIRM</span><span class="o">$</span><span class="nf">new</span><span class="p">(</span><span class="n">data_ml_aux</span><span class="p">,</span> <span class="n">ml_g</span> <span class="o">=</span> <span class="n">randomForest</span><span class="p">,</span> 
+                          <span class="n">ml_m</span> <span class="o">=</span> <span class="n">randomForest_class</span><span class="p">,</span> 
+                          <span class="n">trimming_threshold</span> <span class="o">=</span> <span class="m">0.01</span><span class="p">,</span> <span class="n">n_folds</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
+<span class="n">dml_irm</span><span class="o">$</span><span class="nf">fit</span><span class="p">(</span><span class="n">store_predictions</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">dml_irm</span><span class="o">$</span><span class="nf">summary</span><span class="p">()</span>
+<span class="n">forest_irm</span> <span class="o">&lt;-</span> <span class="n">dml_irm</span><span class="o">$</span><span class="n">coef</span>
+<span class="n">forest_std_irm</span> <span class="o">&lt;-</span> <span class="n">dml_plr</span><span class="o">$</span><span class="n">se</span>
+
+<span class="c1"># predictions</span>
+<span class="n">g0_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_irm</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_g0</span><span class="p">)</span> <span class="c1"># predictions of g_0(D=0, X)</span>
+<span class="n">g1_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_irm</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_g1</span><span class="p">)</span> <span class="c1"># predictions of g_0(D=1, X)</span>
+<span class="n">g_hat</span> <span class="o">&lt;-</span> <span class="n">d</span><span class="o">*</span><span class="n">g1_hat</span><span class="o">+</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">d</span><span class="p">)</span><span class="o">*</span><span class="n">g0_hat</span> <span class="c1"># predictions of g_0</span>
+<span class="n">m_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_irm</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_m</span><span class="p">)</span> <span class="c1"># predictions of m_o</span>
+
+<span class="c1"># cross-fitted RMSE: outcome</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">pension</span><span class="o">$</span><span class="n">net_tfa</span><span class="p">)</span> <span class="c1"># true observations</span>
+<span class="n">d</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">pension</span><span class="o">$</span><span class="n">e401</span><span class="p">)</span> 
+<span class="n">forest_y_irm</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">g_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">forest_y_irm</span>
+
+<span class="c1"># cross-fitted RMSE: treatment</span>
+<span class="n">forest_d_irm</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">d</span><span class="o">-</span><span class="n">m_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">forest_d_irm</span>
+
+<span class="c1"># cross-fitted ce: treatment</span>
+<span class="nf">mean</span><span class="p">(</span><span class="nf">ifelse</span><span class="p">(</span><span class="n">m_hat</span> <span class="o">&gt;</span> <span class="m">0.5</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span> <span class="o">!=</span> <span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimates and significance testing of the effect of target variables
+     Estimate. Std. Error t value Pr(&gt;|t|)    
+e401      7809       1311   5.955  2.6e-09 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+</pre></div>
+</div>
+<div class="output text_html">55502.9533263922</div><div class="output text_html">0.455986892734011</div><div class="output text_html">0.329097327281896</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">##### trees #####</span>
+
+<span class="n">dml_irm</span> <span class="o">&lt;-</span> <span class="n">DoubleMLIRM</span><span class="o">$</span><span class="nf">new</span><span class="p">(</span><span class="n">data_ml_aux</span><span class="p">,</span> <span class="n">ml_g</span> <span class="o">=</span> <span class="n">trees</span><span class="p">,</span> <span class="n">ml_m</span> <span class="o">=</span> <span class="n">trees_class</span><span class="p">,</span> 
+                           <span class="n">trimming_threshold</span> <span class="o">=</span> <span class="m">0.01</span><span class="p">,</span> <span class="n">n_folds</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
+<span class="n">dml_irm</span><span class="o">$</span><span class="nf">fit</span><span class="p">(</span><span class="n">store_predictions</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">dml_irm</span><span class="o">$</span><span class="nf">summary</span><span class="p">()</span>
+<span class="n">tree_irm</span> <span class="o">&lt;-</span> <span class="n">dml_irm</span><span class="o">$</span><span class="n">coef</span>
+<span class="n">tree_std_irm</span> <span class="o">&lt;-</span> <span class="n">dml_irm</span><span class="o">$</span><span class="n">se</span>
+
+<span class="c1"># predictions</span>
+<span class="n">g0_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_irm</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_g0</span><span class="p">)</span> <span class="c1"># predictions of g_0(D=0, X)</span>
+<span class="n">g1_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_irm</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_g1</span><span class="p">)</span> <span class="c1"># predictions of g_0(D=1, X)</span>
+<span class="n">g_hat</span> <span class="o">&lt;-</span> <span class="n">d</span><span class="o">*</span><span class="n">g1_hat</span><span class="o">+</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">d</span><span class="p">)</span><span class="o">*</span><span class="n">g0_hat</span> <span class="c1"># predictions of g_0</span>
+<span class="n">m_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_irm</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_m</span><span class="p">)</span> <span class="c1"># predictions of m_o</span>
+
+<span class="c1"># cross-fitted RMSE: outcome</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">pension</span><span class="o">$</span><span class="n">net_tfa</span><span class="p">)</span> <span class="c1"># true observations</span>
+<span class="n">d</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">pension</span><span class="o">$</span><span class="n">e401</span><span class="p">)</span> 
+<span class="n">tree_y_irm</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">g_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">tree_y_irm</span>
+
+<span class="c1"># cross-fitted RMSE: treatment</span>
+<span class="n">tree_d_irm</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">d</span><span class="o">-</span><span class="n">m_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">tree_d_irm</span>
+
+<span class="c1"># cross-fitted ce: treatment</span>
+<span class="nf">mean</span><span class="p">(</span><span class="nf">ifelse</span><span class="p">(</span><span class="n">m_hat</span> <span class="o">&gt;</span> <span class="m">0.5</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span> <span class="o">!=</span> <span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimates and significance testing of the effect of target variables
+     Estimate. Std. Error t value Pr(&gt;|t|)    
+e401      7477       1187     6.3 2.97e-10 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+</pre></div>
+</div>
+<div class="output text_html">57305.2609648949</div><div class="output text_html">0.455894013067015</div><div class="output text_html">0.313565305093293</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">##### boosting #####</span>
+
+<span class="n">dml_irm</span> <span class="o">&lt;-</span> <span class="n">DoubleMLIRM</span><span class="o">$</span><span class="nf">new</span><span class="p">(</span><span class="n">data_ml_aux</span><span class="p">,</span> <span class="n">ml_g</span> <span class="o">=</span> <span class="n">boost</span><span class="p">,</span> <span class="n">ml_m</span> <span class="o">=</span> <span class="n">boost_class</span><span class="p">,</span>
+                           <span class="n">trimming_threshold</span> <span class="o">=</span> <span class="m">0.01</span><span class="p">,</span> <span class="n">n_folds</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
+<span class="n">dml_irm</span><span class="o">$</span><span class="nf">fit</span><span class="p">(</span><span class="n">store_predictions</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">dml_irm</span><span class="o">$</span><span class="nf">summary</span><span class="p">()</span>
+<span class="n">boost_irm</span> <span class="o">&lt;-</span> <span class="n">dml_irm</span><span class="o">$</span><span class="n">coef</span>
+<span class="n">boost_std_irm</span> <span class="o">&lt;-</span> <span class="n">dml_irm</span><span class="o">$</span><span class="n">se</span>
+
+<span class="c1"># predictions</span>
+<span class="n">g0_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_irm</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_g0</span><span class="p">)</span> <span class="c1"># predictions of g_0(D=0, X)</span>
+<span class="n">g1_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_irm</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_g1</span><span class="p">)</span> <span class="c1"># predictions of g_0(D=1, X)</span>
+<span class="n">g_hat</span> <span class="o">&lt;-</span> <span class="n">d</span><span class="o">*</span><span class="n">g1_hat</span><span class="o">+</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">d</span><span class="p">)</span><span class="o">*</span><span class="n">g0_hat</span> <span class="c1"># predictions of g_0</span>
+<span class="n">m_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_irm</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_m</span><span class="p">)</span> <span class="c1"># predictions of m_o</span>
+
+<span class="c1"># cross-fitted RMSE: outcome</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">pension</span><span class="o">$</span><span class="n">net_tfa</span><span class="p">)</span> <span class="c1"># true observations</span>
+<span class="n">d</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">pension</span><span class="o">$</span><span class="n">e401</span><span class="p">)</span> 
+<span class="n">boost_y_irm</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">g_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">boost_y_irm</span>
+
+<span class="c1"># cross-fitted RMSE: treatment</span>
+<span class="n">boost_d_irm</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">d</span><span class="o">-</span><span class="n">m_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">boost_d_irm</span>
+
+<span class="c1"># cross-fitted ce: treatment</span>
+<span class="nf">mean</span><span class="p">(</span><span class="nf">ifelse</span><span class="p">(</span><span class="n">m_hat</span> <span class="o">&gt;</span> <span class="m">0.5</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span> <span class="o">!=</span> <span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimates and significance testing of the effect of target variables
+     Estimate. Std. Error t value Pr(&gt;|t|)    
+e401      8353       1228   6.803 1.03e-11 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+</pre></div>
+</div>
+<div class="output text_html">61055.9143568919</div><div class="output text_html">0.473234647359898</div><div class="output text_html">0.323449319213313</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">4</span><span class="p">)</span>
+<span class="n">table</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">lasso_irm</span><span class="p">,</span><span class="n">forest_irm</span><span class="p">,</span><span class="n">tree_irm</span><span class="p">,</span><span class="n">boost_irm</span><span class="p">)</span>
+<span class="n">table</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">lasso_std_irm</span><span class="p">,</span><span class="n">forest_std_irm</span><span class="p">,</span><span class="n">tree_std_irm</span><span class="p">,</span><span class="n">boost_std_irm</span><span class="p">)</span>
+<span class="n">table</span><span class="p">[</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">lasso_y_irm</span><span class="p">,</span><span class="n">forest_y_irm</span><span class="p">,</span><span class="n">tree_y_irm</span><span class="p">,</span><span class="n">boost_y_irm</span><span class="p">)</span>
+<span class="n">table</span><span class="p">[</span><span class="m">4</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">lasso_d_irm</span><span class="p">,</span><span class="n">forest_d_irm</span><span class="p">,</span><span class="n">tree_d_irm</span><span class="p">,</span><span class="n">boost_d_irm</span><span class="p">)</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">table</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Estimate&quot;</span><span class="p">,</span><span class="s">&quot;Std.Error&quot;</span><span class="p">,</span><span class="s">&quot;RMSE Y&quot;</span><span class="p">,</span><span class="s">&quot;RMSE D&quot;</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">table</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Lasso&quot;</span><span class="p">,</span><span class="s">&quot;Random Forest&quot;</span><span class="p">,</span><span class="s">&quot;Trees&quot;</span><span class="p">,</span><span class="s">&quot;Boosting&quot;</span><span class="p">)</span>
+<span class="n">table</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 4 × 4 of type dbl</caption>
+<thead>
+	<tr><th></th><th scope=col>Lasso</th><th scope=col>Random Forest</th><th scope=col>Trees</th><th scope=col>Boosting</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>Estimate</th><td>7.941055e+03</td><td>7.808952e+03</td><td> 7477.066528</td><td>8.353329e+03</td></tr>
+	<tr><th scope=row>Std.Error</th><td>1.106525e+03</td><td>1.342332e+03</td><td> 1186.745746</td><td>1.227915e+03</td></tr>
+	<tr><th scope=row>RMSE Y</th><td>5.543951e+04</td><td>5.550295e+04</td><td>57305.260965</td><td>6.105591e+04</td></tr>
+	<tr><th scope=row>RMSE D</th><td>4.440579e-01</td><td>4.559869e-01</td><td>    0.455894</td><td>4.732346e-01</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>Here, Random Forest gives the best prediction rule for <span class="math notranslate nohighlight">\(g_0\)</span> and Lasso the best prediction rule for <span class="math notranslate nohighlight">\(m_0\)</span>, respectively. Let us fit the IRM model using the best ML method for each equation to get a final estimate for the treatment effect of eligibility.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">123</span><span class="p">)</span>
+<span class="n">lgr</span><span class="o">::</span><span class="nf">get_logger</span><span class="p">(</span><span class="s">&quot;mlr3&quot;</span><span class="p">)</span><span class="o">$</span><span class="nf">set_threshold</span><span class="p">(</span><span class="s">&quot;warn&quot;</span><span class="p">)</span> 
+<span class="n">dml_irm</span> <span class="o">=</span> <span class="n">DoubleMLIRM</span><span class="o">$</span><span class="nf">new</span><span class="p">(</span><span class="n">data_ml_aux</span><span class="p">,</span> <span class="n">ml_g</span> <span class="o">=</span> <span class="n">randomForest</span><span class="p">,</span> 
+                          <span class="n">ml_m</span> <span class="o">=</span> <span class="n">lasso_class</span><span class="p">,</span> 
+                          <span class="n">trimming_threshold</span> <span class="o">=</span> <span class="m">0.01</span><span class="p">,</span> <span class="n">n_folds</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
+<span class="n">dml_irm</span><span class="o">$</span><span class="nf">fit</span><span class="p">(</span><span class="n">store_predictions</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">dml_irm</span><span class="o">$</span><span class="nf">summary</span><span class="p">()</span>
+<span class="n">best_irm</span> <span class="o">&lt;-</span> <span class="n">dml_irm</span><span class="o">$</span><span class="n">coef</span>
+<span class="n">best_std_irm</span> <span class="o">&lt;-</span> <span class="n">dml_irm</span><span class="o">$</span><span class="n">se</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimates and significance testing of the effect of target variables
+     Estimate. Std. Error t value Pr(&gt;|t|)    
+e401      8286       1118   7.411 1.25e-13 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+</pre></div>
+</div>
+</div>
+</div>
+<p>These estimates that flexibly account for confounding are
+substantially attenuated relative to the baseline estimate (<em>19559</em>) that does not account for confounding. They suggest much smaller causal effects of 401(k) eligiblity on financial asset holdings.</p>
+</section>
+<section id="local-average-treatment-effects-of-401-k-participation-on-net-financial-assets">
+<h2><span class="section-number">20.6. </span>Local Average Treatment Effects of 401(k) Participation on Net Financial Assets<a class="headerlink" href="#local-average-treatment-effects-of-401-k-participation-on-net-financial-assets" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="interactive-iv-model-iivm">
+<h2><span class="section-number">20.7. </span>Interactive IV Model (IIVM)<a class="headerlink" href="#interactive-iv-model-iivm" title="Permalink to this headline">#</a></h2>
+<p>Now, we consider estimation of local average treatment effects (LATE) of participation with the binary instrument <code class="docutils literal notranslate"><span class="pre">e401</span></code>. As before, <span class="math notranslate nohighlight">\(Y\)</span> denotes the outcome <code class="docutils literal notranslate"><span class="pre">net_tfa</span></code>, and <span class="math notranslate nohighlight">\(X\)</span> is the vector of covariates.  Here the structural equation model is:</p>
+<p>\begin{eqnarray}
+&amp; Y = g_0(Z,X) + U, &amp;\quad E[U\mid Z,X] = 0,\
+&amp; D = r_0(Z,X) + V, &amp;\quad E[V\mid Z, X] = 0,\
+&amp; Z = m_0(X) + \zeta, &amp;\quad E[\zeta \mid X] = 0.
+\end{eqnarray}</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Constructing the data (as DoubleMLData)</span>
+<span class="c1"># formula_flex2 = &quot;net_tfa ~ p401+ e401 + poly(age, 6, raw=TRUE) + poly(inc, 8, raw=TRUE) + poly(educ, 4, raw=TRUE) + poly(fsize, 2, raw=TRUE) + marr + twoearn + db + pira + hown&quot;</span>
+<span class="c1"># model_flex2 = as.data.table(model.frame(formula_flex2, data))</span>
+<span class="c1"># x_cols = colnames(model_flex2)[-c(1,2,3)]</span>
+<span class="c1"># data_IV = DoubleMLData$new(model_flex2, y_col = &quot;net_tfa&quot;, d_cols = &quot;p401&quot;, z_cols =&quot;e401&quot;,x_cols=x_cols)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Constructing the data (as DoubleMLData)</span>
+<span class="n">formula_flex2</span> <span class="o">=</span> <span class="s">&quot;net_tfa ~ p401+ e401 + poly(age, 6, raw=TRUE) + poly(inc, 6, raw=TRUE) + poly(educ, 4, raw=TRUE) + poly(fsize, 2, raw=TRUE) + marr + twoearn + db + pira + hown&quot;</span>
+<span class="n">model_flex2</span> <span class="o">=</span> <span class="nf">as.data.table</span><span class="p">(</span><span class="nf">model.frame</span><span class="p">(</span><span class="n">formula_flex2</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
+<span class="n">x_cols</span> <span class="o">=</span> <span class="nf">colnames</span><span class="p">(</span><span class="n">model_flex2</span><span class="p">)[</span><span class="o">-</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">)]</span>
+<span class="n">data_IV_aux</span> <span class="o">=</span> <span class="n">DoubleMLData</span><span class="o">$</span><span class="nf">new</span><span class="p">(</span><span class="n">model_flex2</span><span class="p">,</span> <span class="n">y_col</span> <span class="o">=</span> <span class="s">&quot;net_tfa&quot;</span><span class="p">,</span> <span class="n">d_cols</span> <span class="o">=</span> <span class="s">&quot;p401&quot;</span><span class="p">,</span> <span class="n">z_cols</span> <span class="o">=</span><span class="s">&quot;e401&quot;</span><span class="p">,</span><span class="n">x_cols</span><span class="o">=</span><span class="n">x_cols</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">123</span><span class="p">)</span>
+<span class="n">lgr</span><span class="o">::</span><span class="nf">get_logger</span><span class="p">(</span><span class="s">&quot;mlr3&quot;</span><span class="p">)</span><span class="o">$</span><span class="nf">set_threshold</span><span class="p">(</span><span class="s">&quot;warn&quot;</span><span class="p">)</span> 
+<span class="n">dml_MLIIVM</span> <span class="o">=</span> <span class="n">DoubleMLIIVM</span><span class="o">$</span><span class="nf">new</span><span class="p">(</span><span class="n">data_IV_aux</span><span class="p">,</span> <span class="n">ml_g</span> <span class="o">=</span> <span class="n">lasso</span><span class="p">,</span> 
+                       <span class="n">ml_m</span> <span class="o">=</span> <span class="n">lasso_class</span><span class="p">,</span> <span class="n">ml_r</span> <span class="o">=</span> <span class="n">lasso_class</span><span class="p">,</span><span class="n">n_folds</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">subgroups</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">always_takers</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> 
+                                         <span class="n">never_takers</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">))</span>
+<span class="n">dml_MLIIVM</span><span class="o">$</span><span class="nf">fit</span><span class="p">(</span><span class="n">store_predictions</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">dml_MLIIVM</span><span class="o">$</span><span class="nf">summary</span><span class="p">()</span>
+<span class="n">lasso_MLIIVM</span> <span class="o">&lt;-</span> <span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">coef</span>
+<span class="n">lasso_std_MLIIVM</span> <span class="o">&lt;-</span> <span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">se</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimates and significance testing of the effect of target variables
+     Estimate. Std. Error t value Pr(&gt;|t|)    
+p401     11484       1596   7.195 6.25e-13 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+</pre></div>
+</div>
+</div>
+</div>
+<p>The confidence interval for the local average treatment effect of participation is given by</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">dml_MLIIVM</span><span class="o">$</span><span class="nf">confint</span><span class="p">(</span><span class="n">level</span> <span class="o">=</span> <span class="m">0.95</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 1 × 2 of type dbl</caption>
+<thead>
+	<tr><th></th><th scope=col>2.5 %</th><th scope=col>97.5 %</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>p401</th><td>8356.038</td><td>14612.92</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>Here we can also check the accuracy of the model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># variables</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">pension</span><span class="o">$</span><span class="n">net_tfa</span><span class="p">)</span> <span class="c1"># true observations</span>
+<span class="n">d</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">pension</span><span class="o">$</span><span class="n">p401</span><span class="p">)</span> 
+<span class="n">z</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">pension</span><span class="o">$</span><span class="n">e401</span><span class="p">)</span> 
+
+<span class="c1"># predictions</span>
+<span class="n">dml_MLIIVM</span><span class="o">$</span><span class="nf">params_names</span><span class="p">()</span>
+<span class="n">g0_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_g0</span><span class="p">)</span> <span class="c1"># predictions of g_0(z=0, X)</span>
+<span class="n">g1_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_g1</span><span class="p">)</span> <span class="c1"># predictions of g_0(z=1, X)</span>
+<span class="n">g_hat</span> <span class="o">&lt;-</span> <span class="n">z</span><span class="o">*</span><span class="n">g1_hat</span><span class="o">+</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">z</span><span class="p">)</span><span class="o">*</span><span class="n">g0_hat</span> <span class="c1"># predictions of g_0</span>
+<span class="n">r0_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_r0</span><span class="p">)</span> <span class="c1"># predictions of r_0(z=0, X)</span>
+<span class="n">r1_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_r1</span><span class="p">)</span> <span class="c1"># predictions of r_0(z=1, X)</span>
+<span class="n">r_hat</span> <span class="o">&lt;-</span> <span class="n">z</span><span class="o">*</span><span class="n">r1_hat</span><span class="o">+</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">z</span><span class="p">)</span><span class="o">*</span><span class="n">r0_hat</span> <span class="c1"># predictions of r_0</span>
+<span class="n">m_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_m</span><span class="p">)</span> <span class="c1"># predictions of m_o</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'ml_g0'</li><li>'ml_g1'</li><li>'ml_m'</li><li>'ml_r0'</li><li>'ml_r1'</li></ol>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># cross-fitted RMSE: outcome</span>
+<span class="n">lasso_y_MLIIVM</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">g_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">lasso_y_MLIIVM</span>
+
+<span class="c1"># cross-fitted RMSE: treatment</span>
+<span class="n">lasso_d_MLIIVM</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">d</span><span class="o">-</span><span class="n">r_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">lasso_d_MLIIVM</span>
+
+<span class="c1"># cross-fitted RMSE: instrument</span>
+<span class="n">lasso_z_MLIIVM</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">z</span><span class="o">-</span><span class="n">m_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">lasso_z_MLIIVM</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">55439.5089355971</div><div class="output text_html">0.273065094547404</div><div class="output text_html">0.444057854588759</div></div>
+</div>
+<p>Again, we repeat the procedure for the other machine learning methods:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">### random forest ###</span>
+
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">123</span><span class="p">)</span>
+<span class="n">lgr</span><span class="o">::</span><span class="nf">get_logger</span><span class="p">(</span><span class="s">&quot;mlr3&quot;</span><span class="p">)</span><span class="o">$</span><span class="nf">set_threshold</span><span class="p">(</span><span class="s">&quot;warn&quot;</span><span class="p">)</span> 
+<span class="n">dml_MLIIVM</span> <span class="o">=</span> <span class="n">DoubleMLIIVM</span><span class="o">$</span><span class="nf">new</span><span class="p">(</span><span class="n">data_IV_aux</span><span class="p">,</span> <span class="n">ml_g</span> <span class="o">=</span> <span class="n">randomForest</span><span class="p">,</span> 
+                       <span class="n">ml_m</span> <span class="o">=</span> <span class="n">randomForest_class</span><span class="p">,</span> <span class="n">ml_r</span> <span class="o">=</span> <span class="n">randomForest_class</span><span class="p">,</span><span class="n">n_folds</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">subgroups</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">always_takers</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> 
+                                         <span class="n">never_takers</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">))</span>
+<span class="n">dml_MLIIVM</span><span class="o">$</span><span class="nf">fit</span><span class="p">(</span><span class="n">store_predictions</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">dml_MLIIVM</span><span class="o">$</span><span class="nf">summary</span><span class="p">()</span>
+<span class="n">forest_MLIIVM</span> <span class="o">&lt;-</span> <span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">coef</span>
+<span class="n">forest_std_MLIIVM</span> <span class="o">&lt;-</span> <span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">se</span>
+
+<span class="c1"># predictions</span>
+<span class="n">g0_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_g0</span><span class="p">)</span> <span class="c1"># predictions of g_0(Z=0, X)</span>
+<span class="n">g1_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_g1</span><span class="p">)</span> <span class="c1"># predictions of g_0(Z=1, X)</span>
+<span class="n">g_hat</span> <span class="o">&lt;-</span> <span class="n">z</span><span class="o">*</span><span class="n">g1_hat</span><span class="o">+</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">z</span><span class="p">)</span><span class="o">*</span><span class="n">g0_hat</span> <span class="c1"># predictions of g_0</span>
+<span class="n">r0_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_r0</span><span class="p">)</span> <span class="c1"># predictions of r_0(Z=0, X)</span>
+<span class="n">r1_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_r1</span><span class="p">)</span> <span class="c1"># predictions of r_0(Z=1, X)</span>
+<span class="n">r_hat</span> <span class="o">&lt;-</span> <span class="n">z</span><span class="o">*</span><span class="n">r1_hat</span><span class="o">+</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">z</span><span class="p">)</span><span class="o">*</span><span class="n">r0_hat</span> <span class="c1"># predictions of r_0</span>
+<span class="n">m_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_m</span><span class="p">)</span> <span class="c1"># predictions of m_o</span>
+
+<span class="c1"># cross-fitted RMSE: outcome</span>
+<span class="n">forest_y_MLIIVM</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">g_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">forest_y_MLIIVM</span>
+
+<span class="c1"># cross-fitted RMSE: treatment</span>
+<span class="n">forest_d_MLIIVM</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">d</span><span class="o">-</span><span class="n">r_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">forest_d_MLIIVM</span>
+
+<span class="c1"># cross-fitted RMSE: instrument</span>
+<span class="n">forest_z_MLIIVM</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">z</span><span class="o">-</span><span class="n">m_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">forest_z_MLIIVM</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimates and significance testing of the effect of target variables
+     Estimate. Std. Error t value Pr(&gt;|t|)    
+p401     12386       1861   6.655 2.84e-11 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+</pre></div>
+</div>
+<div class="output text_html">55894.9225672997</div><div class="output text_html">0.281485008868116</div><div class="output text_html">0.455820706839991</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">### trees ###</span>
+
+<span class="n">dml_MLIIVM</span> <span class="o">=</span> <span class="n">DoubleMLIIVM</span><span class="o">$</span><span class="nf">new</span><span class="p">(</span><span class="n">data_IV_aux</span><span class="p">,</span> <span class="n">ml_g</span> <span class="o">=</span> <span class="n">trees</span><span class="p">,</span> 
+                       <span class="n">ml_m</span> <span class="o">=</span> <span class="n">trees_class</span><span class="p">,</span> <span class="n">ml_r</span> <span class="o">=</span> <span class="n">trees_class</span><span class="p">,</span><span class="n">n_folds</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">subgroups</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">always_takers</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> 
+                                         <span class="n">never_takers</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">))</span>
+<span class="n">dml_MLIIVM</span><span class="o">$</span><span class="nf">fit</span><span class="p">(</span><span class="n">store_predictions</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">dml_MLIIVM</span><span class="o">$</span><span class="nf">summary</span><span class="p">()</span>
+<span class="n">tree_MLIIVM</span> <span class="o">&lt;-</span> <span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">coef</span>
+<span class="n">tree_std_MLIIVM</span> <span class="o">&lt;-</span> <span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">se</span>
+
+<span class="c1"># predictions</span>
+<span class="n">g0_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_g0</span><span class="p">)</span> <span class="c1"># predictions of g_0(Z=0, X)</span>
+<span class="n">g1_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_g1</span><span class="p">)</span> <span class="c1"># predictions of g_0(Z=1, X)</span>
+<span class="n">g_hat</span> <span class="o">&lt;-</span> <span class="n">z</span><span class="o">*</span><span class="n">g1_hat</span><span class="o">+</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">z</span><span class="p">)</span><span class="o">*</span><span class="n">g0_hat</span> <span class="c1"># predictions of g_0</span>
+<span class="n">r0_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_r0</span><span class="p">)</span> <span class="c1"># predictions of r_0(Z=0, X)</span>
+<span class="n">r1_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_r1</span><span class="p">)</span> <span class="c1"># predictions of r_0(Z=1, X)</span>
+<span class="n">r_hat</span> <span class="o">&lt;-</span> <span class="n">z</span><span class="o">*</span><span class="n">r1_hat</span><span class="o">+</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">z</span><span class="p">)</span><span class="o">*</span><span class="n">r0_hat</span> <span class="c1"># predictions of r_0</span>
+<span class="n">m_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_m</span><span class="p">)</span> <span class="c1"># predictions of m_o</span>
+
+<span class="c1"># cross-fitted RMSE: outcome</span>
+<span class="n">tree_y_MLIIVM</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">g_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">tree_y_MLIIVM</span>
+
+<span class="c1"># cross-fitted RMSE: treatment</span>
+<span class="n">tree_d_MLIIVM</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">d</span><span class="o">-</span><span class="n">r_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">tree_d_MLIIVM</span>
+
+<span class="c1"># cross-fitted RMSE: instrument</span>
+<span class="n">tree_z_MLIIVM</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">z</span><span class="o">-</span><span class="n">m_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">tree_z_MLIIVM</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimates and significance testing of the effect of target variables
+     Estimate. Std. Error t value Pr(&gt;|t|)    
+p401     11341       1719   6.596 4.23e-11 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+</pre></div>
+</div>
+<div class="output text_html">58138.8671314746</div><div class="output text_html">0.278065853668596</div><div class="output text_html">0.455683602053198</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">### boosting ###</span>
+<span class="n">dml_MLIIVM</span> <span class="o">=</span> <span class="n">DoubleMLIIVM</span><span class="o">$</span><span class="nf">new</span><span class="p">(</span><span class="n">data_IV_aux</span><span class="p">,</span> <span class="n">ml_g</span> <span class="o">=</span> <span class="n">boost</span><span class="p">,</span> 
+                       <span class="n">ml_m</span> <span class="o">=</span> <span class="n">boost_class</span><span class="p">,</span> <span class="n">ml_r</span> <span class="o">=</span> <span class="n">boost_class</span><span class="p">,</span><span class="n">n_folds</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">subgroups</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">always_takers</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> 
+                                         <span class="n">never_takers</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">))</span>
+<span class="n">dml_MLIIVM</span><span class="o">$</span><span class="nf">fit</span><span class="p">(</span><span class="n">store_predictions</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">dml_MLIIVM</span><span class="o">$</span><span class="nf">summary</span><span class="p">()</span>
+<span class="n">boost_MLIIVM</span> <span class="o">&lt;-</span> <span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">coef</span>
+<span class="n">boost_std_MLIIVM</span> <span class="o">&lt;-</span> <span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">se</span>
+
+<span class="c1"># predictions</span>
+<span class="n">g0_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_g0</span><span class="p">)</span> <span class="c1"># predictions of g_0(Z=0, X)</span>
+<span class="n">g1_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_g1</span><span class="p">)</span> <span class="c1"># predictions of g_0(Z=1, X)</span>
+<span class="n">g_hat</span> <span class="o">&lt;-</span> <span class="n">z</span><span class="o">*</span><span class="n">g1_hat</span><span class="o">+</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">z</span><span class="p">)</span><span class="o">*</span><span class="n">g0_hat</span> <span class="c1"># predictions of g_0</span>
+<span class="n">r0_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_r0</span><span class="p">)</span> <span class="c1"># predictions of r_0(Z=0, X)</span>
+<span class="n">r1_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_r1</span><span class="p">)</span> <span class="c1"># predictions of r_0(Z=1, X)</span>
+<span class="n">r_hat</span> <span class="o">&lt;-</span> <span class="n">z</span><span class="o">*</span><span class="n">r1_hat</span><span class="o">+</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">z</span><span class="p">)</span><span class="o">*</span><span class="n">r0_hat</span> <span class="c1"># predictions of r_0</span>
+<span class="n">m_hat</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">predictions</span><span class="o">$</span><span class="n">ml_m</span><span class="p">)</span> <span class="c1"># predictions of m_o</span>
+
+<span class="c1"># cross-fitted RMSE: outcome</span>
+<span class="n">boost_y_MLIIVM</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">g_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">boost_y_MLIIVM</span>
+
+<span class="c1"># cross-fitted RMSE: treatment</span>
+<span class="n">boost_d_MLIIVM</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">d</span><span class="o">-</span><span class="n">r_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">boost_d_MLIIVM</span>
+
+<span class="c1"># cross-fitted RMSE: instrument</span>
+<span class="n">boost_z_MLIIVM</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">((</span><span class="n">z</span><span class="o">-</span><span class="n">m_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> 
+<span class="n">boost_z_MLIIVM</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimates and significance testing of the effect of target variables
+     Estimate. Std. Error t value Pr(&gt;|t|)    
+p401     12529       1822   6.878 6.08e-12 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+</pre></div>
+</div>
+<div class="output text_html">61377.343221528</div><div class="output text_html">0.289797050341825</div><div class="output text_html">0.472681479997785</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># library(xtable)</span>
+<span class="n">table</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">4</span><span class="p">)</span>
+<span class="n">table</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">lasso_MLIIVM</span><span class="p">,</span><span class="n">forest_MLIIVM</span><span class="p">,</span><span class="n">tree_MLIIVM</span><span class="p">,</span><span class="n">boost_MLIIVM</span><span class="p">)</span>
+<span class="n">table</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">lasso_std_MLIIVM</span><span class="p">,</span><span class="n">forest_std_MLIIVM</span><span class="p">,</span><span class="n">tree_std_MLIIVM</span><span class="p">,</span><span class="n">boost_std_MLIIVM</span><span class="p">)</span>
+<span class="n">table</span><span class="p">[</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">lasso_y_MLIIVM</span><span class="p">,</span><span class="n">forest_y_MLIIVM</span><span class="p">,</span><span class="n">tree_y_MLIIVM</span><span class="p">,</span><span class="n">boost_y_MLIIVM</span><span class="p">)</span>
+<span class="n">table</span><span class="p">[</span><span class="m">4</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">lasso_d_MLIIVM</span><span class="p">,</span><span class="n">forest_d_MLIIVM</span><span class="p">,</span><span class="n">tree_d_MLIIVM</span><span class="p">,</span><span class="n">boost_d_MLIIVM</span><span class="p">)</span>
+<span class="n">table</span><span class="p">[</span><span class="m">5</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">lasso_z_MLIIVM</span><span class="p">,</span><span class="n">forest_z_MLIIVM</span><span class="p">,</span><span class="n">tree_z_MLIIVM</span><span class="p">,</span><span class="n">boost_z_MLIIVM</span><span class="p">)</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">table</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Estimate&quot;</span><span class="p">,</span><span class="s">&quot;Std.Error&quot;</span><span class="p">,</span><span class="s">&quot;RMSE Y&quot;</span><span class="p">,</span><span class="s">&quot;RMSE D&quot;</span><span class="p">,</span><span class="s">&quot;RMSE Z&quot;</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">table</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Lasso&quot;</span><span class="p">,</span><span class="s">&quot;Random Forest&quot;</span><span class="p">,</span><span class="s">&quot;Trees&quot;</span><span class="p">,</span><span class="s">&quot;Boosting&quot;</span><span class="p">)</span>
+<span class="c1"># tab&lt;- xtable(table, digits = 2)</span>
+<span class="n">table</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 5 × 4 of type dbl</caption>
+<thead>
+	<tr><th></th><th scope=col>Lasso</th><th scope=col>Random Forest</th><th scope=col>Trees</th><th scope=col>Boosting</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>Estimate</th><td>1.148448e+04</td><td>1.238592e+04</td><td>1.134090e+04</td><td>1.252911e+04</td></tr>
+	<tr><th scope=row>Std.Error</th><td>1.596173e+03</td><td>1.861187e+03</td><td>1.719411e+03</td><td>1.821686e+03</td></tr>
+	<tr><th scope=row>RMSE Y</th><td>5.543951e+04</td><td>5.589492e+04</td><td>5.813887e+04</td><td>6.137734e+04</td></tr>
+	<tr><th scope=row>RMSE D</th><td>2.730651e-01</td><td>2.814850e-01</td><td>2.780659e-01</td><td>2.897971e-01</td></tr>
+	<tr><th scope=row>RMSE Z</th><td>4.440579e-01</td><td>4.558207e-01</td><td>4.556836e-01</td><td>4.726815e-01</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>We report results based on four ML methods for estimating the nuisance functions used in
+forming the orthogonal estimating equations. We find again that the estimates of the treatment effect are stable across ML methods. The estimates are highly significant, hence we would reject the hypothesis
+that the effect of 401(k) participation has no effect on financial health.</p>
+<p>We might rerun the model using the best ML method for each equation to get a final estimate for the treatment effect of participation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">123</span><span class="p">)</span>
+<span class="n">lgr</span><span class="o">::</span><span class="nf">get_logger</span><span class="p">(</span><span class="s">&quot;mlr3&quot;</span><span class="p">)</span><span class="o">$</span><span class="nf">set_threshold</span><span class="p">(</span><span class="s">&quot;warn&quot;</span><span class="p">)</span> 
+<span class="n">dml_MLIIVM</span> <span class="o">=</span> <span class="n">DoubleMLIIVM</span><span class="o">$</span><span class="nf">new</span><span class="p">(</span><span class="n">data_IV_aux</span><span class="p">,</span> <span class="n">ml_g</span> <span class="o">=</span> <span class="n">randomForest</span><span class="p">,</span> 
+                       <span class="n">ml_m</span> <span class="o">=</span> <span class="n">lasso_class</span><span class="p">,</span> <span class="n">ml_r</span> <span class="o">=</span> <span class="n">lasso_class</span><span class="p">,</span><span class="n">n_folds</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">subgroups</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">always_takers</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> 
+                                         <span class="n">never_takers</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">))</span>
+<span class="n">dml_MLIIVM</span><span class="o">$</span><span class="nf">fit</span><span class="p">(</span><span class="n">store_predictions</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">dml_MLIIVM</span><span class="o">$</span><span class="nf">summary</span><span class="p">()</span>
+<span class="n">best_MLIIVM</span> <span class="o">&lt;-</span> <span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">coef</span>
+<span class="n">best_std_MLIIVM</span> <span class="o">&lt;-</span> <span class="n">dml_MLIIVM</span><span class="o">$</span><span class="n">se</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimates and significance testing of the effect of target variables
+     Estimate. Std. Error t value Pr(&gt;|t|)    
+p401     11984       1612   7.433 1.06e-13 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "d2cml-ai/14.388_r",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            kernelName: "ir",
+            path: "./r_notebook"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="19_dml_inference_using_nn_for_gun_ownership.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">19. </span>DML inference using NN for gun ownership</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="21_identification_analysis_of_401_k_example_w_dags.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">21. </span>Debiased ML for Partially Linear Model in R</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Victor Chernozhukov<br/>
+  
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

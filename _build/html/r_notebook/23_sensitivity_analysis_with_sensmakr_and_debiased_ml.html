@@ -1,0 +1,1108 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>23. Sensitivity Analysis with Sensmakr and Debiased ML &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="24. Debiased ML for Partially Linear IV Model in R" href="24_debiased_ml_for_partially_linear_iv_model_in_r.html" />
+    <link rel="prev" title="22. Debiased ML for Partially Linear Model in R" href="22_debiased_ml_for_partially_linear_model_in_r.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/mit.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Inference on Causal and Structural Parametters Using ML and AI</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_r_notebook_linear_model_overfiting.html">
+   1. Linear Model Overfiting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_ols_and_lasso_for_wage_prediction.html">
+   2. OLS and lasso for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_ols_and_lasso_for_gender_wage_gap_inference.html">
+   3. OLS and lasso for gender wage gap inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_r_notebook_some_rct_examples.html">
+   4. Some RCT Examples
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_r_notebook_analyzing_rct_with_precision.html">
+   5. Analyzing RCT reemployment experiment with Precision by Ajusting for Baseline Covariates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_analyzing_rct_reemployment_experiment.html">
+   6. Analyzing RCT reemployment experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_r_notebook_linear_penalized_regs.html">
+   7. Linear Penalized Regs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_ml_for_wage_prediction.html">
+   8. ML for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_r_notebook_experiment_on_orthogonal_learning.html">
+   9. Experiment on orthogonal Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_double_lasso_for_the_convergence_hypothesis.html">
+   10. Double Lasso for the convergence hypothesis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_heterogenous_wage_effects.html">
+   11. Heterogenous Wage Effects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_r_colliderbias_hollywood.html">
+   12. ColliderBias Hollywood
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13_deep_neural_networks_for_wage_prediction.html">
+   13. Deep Neural Networks for Wage Prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_automl_for_wage_prediction.html">
+   14. AutoML for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15_functional_approximation_by_nn_and_rf.html">
+   15. Functional Approximation By NN and RF
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_notebook_dagitty.html">
+   16. Notebook-DAGitty
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_notebook_dosearch.html">
+   17. Notebook-Dosearch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18_dml_inference_for_gun_ownership.html">
+   18. DML inference for gun ownership
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19_dml_inference_using_nn_for_gun_ownership.html">
+   19. DML inference using NN for gun ownership
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_pm5_401k.html">
+   20. DML for ATE and LATE of 401(k) on Wealth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21_identification_analysis_of_401_k_example_w_dags.html">
+   21. Debiased ML for Partially Linear Model in R
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22_debiased_ml_for_partially_linear_model_in_r.html">
+   22. Debiased ML for Partially Linear Model in R
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   23. Sensitivity Analysis with Sensmakr and Debiased ML
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="24_debiased_ml_for_partially_linear_iv_model_in_r.html">
+   24. Debiased ML for Partially Linear IV Model in R
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_r_weak_iv_experiments.html">
+   25. Weak IV Experiments
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_r/master?urlpath=tree/_build/jupyter_execute/r_notebook/23_sensitivity_analysis_with_sensmakr_and_debiased_ml.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_r/blob/master/_build/jupyter_execute/r_notebook/23_sensitivity_analysis_with_sensmakr_and_debiased_ml.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_r"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_r/issues/new?title=Issue%20on%20page%20%2Fr_notebook/23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_r/edit/master/_build/jupyter_execute/r_notebook/23_sensitivity_analysis_with_sensmakr_and_debiased_ml.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/r_notebook/23_sensitivity_analysis_with_sensmakr_and_debiased_ml.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#here-we-experiment-with-using-package-sensemakr-in-conjunction-with-debiased-ml">
+   23.1. Here we experiment with using package “sensemakr” in conjunction with debiased ML
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#take-out-village-fixed-effects-and-run-basic-linear-analysis">
+   23.2. Take out village fixed effects and run basic linear analysis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#we-first-use-lasso-for-partilling-out-controls">
+   23.3. We first use Lasso for Partilling Out Controls
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#manual-bias-analysis">
+   23.4. Manual Bias Analysis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bias-analysis-with-sensemakr">
+   23.5. Bias Analysis with Sensemakr
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#next-we-use-random-forest-as-ml-tool-for-partialling-out">
+   23.6. Next We use Random Forest as ML tool for Partialling Out
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Sensitivity Analysis with Sensmakr and Debiased ML</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#here-we-experiment-with-using-package-sensemakr-in-conjunction-with-debiased-ml">
+   23.1. Here we experiment with using package “sensemakr” in conjunction with debiased ML
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#take-out-village-fixed-effects-and-run-basic-linear-analysis">
+   23.2. Take out village fixed effects and run basic linear analysis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#we-first-use-lasso-for-partilling-out-controls">
+   23.3. We first use Lasso for Partilling Out Controls
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#manual-bias-analysis">
+   23.4. Manual Bias Analysis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bias-analysis-with-sensemakr">
+   23.5. Bias Analysis with Sensemakr
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#next-we-use-random-forest-as-ml-tool-for-partialling-out">
+   23.6. Next We use Random Forest as ML tool for Partialling Out
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="sensitivity-analysis-with-sensmakr-and-debiased-ml">
+<h1><span class="section-number">23. </span>Sensitivity Analysis with Sensmakr and Debiased ML<a class="headerlink" href="#sensitivity-analysis-with-sensmakr-and-debiased-ml" title="Permalink to this headline">#</a></h1>
+<section id="here-we-experiment-with-using-package-sensemakr-in-conjunction-with-debiased-ml">
+<h2><span class="section-number">23.1. </span>Here we experiment with using package “sensemakr” in conjunction with debiased ML<a class="headerlink" href="#here-we-experiment-with-using-package-sensemakr-in-conjunction-with-debiased-ml" title="Permalink to this headline">#</a></h2>
+<p>References:</p>
+<ul class="simple">
+<li><p>Linear Models: Cinelli and Hazlett
+<a class="reference external" href="https://doi.org/10.1111/rssb.12348">https://doi.org/10.1111/rssb.12348</a></p></li>
+<li><p>Partially Linear and Nonlinear Models. Chernozhukov, Cinelli, Newey, Sharma, Syrgkanis
+<a class="reference external" href="https://arxiv.org/pdf/2112.13398.pdf">https://arxiv.org/pdf/2112.13398.pdf</a></p></li>
+</ul>
+<p>We will mimic the partialling out procedure with machine learning tools, and invoke Sensmakr to compute <span class="math notranslate nohighlight">\(\phi^2\)</span> and plot sensitivity results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># loads package</span>
+
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;librarian&quot;</span><span class="p">)</span>
+<span class="n">librarian</span><span class="o">::</span><span class="nf">shelf</span><span class="p">(</span>
+  <span class="n">sensemakr</span><span class="p">,</span> <span class="n">hdm</span><span class="p">,</span> <span class="n">lfe</span><span class="p">,</span> <span class="n">randomForest</span><span class="p">,</span> <span class="n">zoo</span>
+  <span class="p">,</span> <span class="n">survival</span>
+<span class="p">)</span>
+
+<span class="c1"># loads data</span>
+<span class="nf">data</span><span class="p">(</span><span class="s">&quot;darfur&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing package into ‘/home/runner/work/_temp/Library’
+(as ‘lib’ is unspecified)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  These packages will be installed:
+
+  &#39;sensemakr&#39;
+
+  It may take some time.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Data is described here
+<a class="reference external" href="https://cran.r-project.org/web/packages/sensemakr/vignettes/sensemakr.html">https://cran.r-project.org/web/packages/sensemakr/vignettes/sensemakr.html</a></p>
+<p>The main outcome is attitude towards peace – the peacefactor.
+The key variable of interest is whether the responders were directly harmed (directlyharmed).
+We want to know if being directly harmed in the conflict causes people to support peace-enforcing measures.
+The measured confounders include female indicator, age, farmer, herder, voted in the past, and household size.
+There is also a village indicator, which we will treat as fixed effect and partial it out before conducting
+the analysis. The standard errors will be clustered at the village level.</p>
+</section>
+<section id="take-out-village-fixed-effects-and-run-basic-linear-analysis">
+<h2><span class="section-number">23.2. </span>Take out village fixed effects and run basic linear analysis<a class="headerlink" href="#take-out-village-fixed-effects-and-run-basic-linear-analysis" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">#get rid of village fixed effects</span>
+
+<span class="nf">attach</span><span class="p">(</span><span class="n">darfur</span><span class="p">)</span>
+<span class="c1"># library(lfe)</span>
+
+<span class="n">peacefactorR</span><span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">peacefactor</span><span class="o">~</span><span class="n">village</span><span class="p">)</span><span class="o">$</span><span class="n">res</span>
+<span class="n">directlyharmedR</span><span class="o">&lt;-</span>  <span class="nf">lm</span><span class="p">(</span><span class="n">directlyharmed</span><span class="o">~</span><span class="n">village</span><span class="p">)</span><span class="o">$</span><span class="n">res</span>
+<span class="n">femaleR</span><span class="o">&lt;-</span>  <span class="nf">lm</span><span class="p">(</span><span class="n">female</span><span class="o">~</span><span class="n">village</span><span class="p">)</span><span class="o">$</span><span class="n">res</span>
+<span class="n">ageR</span><span class="o">&lt;-</span>     <span class="nf">lm</span><span class="p">(</span><span class="n">age</span><span class="o">~</span><span class="n">village</span><span class="p">)</span><span class="o">$</span><span class="n">res</span>
+<span class="n">farmerR</span><span class="o">&lt;-</span>  <span class="nf">lm</span><span class="p">(</span><span class="n">farmer_dar</span><span class="o">~</span><span class="n">village</span><span class="p">)</span><span class="o">$</span><span class="n">res</span>
+<span class="n">herderR</span><span class="o">&lt;-</span>  <span class="nf">lm</span><span class="p">(</span><span class="n">herder_dar</span><span class="o">~</span><span class="n">village</span><span class="p">)</span><span class="o">$</span><span class="n">res</span>
+<span class="n">pastvotedR</span><span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">pastvoted</span><span class="o">~</span><span class="n">village</span><span class="p">)</span><span class="o">$</span><span class="n">res</span>
+<span class="n">hhsizeR</span><span class="o">&lt;-</span>   <span class="nf">lm</span><span class="p">(</span><span class="n">hhsize_darfur</span><span class="o">~</span><span class="n">village</span><span class="p">)</span><span class="o">$</span><span class="n">res</span>
+
+
+<span class="c1"># Preliminary linear model analysis</span>
+
+<span class="nf">summary</span><span class="p">(</span><span class="nf">felm</span><span class="p">(</span><span class="n">peacefactorR</span><span class="o">~</span> <span class="n">directlyharmedR</span><span class="o">+</span> <span class="n">femaleR</span> <span class="o">+</span>
+                     <span class="n">ageR</span> <span class="o">+</span> <span class="n">farmerR</span><span class="o">+</span> <span class="n">herderR</span> <span class="o">+</span> <span class="n">pastvotedR</span> <span class="o">+</span> <span class="n">hhsizeR</span> <span class="o">|</span><span class="m">0</span><span class="o">|</span><span class="m">0</span><span class="o">|</span><span class="n">village</span><span class="p">))</span>
+
+<span class="c1"># here we are clustering standard errors at the village level</span>
+
+
+<span class="nf">summary</span><span class="p">(</span><span class="nf">felm</span><span class="p">(</span><span class="n">peacefactorR</span><span class="o">~</span> <span class="n">femaleR</span> <span class="o">+</span>
+                     <span class="n">ageR</span> <span class="o">+</span> <span class="n">farmerR</span><span class="o">+</span> <span class="n">herderR</span> <span class="o">+</span> <span class="n">pastvotedR</span> <span class="o">+</span> <span class="n">hhsizeR</span> <span class="o">|</span><span class="m">0</span><span class="o">|</span><span class="m">0</span><span class="o">|</span><span class="n">village</span><span class="p">))</span>
+
+<span class="c1"># here we are clustering standard errors at the village level</span>
+
+
+
+<span class="nf">summary</span><span class="p">(</span><span class="nf">felm</span><span class="p">(</span><span class="n">directlyharmedR</span><span class="o">~</span> <span class="n">femaleR</span> <span class="o">+</span>
+                     <span class="n">ageR</span> <span class="o">+</span> <span class="n">farmerR</span><span class="o">+</span> <span class="n">herderR</span> <span class="o">+</span> <span class="n">pastvotedR</span> <span class="o">+</span> <span class="n">hhsizeR</span> <span class="o">|</span><span class="m">0</span><span class="o">|</span><span class="m">0</span><span class="o">|</span><span class="n">village</span><span class="p">))</span>
+
+<span class="c1"># here we are clustering standard errors at the village level</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
+   felm(formula = peacefactorR ~ directlyharmedR + femaleR + ageR +      farmerR + herderR + pastvotedR + hhsizeR | 0 | 0 | village) 
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.67487 -0.14712  0.00000  0.09857  0.90307 
+
+Coefficients:
+                  Estimate Cluster s.e. t value Pr(&gt;|t|)    
+(Intercept)     -7.428e-19    2.065e-17  -0.036  0.97131    
+directlyharmedR  9.732e-02    2.382e-02   4.085 4.68e-05 ***
+femaleR         -2.321e-01    2.444e-02  -9.495  &lt; 2e-16 ***
+ageR            -2.072e-03    7.441e-04  -2.784  0.00545 ** 
+farmerR         -4.044e-02    2.956e-02  -1.368  0.17156    
+herderR          1.428e-02    3.650e-02   0.391  0.69569    
+pastvotedR      -4.802e-02    2.688e-02  -1.787  0.07420 .  
+hhsizeR          1.230e-03    2.166e-03   0.568  0.57034    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.2437 on 1268 degrees of freedom
+Multiple R-squared(full model): 0.1542   Adjusted R-squared: 0.1496 
+Multiple R-squared(proj model): 0.1542   Adjusted R-squared: 0.1496 
+F-statistic(full model, *iid*):33.03 on 7 and 1268 DF, p-value: &lt; 2.2e-16 
+F-statistic(proj model): 25.44 on 7 and 485 DF, p-value: &lt; 2.2e-16 
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
+   felm(formula = peacefactorR ~ femaleR + ageR + farmerR + herderR +      pastvotedR + hhsizeR | 0 | 0 | village) 
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.63765 -0.15168  0.00000  0.09859  0.90298 
+
+Coefficients:
+              Estimate Cluster s.e. t value Pr(&gt;|t|)    
+(Intercept) -1.375e-18    1.991e-17  -0.069  0.94496    
+femaleR     -2.415e-01    2.536e-02  -9.522  &lt; 2e-16 ***
+ageR        -2.187e-03    7.453e-04  -2.934  0.00341 ** 
+farmerR     -4.071e-02    2.923e-02  -1.393  0.16390    
+herderR      2.623e-02    3.968e-02   0.661  0.50871    
+pastvotedR  -4.414e-02    2.784e-02  -1.585  0.11313    
+hhsizeR      1.336e-03    2.127e-03   0.628  0.52991    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.2463 on 1269 degrees of freedom
+Multiple R-squared(full model): 0.1353   Adjusted R-squared: 0.1312 
+Multiple R-squared(proj model): 0.1353   Adjusted R-squared: 0.1312 
+F-statistic(full model, *iid*): 33.1 on 6 and 1269 DF, p-value: &lt; 2.2e-16 
+F-statistic(proj model): 23.07 on 6 and 485 DF, p-value: &lt; 2.2e-16 
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
+   felm(formula = directlyharmedR ~ femaleR + ageR + farmerR + herderR +      pastvotedR + hhsizeR | 0 | 0 | village) 
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.8285 -0.3129  0.0000  0.2630  0.9076 
+
+Coefficients:
+              Estimate Cluster s.e. t value Pr(&gt;|t|)  
+(Intercept) -8.331e-18    2.684e-17  -0.310   0.7563  
+femaleR     -9.714e-02    5.129e-02  -1.894   0.0585 .
+ageR        -1.182e-03    1.151e-03  -1.028   0.3044  
+farmerR     -2.789e-03    4.280e-02  -0.065   0.9481  
+herderR      1.228e-01    5.064e-02   2.425   0.0155 *
+pastvotedR   3.991e-02    3.366e-02   1.186   0.2360  
+hhsizeR      1.093e-03    3.286e-03   0.333   0.7394  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.3744 on 1269 degrees of freedom
+Multiple R-squared(full model): 0.0179   Adjusted R-squared: 0.01326 
+Multiple R-squared(proj model): 0.0179   Adjusted R-squared: 0.01326 
+F-statistic(full model, *iid*):3.856 on 6 and 1269 DF, p-value: 0.0008089 
+F-statistic(proj model): 3.828 on 6 and 485 DF, p-value: 0.0009698 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="we-first-use-lasso-for-partilling-out-controls">
+<h2><span class="section-number">23.3. </span>We first use Lasso for Partilling Out Controls<a class="headerlink" href="#we-first-use-lasso-for-partilling-out-controls" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># library(hdm)</span>
+
+
+<span class="n">resY</span> <span class="o">=</span>  <span class="nf">rlasso</span><span class="p">(</span><span class="n">peacefactorR</span> <span class="o">~</span>  <span class="p">(</span><span class="n">femaleR</span> <span class="o">+</span>
+                     <span class="n">ageR</span> <span class="o">+</span> <span class="n">farmerR</span><span class="o">+</span> <span class="n">herderR</span> <span class="o">+</span> <span class="n">pastvotedR</span> <span class="o">+</span> <span class="n">hhsizeR</span><span class="p">)</span><span class="o">^</span><span class="m">3</span><span class="p">,</span> <span class="n">post</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span><span class="o">$</span><span class="n">res</span>
+
+<span class="n">resD</span> <span class="o">=</span>  <span class="nf">rlasso</span><span class="p">(</span><span class="n">directlyharmedR</span> <span class="o">~</span>  <span class="p">(</span><span class="n">femaleR</span> <span class="o">+</span>
+                     <span class="n">ageR</span> <span class="o">+</span> <span class="n">farmerR</span> <span class="o">+</span> <span class="n">herderR</span> <span class="o">+</span> <span class="n">pastvotedR</span> <span class="o">+</span> <span class="n">hhsizeR</span><span class="p">)</span><span class="o">^</span><span class="m">3</span> <span class="p">,</span> <span class="n">post</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span><span class="o">$</span><span class="n">res</span>
+
+
+<span class="nf">print</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Controls explain the following fraction of variance of Outcome&quot;</span><span class="p">,</span> <span class="m">1</span><span class="o">-</span><span class="nf">var</span><span class="p">(</span><span class="n">resY</span><span class="p">)</span><span class="o">/</span><span class="nf">var</span><span class="p">(</span><span class="n">peacefactorR</span><span class="p">)))</span>
+
+
+<span class="nf">print</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Controls explain the following fraction of variance of Treatment&quot;</span><span class="p">,</span> <span class="m">1</span><span class="o">-</span><span class="nf">var</span><span class="p">(</span><span class="n">resD</span><span class="p">)</span><span class="o">/</span><span class="nf">var</span><span class="p">(</span><span class="n">directlyharmedR</span><span class="p">)))</span>
+
+
+
+<span class="c1"># library(lfe)</span>
+
+
+<span class="n">dml.darfur.model</span><span class="o">=</span> <span class="nf">felm</span><span class="p">(</span><span class="n">resY</span> <span class="o">~</span> <span class="n">resD</span><span class="o">|</span><span class="m">0</span><span class="o">|</span><span class="m">0</span><span class="o">|</span><span class="n">village</span><span class="p">)</span>   <span class="c1"># cluster SEs by village</span>
+
+<span class="nf">summary</span><span class="p">(</span><span class="n">dml.darfur.model</span><span class="p">,</span><span class="n">robust</span><span class="o">=</span><span class="bp">T</span><span class="p">)</span>  <span class="c1">#culster SE by village</span>
+
+<span class="n">dml.darfur.model</span><span class="o">=</span> <span class="nf">lm</span><span class="p">(</span><span class="n">resY</span> <span class="o">~</span> <span class="n">resD</span><span class="p">)</span>  <span class="c1">#lineaer model to use as input in sensemakr   </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Controls explain the following fraction of variance of Outcome&quot;
+[2] &quot;0.125108054898996&quot;                                             
+[1] &quot;Controls explain the following fraction of variance of Treatment&quot;
+[2] &quot;0.0119842379295265&quot;                                              
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
+   felm(formula = resY ~ resD | 0 | 0 | village) 
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.63410 -0.15299  0.00069  0.09305  0.89593 
+
+Coefficients:
+             Estimate Cluster s.e. t value Pr(&gt;|t|)    
+(Intercept) 5.763e-18    1.594e-04   0.000        1    
+resD        1.003e-01    2.443e-02   4.108 4.25e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.2444 on 1274 degrees of freedom
+Multiple R-squared(full model): 0.02312   Adjusted R-squared: 0.02235 
+Multiple R-squared(proj model): 0.02312   Adjusted R-squared: 0.02235 
+F-statistic(full model, *iid*):30.15 on 1 and 1274 DF, p-value: 4.82e-08 
+F-statistic(proj model): 16.87 on 1 and 485 DF, p-value: 4.693e-05 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="manual-bias-analysis">
+<h2><span class="section-number">23.4. </span>Manual Bias Analysis<a class="headerlink" href="#manual-bias-analysis" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Main estimate</span>
+
+<span class="n">beta</span> <span class="o">=</span> <span class="n">dml.darfur.model</span><span class="o">$</span><span class="n">coef</span><span class="p">[</span><span class="m">2</span><span class="p">]</span>
+
+<span class="c1"># Hypothetical values of partial R2s </span>
+
+<span class="n">R2.YC</span> <span class="o">=</span> <span class="n">.</span><span class="m">16</span><span class="p">;</span> <span class="n">R2.DC</span> <span class="o">=</span> <span class="n">.</span><span class="m">01</span>
+
+<span class="c1"># Elements of the formal</span>
+
+<span class="n">kappa</span><span class="o">&lt;-</span>  <span class="p">(</span><span class="n">R2.YC</span> <span class="o">*</span> <span class="n">R2.DC</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="m">1</span><span class="o">-</span> <span class="n">R2.DC</span><span class="p">)</span>
+
+<span class="n">varianceRatio</span><span class="o">&lt;-</span> <span class="nf">mean</span><span class="p">(</span><span class="n">dml.darfur.model</span><span class="o">$</span><span class="n">res</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="o">/</span><span class="nf">mean</span><span class="p">(</span><span class="n">resD</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
+
+<span class="c1"># Compute square bias </span>
+
+<span class="n">BiasSq</span> <span class="o">&lt;-</span>  <span class="n">kappa</span><span class="o">*</span><span class="n">varianceRatio</span>
+
+<span class="c1"># Compute absolute value of the bias</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">BiasSq</span><span class="p">))</span>
+
+
+<span class="c1"># plotting </span>
+
+<span class="n">gridR2.DC</span><span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="n">.</span><span class="m">3</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="n">.</span><span class="m">001</span><span class="p">)</span> 
+
+<span class="n">gridR2.YC</span><span class="o">&lt;-</span> <span class="n">kappa</span><span class="o">*</span><span class="p">(</span><span class="m">1</span> <span class="o">-</span> <span class="n">gridR2.DC</span><span class="p">)</span><span class="o">/</span><span class="n">gridR2.DC</span>
+
+<span class="n">gridR2.YC</span><span class="o">&lt;-</span> <span class="nf">ifelse</span><span class="p">(</span><span class="n">gridR2.YC</span><span class="o">&gt;</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">gridR2.YC</span><span class="p">);</span>
+
+
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">gridR2.DC</span><span class="p">,</span> <span class="n">gridR2.YC</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Partial R2 of Treatment with Confounder&quot;</span><span class="p">,</span> 
+     <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;Partial R2 of Outcome with Confounder&quot;</span><span class="p">,</span>
+    <span class="n">main</span><span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Combo of R2 such that |Bias|&lt; &quot;</span><span class="p">,</span> <span class="nf">round</span><span class="p">(</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">BiasSq</span><span class="p">),</span> <span class="n">digits</span><span class="o">=</span><span class="m">4</span><span class="p">))</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 0.02622016
+</pre></div>
+</div>
+<img alt="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_10_1.png" src="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_10_1.png" />
+</div>
+</div>
+</section>
+<section id="bias-analysis-with-sensemakr">
+<h2><span class="section-number">23.5. </span>Bias Analysis with Sensemakr<a class="headerlink" href="#bias-analysis-with-sensemakr" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span> 
+<span class="n">dml.darfur.sensitivity</span> <span class="o">&lt;-</span> <span class="nf">sensemakr</span><span class="p">(</span><span class="n">model</span> <span class="o">=</span> <span class="n">dml.darfur.model</span><span class="p">,</span> 
+                                <span class="n">treatment</span> <span class="o">=</span> <span class="s">&quot;resD&quot;</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">dml.darfur.sensitivity</span><span class="p">)</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">dml.darfur.sensitivity</span><span class="p">,</span> <span class="n">nlevels</span> <span class="o">=</span> <span class="m">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sensitivity Analysis to Unobserved Confounding
+
+Model Formula: resY ~ resD
+
+Null hypothesis: q = 1 and reduce = TRUE 
+-- This means we are considering biases that reduce the absolute value of the current estimate.
+-- The null hypothesis deemed problematic is H0:tau = 0 
+
+Unadjusted Estimates of &#39;resD&#39;: 
+  Coef. estimate: 0.1003 
+  Standard Error: 0.0183 
+  t-value (H0:tau = 0): 5.491 
+
+Sensitivity Statistics:
+  Partial R2 of treatment with outcome: 0.0231 
+  Robustness Value, q = 1: 0.1425 
+  Robustness Value, q = 1, alpha = 0.05: 0.0941 
+
+Verbal interpretation of sensitivity statistics:
+
+-- Partial R2 of the treatment with the outcome: an extreme confounder (orthogonal to the covariates) that explains 100% of the residual variance of the outcome, would need to explain at least 2.31% of the residual variance of the treatment to fully account for the observed estimated effect.
+
+-- Robustness Value, q = 1: unobserved confounders (orthogonal to the covariates) that explain more than 14.25% of the residual variance of both the treatment and the outcome are strong enough to bring the point estimate to 0 (a bias of 100% of the original estimate). Conversely, unobserved confounders that do not explain more than 14.25% of the residual variance of both the treatment and the outcome are not strong enough to bring the point estimate to 0.
+
+-- Robustness Value, q = 1, alpha = 0.05: unobserved confounders (orthogonal to the covariates) that explain more than 9.41% of the residual variance of both the treatment and the outcome are strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0 (a bias of 100% of the original estimate), at the significance level of alpha = 0.05. Conversely, unobserved confounders that do not explain more than 9.41% of the residual variance of both the treatment and the outcome are not strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0, at the significance level of alpha = 0.05.
+</pre></div>
+</div>
+<img alt="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_12_1.png" src="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_12_1.png" />
+</div>
+</div>
+</section>
+<section id="next-we-use-random-forest-as-ml-tool-for-partialling-out">
+<h2><span class="section-number">23.6. </span>Next We use Random Forest as ML tool for Partialling Out<a class="headerlink" href="#next-we-use-random-forest-as-ml-tool-for-partialling-out" title="Permalink to this headline">#</a></h2>
+<p>The following code does DML with clsutered standard errors by ClusterID</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">DML2.for.PLM</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dreg</span><span class="p">,</span> <span class="n">yreg</span><span class="p">,</span> <span class="n">nfold</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">clusterID</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">nobs</span> <span class="o">&lt;-</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1">#number of observations</span>
+  <span class="n">foldid</span> <span class="o">&lt;-</span> <span class="nf">rep.int</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">nfold</span><span class="p">,</span><span class="n">times</span> <span class="o">=</span> <span class="nf">ceiling</span><span class="p">(</span><span class="n">nobs</span><span class="o">/</span><span class="n">nfold</span><span class="p">))[</span><span class="nf">sample.int</span><span class="p">(</span><span class="n">nobs</span><span class="p">)]</span> <span class="c1">#define folds indices</span>
+  <span class="n">I</span> <span class="o">&lt;-</span> <span class="nf">split</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">nobs</span><span class="p">,</span> <span class="n">foldid</span><span class="p">)</span>  <span class="c1">#split observation indices into folds  </span>
+  <span class="n">ytil</span> <span class="o">&lt;-</span> <span class="n">dtil</span> <span class="o">&lt;-</span> <span class="nf">rep</span><span class="p">(</span><span class="kc">NA</span><span class="p">,</span> <span class="n">nobs</span><span class="p">)</span>
+  <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;fold: &quot;</span><span class="p">)</span>
+  <span class="nf">for</span><span class="p">(</span><span class="n">b</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">I</span><span class="p">)){</span>
+    <span class="n">dfit</span> <span class="o">&lt;-</span> <span class="nf">dreg</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="n">I</span><span class="p">[[</span><span class="n">b</span><span class="p">]],],</span> <span class="n">d</span><span class="p">[</span><span class="o">-</span><span class="n">I</span><span class="p">[[</span><span class="n">b</span><span class="p">]]])</span> <span class="c1">#take a fold out</span>
+    <span class="n">yfit</span> <span class="o">&lt;-</span> <span class="nf">yreg</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="n">I</span><span class="p">[[</span><span class="n">b</span><span class="p">]],],</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="n">I</span><span class="p">[[</span><span class="n">b</span><span class="p">]]])</span> <span class="c1"># take a foldt out</span>
+    <span class="n">dhat</span> <span class="o">&lt;-</span> <span class="nf">predict</span><span class="p">(</span><span class="n">dfit</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">I</span><span class="p">[[</span><span class="n">b</span><span class="p">]],],</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">)</span> <span class="c1">#predict the left-out fold </span>
+    <span class="n">yhat</span> <span class="o">&lt;-</span> <span class="nf">predict</span><span class="p">(</span><span class="n">yfit</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">I</span><span class="p">[[</span><span class="n">b</span><span class="p">]],],</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">)</span> <span class="c1">#predict the left-out fold </span>
+    <span class="n">dtil</span><span class="p">[</span><span class="n">I</span><span class="p">[[</span><span class="n">b</span><span class="p">]]]</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">I</span><span class="p">[[</span><span class="n">b</span><span class="p">]]]</span> <span class="o">-</span> <span class="n">dhat</span><span class="p">)</span> <span class="c1">#record residual for the left-out fold</span>
+    <span class="n">ytil</span><span class="p">[</span><span class="n">I</span><span class="p">[[</span><span class="n">b</span><span class="p">]]]</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">I</span><span class="p">[[</span><span class="n">b</span><span class="p">]]]</span> <span class="o">-</span> <span class="n">yhat</span><span class="p">)</span> <span class="c1">#record residial for the left-out fold</span>
+    <span class="nf">cat</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="s">&quot; &quot;</span><span class="p">)</span>
+        <span class="p">}</span>
+  <span class="n">rfit</span> <span class="o">&lt;-</span> <span class="nf">felm</span><span class="p">(</span><span class="n">ytil</span> <span class="o">~</span> <span class="n">dtil</span> <span class="o">|</span><span class="m">0</span><span class="o">|</span><span class="m">0</span><span class="o">|</span><span class="n">clusterID</span><span class="p">)</span>    <span class="c1">#get clustered standard errors using felm</span>
+  <span class="n">rfitSummary</span><span class="o">&lt;-</span> <span class="nf">summary</span><span class="p">(</span><span class="n">rfit</span><span class="p">)</span>
+  <span class="n">coef.est</span> <span class="o">&lt;-</span>  <span class="n">rfitSummary</span><span class="o">$</span><span class="n">coef</span><span class="p">[</span><span class="m">2</span><span class="p">]</span> <span class="c1">#extract coefficient</span>
+  <span class="n">se</span> <span class="o">&lt;-</span> <span class="n">rfitSummary</span><span class="o">$</span><span class="n">coef</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">]</span>  <span class="c1">#record robust standard error</span>
+  <span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;\ncoef (se) = %g (%g)\n&quot;</span><span class="p">,</span> <span class="n">coef.est</span> <span class="p">,</span> <span class="n">se</span><span class="p">))</span>  <span class="c1">#printing output</span>
+  <span class="nf">return</span><span class="p">(</span> <span class="nf">list</span><span class="p">(</span><span class="n">coef.est</span> <span class="o">=</span><span class="n">coef.est</span> <span class="p">,</span> <span class="n">se</span><span class="o">=</span><span class="n">se</span><span class="p">,</span> <span class="n">dtil</span><span class="o">=</span><span class="n">dtil</span><span class="p">,</span> <span class="n">ytil</span><span class="o">=</span><span class="n">ytil</span><span class="p">)</span> <span class="p">)</span> <span class="c1">#save output and residuals </span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span> <span class="nf">model.matrix</span><span class="p">(</span><span class="o">~</span>  <span class="n">femaleR</span> <span class="o">+</span> <span class="n">ageR</span> <span class="o">+</span> <span class="n">farmerR</span> <span class="o">+</span> <span class="n">herderR</span> <span class="o">+</span> <span class="n">pastvotedR</span> <span class="o">+</span> <span class="n">hhsizeR</span><span class="p">)</span>
+
+<span class="nf">dim</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">d</span><span class="o">=</span> <span class="n">directlyharmedR</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">peacefactorR</span><span class="p">;</span>
+
+<span class="c1">#DML with Random Forest:</span>
+<span class="n">dreg</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">d</span><span class="p">){</span> <span class="nf">randomForest</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="p">}</span> <span class="c1">#ML method=Forest </span>
+<span class="n">yreg</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">){</span> <span class="nf">randomForest</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="p">}</span> <span class="c1">#ML method=Forest</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+<span class="n">DML2.RF</span> <span class="o">=</span> <span class="nf">DML2.for.PLM</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dreg</span><span class="p">,</span> <span class="n">yreg</span><span class="p">,</span> <span class="n">nfold</span><span class="o">=</span><span class="m">10</span><span class="p">,</span> <span class="n">clusterID</span><span class="o">=</span><span class="n">village</span><span class="p">)</span>
+
+
+<span class="n">resY</span> <span class="o">=</span>  <span class="n">DML2.RF</span><span class="o">$</span><span class="n">ytil</span>
+
+<span class="n">resD</span> <span class="o">=</span>  <span class="n">DML2.RF</span><span class="o">$</span><span class="n">dtil</span>
+
+
+<span class="nf">print</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Controls explain the following fraction of variance of Outcome&quot;</span><span class="p">,</span> <span class="nf">max</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="nf">var</span><span class="p">(</span><span class="n">resY</span><span class="p">)</span><span class="o">/</span><span class="nf">var</span><span class="p">(</span><span class="n">peacefactorR</span><span class="p">),</span><span class="m">0</span><span class="p">)))</span>
+
+
+<span class="nf">print</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Controls explain the following fraction of variance of Treatment&quot;</span><span class="p">,</span> <span class="nf">max</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="nf">var</span><span class="p">(</span><span class="n">resD</span><span class="p">)</span><span class="o">/</span><span class="nf">var</span><span class="p">(</span><span class="n">directlyharmedR</span><span class="p">),</span><span class="m">0</span><span class="p">)))</span>
+
+
+
+<span class="n">dml.darfur.model</span><span class="o">=</span> <span class="nf">lm</span><span class="p">(</span><span class="n">resY</span><span class="o">~</span><span class="n">resD</span><span class="p">)</span> 
+
+
+<span class="n">dml.darfur.sensitivity</span> <span class="o">&lt;-</span> <span class="nf">sensemakr</span><span class="p">(</span><span class="n">model</span> <span class="o">=</span> <span class="n">dml.darfur.model</span><span class="p">,</span> 
+                                <span class="n">treatment</span> <span class="o">=</span> <span class="s">&quot;resD&quot;</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">dml.darfur.sensitivity</span><span class="p">)</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">dml.darfur.sensitivity</span><span class="p">,</span><span class="n">nlevels</span> <span class="o">=</span> <span class="m">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>1276</li><li>7</li></ol>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fold: 1  2  3  4  5  6  7  8  9  10  
+coef (se) = 0.097853 (0.0248297)
+[1] &quot;Controls explain the following fraction of variance of Outcome&quot;
+[2] &quot;0.0451160320722748&quot;                                            
+[1] &quot;Controls explain the following fraction of variance of Treatment&quot;
+[2] &quot;0&quot;                                                               
+Sensitivity Analysis to Unobserved Confounding
+
+Model Formula: resY ~ resD
+
+Null hypothesis: q = 1 and reduce = TRUE 
+-- This means we are considering biases that reduce the absolute value of the current estimate.
+-- The null hypothesis deemed problematic is H0:tau = 0 
+
+Unadjusted Estimates of &#39;resD&#39;: 
+  Coef. estimate: 0.0979 
+  Standard Error: 0.0182 
+  t-value (H0:tau = 0): 5.3655 
+
+Sensitivity Statistics:
+  Partial R2 of treatment with outcome: 0.0221 
+  Robustness Value, q = 1: 0.1394 
+  Robustness Value, q = 1, alpha = 0.05: 0.0909 
+
+Verbal interpretation of sensitivity statistics:
+
+-- Partial R2 of the treatment with the outcome: an extreme confounder (orthogonal to the covariates) that explains 100% of the residual variance of the outcome, would need to explain at least 2.21% of the residual variance of the treatment to fully account for the observed estimated effect.
+
+-- Robustness Value, q = 1: unobserved confounders (orthogonal to the covariates) that explain more than 13.94% of the residual variance of both the treatment and the outcome are strong enough to bring the point estimate to 0 (a bias of 100% of the original estimate). Conversely, unobserved confounders that do not explain more than 13.94% of the residual variance of both the treatment and the outcome are not strong enough to bring the point estimate to 0.
+
+-- Robustness Value, q = 1, alpha = 0.05: unobserved confounders (orthogonal to the covariates) that explain more than 9.09% of the residual variance of both the treatment and the outcome are strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0 (a bias of 100% of the original estimate), at the significance level of alpha = 0.05. Conversely, unobserved confounders that do not explain more than 9.09% of the residual variance of both the treatment and the outcome are not strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0, at the significance level of alpha = 0.05.
+</pre></div>
+</div>
+<img alt="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_16_2.png" src="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_16_2.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "d2cml-ai/14.388_r",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            kernelName: "ir",
+            path: "./r_notebook"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="22_debiased_ml_for_partially_linear_model_in_r.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">22. </span>Debiased ML for Partially Linear Model in R</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="24_debiased_ml_for_partially_linear_iv_model_in_r.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">24. </span>Debiased ML for Partially Linear IV Model in R</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Victor Chernozhukov<br/>
+  
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

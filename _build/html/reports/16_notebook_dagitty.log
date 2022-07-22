@@ -32,8 +32,9 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['#install and load package', 'install.packages("librarian", quiet = T)', 'install.packages("dagitty", quiet = T)', 'install.packages("ggdag", quiet = T)', 'install.packages("ggraph", quiet = T)']
-...
-['    , ggdag', '    , ggraph', '  # , ggraph', '  , quiet = T', ')']
+install.packages("dagitty")
+install.packages("ggdag")
+library(dagitty)
+library(ggdag)
 -------------------
 
