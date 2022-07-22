@@ -212,7 +212,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="20_dml-for-ate-and-late-of-401-k-on-wealth.html">
+  <a class="reference internal" href="20_pm5_401k.html">
    20. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
   </a>
  </li>
@@ -300,7 +300,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_r/master?urlpath=tree/_build/jupyter_execute/r_notebooks/03_ols-and-lasso-for-gender-wage-gap-inference.ipynb"
+        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_r/master?urlpath=tree/_build/jupyter_execute/r_notebooks/03_ols_and_lasso_for_gender_wage_gap_inference.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -318,7 +318,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_r/blob/master/_build/jupyter_execute/r_notebooks/03_ols-and-lasso-for-gender-wage-gap-inference.ipynb"
+        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_r/blob/master/_build/jupyter_execute/r_notebooks/03_ols_and_lasso_for_gender_wage_gap_inference.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -396,7 +396,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_r/issues/new?title=Issue%20on%20page%20%2Fr_notebooks/03_ols-and-lasso-for-gender-wage-gap-inference.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/d2cml-ai/14.388_r/issues/new?title=Issue%20on%20page%20%2Fr_notebooks/03_ols_and_lasso_for_gender_wage_gap_inference.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -413,7 +413,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_r/edit/master/_build/jupyter_execute/r_notebooks/03_ols-and-lasso-for-gender-wage-gap-inference.ipynb"
+        <a href="https://github.com/d2cml-ai/14.388_r/edit/master/_build/jupyter_execute/r_notebooks/03_ols_and_lasso_for_gender_wage_gap_inference.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -441,7 +441,7 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/r_notebooks/03_ols-and-lasso-for-gender-wage-gap-inference.ipynb"
+        <a href="../_sources/r_notebooks/03_ols_and_lasso_for_gender_wage_gap_inference.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -564,6 +564,7 @@ title="Print to PDF"
 <span class="n">data</span> <span class="o">&lt;-</span> <span class="nf">read_csv</span><span class="p">(</span><span class="s">&quot;https://github.com/d2cml-ai/14.388_R/raw/main/Data/wage2015_subsample_inference.csv&quot;</span>
         <span class="p">,</span> <span class="n">show_col_types</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
 <span class="nf">dim</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nf">attach</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -647,8 +648,8 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">nocontrol_fit</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">lwage</span> <span class="o">~</span> <span class="n">sex</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">Z</span><span class="p">)</span>
 <span class="n">nocontrol_est</span> <span class="o">&lt;-</span> <span class="nf">summary</span><span class="p">(</span><span class="n">nocontrol_fit</span><span class="p">)</span><span class="o">$</span><span class="n">coef</span><span class="p">[</span><span class="s">&quot;sex&quot;</span><span class="p">,</span><span class="m">1</span><span class="p">]</span>
-<span class="n">HCV.coefs</span> <span class="o">&lt;-</span> <span class="nf">vcovHC</span><span class="p">(</span><span class="n">nocontrol_fit</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&#39;HC&#39;</span><span class="p">);</span> <span class="c1"># HC - &quot;heteroskedasticity cosistent&quot;</span>
-<span class="n">nocontrol_se</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">diag</span><span class="p">(</span><span class="n">HCV.coefs</span><span class="p">))[</span><span class="m">2</span><span class="p">]</span> <span class="c1"># Estimated std errors</span>
+<span class="n">HCV_coefs</span> <span class="o">&lt;-</span> <span class="nf">vcovHC</span><span class="p">(</span><span class="n">nocontrol_fit</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&#39;HC&#39;</span><span class="p">);</span> <span class="c1"># HC - &quot;heteroskedasticity cosistent&quot;</span>
+<span class="n">nocontrol_se</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">diag</span><span class="p">(</span><span class="n">HCV_coefs</span><span class="p">))[</span><span class="m">2</span><span class="p">]</span> <span class="c1"># Estimated std errors</span>
 
 <span class="c1"># print unconditional effect of gender and the corresponding standard error</span>
 <span class="nf">cat </span><span class="p">(</span><span class="s">&quot;The estimated coefficient on the dummy for gender is&quot;</span><span class="p">,</span><span class="n">nocontrol_est</span><span class="p">,</span><span class="s">&quot;\nand the corresponding robust standard error is&quot;</span><span class="p">,</span> <span class="n">nocontrol_se</span><span class="p">)</span> 
@@ -792,10 +793,10 @@ We can call this the <em>predictive effect</em> (PE), as it measures the impact 
 
 <span class="c1"># standard error</span>
 <span class="n">HCV_coefs</span> <span class="o">&lt;-</span> <span class="nf">vcovHC</span><span class="p">(</span><span class="n">partial_fit</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&#39;HC&#39;</span><span class="p">)</span>
-<span class="n">partial_se</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">diag</span><span class="p">(</span><span class="n">HCV.coefs</span><span class="p">))[</span><span class="m">2</span><span class="p">]</span>
+<span class="n">partial_se</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">diag</span><span class="p">(</span><span class="n">HCV_coefs</span><span class="p">))[</span><span class="m">2</span><span class="p">]</span>
 
 <span class="c1"># confidence interval</span>
-<span class="nf">confint</span><span class="p">(</span><span class="n">partial.fit</span><span class="p">)[</span><span class="m">2</span><span class="p">,]</span>
+<span class="nf">confint</span><span class="p">(</span><span class="n">partial_fit</span><span class="p">)[</span><span class="m">2</span><span class="p">,]</span>
 </pre></div>
 </div>
 </div>
@@ -803,13 +804,13 @@ We can call this the <em>predictive effect</em> (PE), as it measures the impact 
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficient for D via partialling-out -0.1024693
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="n">confint</span><span class="p">(</span><span class="n">partial</span><span class="o">.</span><span class="n">fit</span><span class="p">):</span> <span class="nb">object</span> <span class="s1">&#39;partial.fit&#39;</span> <span class="ow">not</span> <span class="n">found</span>
-<span class="ne">Traceback</span>:
-
-<span class="mi">1</span><span class="o">.</span> <span class="n">confint</span><span class="p">(</span><span class="n">partial</span><span class="o">.</span><span class="n">fit</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
+<div class="output text_html"><style>
+.dl-inline {width: auto; margin:0; padding: 0}
+.dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
+.dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
+.dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
+</style><dl class=dl-inline><dt>2.5 %</dt><dd>-0.131029157306723</dd><dt>97.5 %</dt><dd>-0.0739094617947904</dd></dl>
+</div></div>
 </div>
 <p>Again, the estimated coefficient measures the linear predictive effect (PE) of <span class="math notranslate nohighlight">\(D\)</span> on <span class="math notranslate nohighlight">\(Y\)</span> after taking out the linear effect of <span class="math notranslate nohighlight">\(W\)</span> on both of these variables. This coefficient is numerically equivalent to the estimated coefficient from the ols regression with controls, confirming the FWL theorem.</p>
 <p>We know that the partialling-out approach works well when the dimension of <span class="math notranslate nohighlight">\(W\)</span> is low
@@ -833,7 +834,7 @@ or penalization for regularization purposes.</p>
 
 <span class="c1"># regression of Y on D after partialling-out the effect of W</span>
 <span class="n">partial_lasso_fit</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">t_Y</span> <span class="o">~</span> <span class="n">t_D</span><span class="p">)</span>
-<span class="n">partial_lassb_est</span> <span class="o">&lt;-</span> <span class="nf">summary</span><span class="p">(</span><span class="n">partial_lasso_fit</span><span class="p">)</span><span class="o">$</span><span class="n">coef</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">]</span>
+<span class="n">partial_lasso_est</span> <span class="o">&lt;-</span> <span class="nf">summary</span><span class="p">(</span><span class="n">partial_lasso_fit</span><span class="p">)</span><span class="o">$</span><span class="n">coef</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">]</span>
 
 <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Coefficient for D via partialling-out using lasso&quot;</span><span class="p">,</span> <span class="n">partial_lasso_est</span><span class="p">)</span>
 
@@ -844,7 +845,7 @@ or penalization for regularization purposes.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficient for D via partialling-out using lasso -0.07193551
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficient for D via partialling-out using lasso -0.1036713
 </pre></div>
 </div>
 </div>
@@ -870,16 +871,15 @@ or penalization for regularization purposes.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="dataframe">
-<caption>A xtable: 4 × 2</caption>
+<caption>A matrix: 4 × 2 of type dbl</caption>
 <thead>
 	<tr><th></th><th scope=col>Estimate</th><th scope=col>Std. Error</th></tr>
-	<tr><th></th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
 </thead>
 <tbody>
 	<tr><th scope=row>Without controls</th><td>-0.03834473</td><td>0.01590194</td></tr>
-	<tr><th scope=row>full reg</th><td>-0.06955320</td><td>0.01500047</td></tr>
-	<tr><th scope=row>partial reg</th><td>-0.06955320</td><td>0.01500047</td></tr>
-	<tr><th scope=row>partial reg via lasso</th><td>-0.07193551</td><td>0.01539102</td></tr>
+	<tr><th scope=row>full reg</th><td>-0.10246931</td><td>0.01458860</td></tr>
+	<tr><th scope=row>partial reg</th><td>-0.10246931</td><td>0.01458860</td></tr>
+	<tr><th scope=row>partial reg via lasso</th><td>-0.10367131</td><td>0.01475760</td></tr>
 </tbody>
 </table>
 </div></div>
@@ -895,7 +895,7 @@ selection effects of unobserved differences in covariates between men and women 
 <span class="n">extraflex</span> <span class="o">&lt;-</span> <span class="n">lwage</span> <span class="o">~</span> <span class="n">sex</span> <span class="o">+</span> <span class="p">(</span><span class="n">exp1</span> <span class="o">+</span> <span class="n">exp2</span> <span class="o">+</span> <span class="n">exp3</span> <span class="o">+</span> <span class="n">exp4</span> <span class="o">+</span> <span class="n">shs</span> <span class="o">+</span> <span class="n">hsg</span> <span class="o">+</span> <span class="n">scl</span> <span class="o">+</span> <span class="n">clg</span> <span class="o">+</span> <span class="n">occ2</span> <span class="o">+</span> <span class="n">ind2</span> <span class="o">+</span> <span class="n">mw</span> <span class="o">+</span> <span class="n">so</span> <span class="o">+</span> <span class="n">we</span><span class="p">)</span><span class="o">^</span><span class="m">2</span>
 
 <span class="n">control_fit</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">extraflex</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-<span class="c1">#summary(control_fit)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">control_fit</span><span class="p">)</span>
 <span class="n">control_est</span> <span class="o">&lt;-</span> <span class="nf">summary</span><span class="p">(</span><span class="n">control_fit</span><span class="p">)</span><span class="o">$</span><span class="n">coef</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">]</span>
 
 <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Number of Extra-Flex Controls&quot;</span><span class="p">,</span> <span class="nf">length</span><span class="p">(</span><span class="n">control_fit</span><span class="o">$</span><span class="n">coef</span><span class="p">)</span> <span class="o">-</span> <span class="m">1</span><span class="p">,</span> <span class="s">&quot;\n&quot;</span><span class="p">)</span>
@@ -904,7 +904,7 @@ selection effects of unobserved differences in covariates between men and women 
 
 <span class="n">HCV_coefs</span> <span class="o">&lt;-</span> <span class="nf">vcovHC</span><span class="p">(</span><span class="n">control_fit</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&#39;HC&#39;</span><span class="p">);</span>
 
-<span class="n">n</span><span class="o">=</span> <span class="nf">length</span><span class="p">(</span><span class="n">wage</span><span class="p">);</span> <span class="n">p</span> <span class="o">=</span><span class="nf">length</span><span class="p">(</span><span class="n">control_fit</span><span class="o">$</span><span class="n">coef</span><span class="p">);</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nf">length</span><span class="p">(</span><span class="n">wage</span><span class="p">);</span> <span class="n">p</span> <span class="o">=</span><span class="nf">length</span><span class="p">(</span><span class="n">control_fit</span><span class="o">$</span><span class="n">coef</span><span class="p">);</span>
 
 <span class="n">control_se</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">diag</span><span class="p">(</span><span class="n">HCV_coefs</span><span class="p">))[</span><span class="m">2</span><span class="p">]</span> <span class="o">*</span> <span class="nf">sqrt</span><span class="p">(</span> <span class="n">n</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">p</span><span class="p">))</span> <span class="c1"># Estimated std errors</span>
 
@@ -915,8 +915,120 @@ selection effects of unobserved differences in covariates between men and women 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Extra-Flex Controls 979 
-Coefficient for OLS with extra flex controls -0.06127046
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
+lm(formula = extraflex, data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.1158 -0.3041 -0.0173  0.2893  3.5892 
+
+Coefficients: (12 not defined because of singularities)
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  3.6297982  0.1552865  23.375  &lt; 2e-16 ***
+sex         -0.0967413  0.0146627  -6.598 4.60e-11 ***
+exp1         0.0094395  0.0613320   0.154  0.87769    
+exp2         0.7798590  1.3068326   0.597  0.55070    
+exp3        -0.9937088  1.5435940  -0.644  0.51976    
+exp4         0.5284032  0.9687560   0.545  0.58547    
+shs          0.4280438  1.0441100   0.410  0.68185    
+hsg         -0.5051460  0.2742205  -1.842  0.06552 .  
+scl         -0.2951033  0.1897037  -1.556  0.11987    
+clg         -0.1203554  0.1176922  -1.023  0.30653    
+occ2        -0.0331114  0.0071125  -4.655 3.32e-06 ***
+ind2        -0.0203271  0.0076790  -2.647  0.00814 ** 
+mw           0.1000058  0.1185443   0.844  0.39892    
+so           0.0590348  0.1071524   0.551  0.58170    
+we           0.1070730  0.1173880   0.912  0.36174    
+exp1:exp2           NA         NA      NA       NA    
+exp1:exp3           NA         NA      NA       NA    
+exp1:exp4   -0.0154773  0.0324014  -0.478  0.63290    
+exp1:shs    -0.3655660  0.2241355  -1.631  0.10295    
+exp1:hsg    -0.0872036  0.0723121  -1.206  0.22790    
+exp1:scl    -0.0877190  0.0528018  -1.661  0.09672 .  
+exp1:clg    -0.0448492  0.0319558  -1.403  0.16054    
+exp1:occ2    0.0017415  0.0018413   0.946  0.34431    
+exp1:ind2    0.0006614  0.0021592   0.306  0.75937    
+exp1:mw     -0.0177427  0.0315136  -0.563  0.57345    
+exp1:so      0.0068205  0.0278941   0.245  0.80684    
+exp1:we     -0.0106886  0.0315461  -0.339  0.73476    
+exp2:exp3           NA         NA      NA       NA    
+exp2:exp4    0.0253399  0.0549125   0.461  0.64449    
+exp2:shs     3.2517652  1.7043879   1.908  0.05646 .  
+exp2:hsg     0.8260811  0.6758047   1.222  0.22163    
+exp2:scl     0.8244532  0.5379554   1.533  0.12544    
+exp2:clg     0.3103536  0.3859653   0.804  0.42138    
+exp2:occ2   -0.0256483  0.0189029  -1.357  0.17489    
+exp2:ind2   -0.0064101  0.0215917  -0.297  0.76657    
+exp2:mw      0.1118794  0.3277397   0.341  0.73284    
+exp2:so     -0.0296200  0.2863447  -0.103  0.91762    
+exp2:we      0.1610522  0.3289716   0.490  0.62446    
+exp3:exp4   -0.0017785  0.0037133  -0.479  0.63199    
+exp3:shs    -1.0955552  0.5316414  -2.061  0.03938 *  
+exp3:hsg    -0.2845745  0.2478395  -1.148  0.25093    
+exp3:scl    -0.2716782  0.2082679  -1.304  0.19213    
+exp3:clg    -0.0575082  0.1656527  -0.347  0.72848    
+exp3:occ2    0.0121038  0.0071930   1.683  0.09249 .  
+exp3:ind2    0.0039878  0.0081100   0.492  0.62294    
+exp3:mw     -0.0323487  0.1257788  -0.257  0.79704    
+exp3:so     -0.0089914  0.1081201  -0.083  0.93373    
+exp3:we     -0.0692433  0.1265415  -0.547  0.58427    
+exp4:shs     0.1229824  0.0581239   2.116  0.03440 *  
+exp4:hsg     0.0332181  0.0308733   1.076  0.28200    
+exp4:scl     0.0296681  0.0269001   1.103  0.27012    
+exp4:clg     0.0004832  0.0228505   0.021  0.98313    
+exp4:occ2   -0.0017545  0.0008997  -1.950  0.05122 .  
+exp4:ind2   -0.0007445  0.0010089  -0.738  0.46057    
+exp4:mw      0.0025865  0.0158330   0.163  0.87024    
+exp4:so      0.0031431  0.0133641   0.235  0.81407    
+exp4:we      0.0083434  0.0159458   0.523  0.60083    
+shs:hsg             NA         NA      NA       NA    
+shs:scl             NA         NA      NA       NA    
+shs:clg             NA         NA      NA       NA    
+shs:occ2     0.0117950  0.0108832   1.084  0.27851    
+shs:ind2    -0.0060826  0.0097555  -0.624  0.53298    
+shs:mw      -0.0553633  0.1711424  -0.323  0.74634    
+shs:so      -0.0917162  0.1595041  -0.575  0.56531    
+shs:we       0.3294645  0.1718442   1.917  0.05527 .  
+hsg:scl             NA         NA      NA       NA    
+hsg:clg             NA         NA      NA       NA    
+hsg:occ2     0.0160702  0.0048987   3.280  0.00104 ** 
+hsg:ind2     0.0010522  0.0055110   0.191  0.84859    
+hsg:mw      -0.1136003  0.0795354  -1.428  0.15327    
+hsg:so      -0.1896137  0.0734389  -2.582  0.00985 ** 
+hsg:we      -0.0144124  0.0782891  -0.184  0.85395    
+scl:clg             NA         NA      NA       NA    
+scl:occ2     0.0063711  0.0046063   1.383  0.16668    
+scl:ind2     0.0019307  0.0053230   0.363  0.71683    
+scl:mw      -0.0835733  0.0750574  -1.113  0.26556    
+scl:so      -0.1016680  0.0690405  -1.473  0.14093    
+scl:we       0.0625579  0.0741913   0.843  0.39916    
+clg:occ2     0.0033082  0.0044378   0.745  0.45603    
+clg:ind2     0.0049356  0.0050629   0.975  0.32969    
+clg:mw      -0.0442317  0.0692762  -0.638  0.52319    
+clg:so      -0.0777453  0.0613241  -1.268  0.20494    
+clg:we      -0.0332471  0.0667061  -0.498  0.61822    
+occ2:ind2    0.0002593  0.0002069   1.254  0.21006    
+occ2:mw      0.0072283  0.0034031   2.124  0.03372 *  
+occ2:so      0.0007315  0.0032890   0.222  0.82402    
+occ2:we      0.0009160  0.0035135   0.261  0.79434    
+ind2:mw     -0.0029011  0.0038057  -0.762  0.44592    
+ind2:so      0.0003376  0.0036861   0.092  0.92704    
+ind2:we     -0.0065410  0.0039548  -1.654  0.09820 .  
+mw:so               NA         NA      NA       NA    
+mw:we               NA         NA      NA       NA    
+so:we               NA         NA      NA       NA    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.4962 on 5069 degrees of freedom
+Multiple R-squared:  0.2551,	Adjusted R-squared:  0.2433 
+F-statistic:  21.7 on 80 and 5069 DF,  p-value: &lt; 2.2e-16
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Extra-Flex Controls 92 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficient for OLS with extra flex controls -0.09674132
 </pre></div>
 </div>
 </div>
@@ -947,7 +1059,7 @@ Coefficient for OLS with extra flex controls -0.06127046
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficient for D via partialling-out using lasso -0.07159928
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficient for D via partialling-out using lasso -0.09916518
 </pre></div>
 </div>
 </div>
@@ -966,11 +1078,17 @@ Coefficient for OLS with extra flex controls -0.06127046
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="nb">eval</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">envir</span><span class="p">,</span> <span class="n">enclos</span><span class="p">):</span> <span class="nb">object</span> <span class="s1">&#39;control_est&#39;</span> <span class="ow">not</span> <span class="n">found</span>
-<span class="ne">Traceback</span>:
-</pre></div>
-</div>
-</div>
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 2 × 2 of type dbl</caption>
+<thead>
+	<tr><th></th><th scope=col>Estimate</th><th scope=col>Std. Error</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>full reg</th><td>-0.09674132</td><td>0.01476431</td></tr>
+	<tr><th scope=row>partial reg via lasso</th><td>-0.09916518</td><td>0.01481612</td></tr>
+</tbody>
+</table>
+</div></div>
 </div>
 <p>In this case p/n = 20%, that is <span class="math notranslate nohighlight">\(p/n\)</span> is no longer small and we start seeing the differences between
 unregularized partialling out and regularized partialling out with lasso (double lasso).  The results based on

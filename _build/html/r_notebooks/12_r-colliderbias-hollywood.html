@@ -125,7 +125,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="03_ols-and-lasso-for-gender-wage-gap-inference.html">
+  <a class="reference internal" href="03_ols_and_lasso_for_gender_wage_gap_inference.html">
    3. An inferential problem: The Gender Wage Gap
   </a>
  </li>
@@ -210,7 +210,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="20_dml-for-ate-and-late-of-401-k-on-wealth.html">
+  <a class="reference internal" href="20_pm5_401k.html">
    20. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
   </a>
  </li>
@@ -554,16 +554,16 @@ lm(formula = T ~ B)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--4.6622 -0.6741  0.0002  0.6744  4.8111 
+-5.0168 -0.6743  0.0002  0.6759  4.5584 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept) -0.0014704  0.0010004   -1.47    0.142
-B            0.0004403  0.0010007    0.44    0.660
+(Intercept)  0.0006396  0.0009998    0.64    0.522
+B           -0.0008195  0.0009995   -0.82    0.412
 
-Residual standard error: 1 on 999998 degrees of freedom
-Multiple R-squared:  1.936e-07,	Adjusted R-squared:  -8.064e-07 
-F-statistic: 0.1936 on 1 and 999998 DF,  p-value: 0.6599
+Residual standard error: 0.9998 on 999998 degrees of freedom
+Multiple R-squared:  6.722e-07,	Adjusted R-squared:  -3.278e-07 
+F-statistic: 0.6722 on 1 and 999998 DF,  p-value: 0.4123
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
@@ -571,19 +571,19 @@ lm(formula = T ~ B + C)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--3.8724 -0.4770  0.0004  0.4762  3.3337 
+-3.2595 -0.4764  0.0000  0.4768  3.6024 
 
 Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -0.0007923  0.0007074   -1.12    0.263    
-B           -0.5003445  0.0008669 -577.20   &lt;2e-16 ***
-C            0.5000640  0.0005001 1000.02   &lt;2e-16 ***
+              Estimate Std. Error  t value Pr(&gt;|t|)    
+(Intercept) -5.942e-05  7.069e-04   -0.084    0.933    
+B           -4.997e-01  8.650e-04 -577.657   &lt;2e-16 ***
+C            4.998e-01  4.997e-04 1000.166   &lt;2e-16 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 0.7074 on 999997 degrees of freedom
-Multiple R-squared:    0.5,	Adjusted R-squared:    0.5 
-F-statistic: 5e+05 on 2 and 999997 DF,  p-value: &lt; 2.2e-16
+Residual standard error: 0.7069 on 999997 degrees of freedom
+Multiple R-squared:  0.5001,	Adjusted R-squared:  0.5001 
+F-statistic: 5.002e+05 on 2 and 999997 DF,  p-value: &lt; 2.2e-16
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
@@ -591,18 +591,18 @@ lm(formula = T.H ~ B.H)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--4.4138 -0.5838 -0.0206  0.5621  4.5825 
+-3.6522 -0.5857 -0.0182  0.5638  4.0634 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  0.585088   0.001364   429.0   &lt;2e-16 ***
-B.H         -0.270514   0.001363  -198.5   &lt;2e-16 ***
+(Intercept)  0.585104   0.001361   430.0   &lt;2e-16 ***
+B.H         -0.269113   0.001360  -197.9   &lt;2e-16 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 0.8548 on 499352 degrees of freedom
-Multiple R-squared:  0.07313,	Adjusted R-squared:  0.07313 
-F-statistic: 3.94e+04 on 1 and 499352 DF,  p-value: &lt; 2.2e-16
+Residual standard error: 0.8547 on 500855 degrees of freedom
+Multiple R-squared:  0.07255,	Adjusted R-squared:  0.07255 
+F-statistic: 3.918e+04 on 1 and 500855 DF,  p-value: &lt; 2.2e-16
 </pre></div>
 </div>
 </div>

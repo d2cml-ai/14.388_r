@@ -1,8 +1,6 @@
 install.packages("librarian")
 librarian::shelf(
-  hdm
-  , ggplot2
-  , remotes
+  hdm, ggplot2, 
   , DoubleML
   , mlr3learners
   , mlr3
@@ -11,13 +9,14 @@ librarian::shelf(
   , ranger
   , xgboost
 )
-theme_set(theme_bw())
-# remotes::install_github("DoubleML/doubleml-for-r",quiet=TRUE)
 
-# loading the packages
+library(hdm) 
+library(ggplot2)
 data(pension)
 data <- pension 
 dim(data)
+
+# save(data, file = "../data/pension.RData")
 
 # help(pension)
 
@@ -38,6 +37,18 @@ p1 <- data[data$p401==1,]
 p0 <- data[data$p401==0,]
 round(mean(p1$net_tfa)-mean(p0$net_tfa),0)
 
+# installing Double ML
+#remotes::install_github("DoubleML/doubleml-for-r",quiet=TRUE)
+
+
+# loading the packages
+library(DoubleML)
+library(mlr3learners)
+library(mlr3)
+library(data.table)
+library(randomForest)
+
+
 # Constructing the data (as DoubleMLData)
 formula_flex = "net_tfa ~ e401 + poly(age, 6, raw=TRUE) + poly(inc, 8, raw=TRUE) + poly(educ, 4, raw=TRUE) + poly(fsize, 2, raw=TRUE) + marr + twoearn + db + pira + hown"
 model_flex = as.data.table(model.frame(formula_flex, pension))
@@ -49,7 +60,14 @@ p <- dim(model_flex)[2]-2
 p
 
 # complex model with two-way interactions
-#data_interactions = fetch_401k(polynomial_features = TRUE, instrument = FALSE)
+data_interactions = fetch_401k(polynomial_features = TRUE, instrument = FALSE)
+
+
+# Constructing the data (as DoubleMLData)
+formula_flex = "net_tfa ~ e401 + poly(age, 6, raw=TRUE) + poly(inc, 6, raw=TRUE) + poly(educ, 4, raw=TRUE) + poly(fsize, 2, raw=TRUE) + marr + twoearn + db + pira + hown"
+model_flex = as.data.table(model.frame(formula_flex, pension))
+x_cols = colnames(model_flex)[-c(1,2)]
+data_ml_aux = DoubleMLData$new(model_flex, y_col = "net_tfa", d_cols = "e401", x_cols=x_cols)
 
 
 # Estimating the PLR
@@ -58,7 +76,7 @@ set.seed(123)
 lasso <- lrn("regr.cv_glmnet",nfolds = 5, s = "lambda.min")
 lasso_class <- lrn("classif.cv_glmnet", nfolds = 5, s = "lambda.min")
 
-dml_plr <- DoubleMLPLR$new(data_ml, ml_g = lasso, ml_m = lasso_class, n_folds=3)
+dml_plr <- DoubleMLPLR$new(data_ml_aux, ml_g = lasso, ml_m = lasso_class, n_folds=3)
 dml_plr$fit(store_predictions=TRUE)
 dml_plr$summary()
 lasso_plr <- dml_plr$coef
@@ -84,16 +102,30 @@ lasso_d_rmse
 # cross-fitted ce: treatment
 mean(ifelse(m_hat > 0.5, 1, 0) != d)
 
+# install.packages( "regr.ranger" )
+# install.packages( "classif.ranger" )
+
 # Random Forest
 lgr::get_logger("mlr3")$set_threshold("warn") 
 randomForest <- lrn("regr.ranger")
 randomForest_class <- lrn("classif.ranger")
 
-dml_plr <- DoubleMLPLR$new(data_ml, ml_g = randomForest, ml_m = randomForest_class, n_folds=3)
+dml_plr <- DoubleMLPLR$new(data_ml_aux, ml_g = randomForest, ml_m = randomForest_class, n_folds=3)
 dml_plr$fit(store_predictions=TRUE) # set store_predictions=TRUE to evaluate the model
 dml_plr$summary()
 forest_plr <- dml_plr$coef
 forest_std_plr <- dml_plr$se
+
+# # Random Forest
+# lgr::get_logger("mlr3")$set_threshold("warn") 
+# randomForest <- lrn("regr.ranger")
+# randomForest_class <- lrn("classif.ranger")
+
+# dml_plr <- DoubleMLPLR$new(data_ml, ml_g = randomForest, ml_m = randomForest_class, n_folds=3)
+# dml_plr$fit(store_predictions=TRUE) # set store_predictions=TRUE to evaluate the model
+# dml_plr$summary()
+# forest_plr <- dml_plr$coef
+# forest_std_plr <- dml_plr$se
 
 # Evaluation predictions
 g_hat <- as.matrix(dml_plr$predictions$ml_l) # predictions of g_o
@@ -110,13 +142,15 @@ forest_d_rmse
 # cross-fitted ce: treatment
 mean(ifelse(m_hat > 0.5, 1, 0) != d)
 
+library(rpart)
+
 # Trees
 lgr::get_logger("mlr3")$set_threshold("warn") 
 
 trees <- lrn("regr.rpart")
 trees_class <- lrn("classif.rpart")
 
-dml_plr <- DoubleMLPLR$new(data_ml, ml_g = trees, ml_m = trees_class, n_folds=3)
+dml_plr <- DoubleMLPLR$new(data_ml_aux, ml_l = trees, ml_m = trees_class, n_folds=3)
 dml_plr$fit(store_predictions=TRUE)
 dml_plr$summary()
 tree_plr <- dml_plr$coef
@@ -142,26 +176,26 @@ lgr::get_logger("mlr3")$set_threshold("warn")
 boost<- lrn("regr.xgboost",objective="reg:squarederror")
 boost_class <- lrn("classif.xgboost",objective = "binary:logistic",eval_metric ="logloss")
 
-# dml_plr <- DoubleMLPLR$new(data_ml, ml_l = boost, ml_m = boost_class, n_folds=3)
-# dml_plr$fit(store_predictions=TRUE)
-# dml_plr$summary()
-# boost_plr <- dml_plr$coef
-# boost_std_plr <- dml_plr$se
+dml_plr <- DoubleMLPLR$new(data_ml_aux, ml_l = boost, ml_m = boost_class, n_folds=3)
+dml_plr$fit(store_predictions=TRUE)
+dml_plr$summary()
+boost_plr <- dml_plr$coef
+boost_std_plr <- dml_plr$se
 
-# # Evaluation predictions
-# g_hat <- as.matrix(dml_plr$predictions$ml_l) # predictions of g_o
-# m_hat <- as.matrix(dml_plr$predictions$ml_m) # predictions of m_o
-# theta <- as.numeric(dml_plr$coef) # estimated regression coefficient
-# predictions_y <- as.matrix(d*theta)+g_hat # predictions for y
-# boost_y_rmse <- sqrt(mean((y-predictions_y)^2)) 
-# boost_y_rmse
+# Evaluation predictions
+g_hat <- as.matrix(dml_plr$predictions$ml_l) # predictions of g_o
+m_hat <- as.matrix(dml_plr$predictions$ml_m) # predictions of m_o
+theta <- as.numeric(dml_plr$coef) # estimated regression coefficient
+predictions_y <- as.matrix(d*theta)+g_hat # predictions for y
+boost_y_rmse <- sqrt(mean((y-predictions_y)^2)) 
+boost_y_rmse
 
-# # # cross-fitted RMSE: treatment
-# boost_d_rmse <- sqrt(mean((d-m_hat)^2)) 
-# boost_d_rmse
+# cross-fitted RMSE: treatment
+boost_d_rmse <- sqrt(mean((d-m_hat)^2)) 
+boost_d_rmse
 
-# # # cross-fitted ce: treatment
-# mean(ifelse(m_hat > 0.5, 1, 0) != d)
+# cross-fitted ce: treatment
+mean(ifelse(m_hat > 0.5, 1, 0) != d)
 
 table <- matrix(0, 4, 4)
 table[1,1:4]   <- c(lasso_plr,forest_plr,tree_plr,boost_plr)
@@ -172,11 +206,9 @@ rownames(table) <- c("Estimate","Std.Error","RMSE Y","RMSE D")
 colnames(table) <- c("Lasso","Random Forest","Trees","Boosting")
 table
 
-lasso_plr
-
 set.seed(123)
 lgr::get_logger("mlr3")$set_threshold("warn") 
-dml_irm = DoubleMLIRM$new(data_ml, ml_g = lasso, 
+dml_irm = DoubleMLIRM$new(data_ml_aux, ml_g = lasso, 
                           ml_m = lasso_class, 
                           trimming_threshold = 0.01, n_folds=3)
 dml_irm$fit(store_predictions=TRUE)
@@ -208,7 +240,7 @@ mean(ifelse(m_hat > 0.5, 1, 0) != d)
 
 ##### forest #####
 
-dml_irm = DoubleMLIRM$new(data_ml, ml_g = randomForest, 
+dml_irm = DoubleMLIRM$new(data_ml_aux, ml_g = randomForest, 
                           ml_m = randomForest_class, 
                           trimming_threshold = 0.01, n_folds=3)
 dml_irm$fit(store_predictions=TRUE)
@@ -235,9 +267,11 @@ forest_d_irm
 # cross-fitted ce: treatment
 mean(ifelse(m_hat > 0.5, 1, 0) != d)
 
+
+
 ##### trees #####
 
-dml_irm <- DoubleMLIRM$new(data_ml, ml_g = trees, ml_m = trees_class, 
+dml_irm <- DoubleMLIRM$new(data_ml_aux, ml_g = trees, ml_m = trees_class, 
                            trimming_threshold = 0.01, n_folds=3)
 dml_irm$fit(store_predictions=TRUE)
 dml_irm$summary()
@@ -263,10 +297,9 @@ tree_d_irm
 # cross-fitted ce: treatment
 mean(ifelse(m_hat > 0.5, 1, 0) != d)
 
-
 ##### boosting #####
 
-dml_irm <- DoubleMLIRM$new(data_ml, ml_g = boost, ml_m = boost_class,
+dml_irm <- DoubleMLIRM$new(data_ml_aux, ml_g = boost, ml_m = boost_class,
                            trimming_threshold = 0.01, n_folds=3)
 dml_irm$fit(store_predictions=TRUE)
 dml_irm$summary()
@@ -292,7 +325,6 @@ boost_d_irm
 # cross-fitted ce: treatment
 mean(ifelse(m_hat > 0.5, 1, 0) != d)
 
-library(xtable)
 table <- matrix(0, 4, 4)
 table[1,1:4]   <- c(lasso_irm,forest_irm,tree_irm,boost_irm)
 table[2,1:4]   <- c(lasso_std_irm,forest_std_irm,tree_std_irm,boost_std_irm)
@@ -300,12 +332,11 @@ table[3,1:4]   <- c(lasso_y_irm,forest_y_irm,tree_y_irm,boost_y_irm)
 table[4,1:4]   <- c(lasso_d_irm,forest_d_irm,tree_d_irm,boost_d_irm)
 rownames(table) <- c("Estimate","Std.Error","RMSE Y","RMSE D")
 colnames(table) <- c("Lasso","Random Forest","Trees","Boosting")
-tab<- xtable(table, digits = 2)
-tab
+table
 
 set.seed(123)
 lgr::get_logger("mlr3")$set_threshold("warn") 
-dml_irm = DoubleMLIRM$new(data_ml, ml_g = randomForest, 
+dml_irm = DoubleMLIRM$new(data_ml_aux, ml_g = randomForest, 
                           ml_m = lasso_class, 
                           trimming_threshold = 0.01, n_folds=3)
 dml_irm$fit(store_predictions=TRUE)
@@ -313,15 +344,21 @@ dml_irm$summary()
 best_irm <- dml_irm$coef
 best_std_irm <- dml_irm$se
 
+# # Constructing the data (as DoubleMLData)
+# formula_flex2 = "net_tfa ~ p401+ e401 + poly(age, 6, raw=TRUE) + poly(inc, 8, raw=TRUE) + poly(educ, 4, raw=TRUE) + poly(fsize, 2, raw=TRUE) + marr + twoearn + db + pira + hown"
+# model_flex2 = as.data.table(model.frame(formula_flex2, data))
+# x_cols = colnames(model_flex2)[-c(1,2,3)]
+# data_IV = DoubleMLData$new(model_flex2, y_col = "net_tfa", d_cols = "p401", z_cols ="e401",x_cols=x_cols)
+
 # Constructing the data (as DoubleMLData)
-formula_flex2 = "net_tfa ~ p401+ e401 + poly(age, 6, raw=TRUE) + poly(inc, 8, raw=TRUE) + poly(educ, 4, raw=TRUE) + poly(fsize, 2, raw=TRUE) + marr + twoearn + db + pira + hown"
+formula_flex2 = "net_tfa ~ p401+ e401 + poly(age, 6, raw=TRUE) + poly(inc, 6, raw=TRUE) + poly(educ, 4, raw=TRUE) + poly(fsize, 2, raw=TRUE) + marr + twoearn + db + pira + hown"
 model_flex2 = as.data.table(model.frame(formula_flex2, data))
 x_cols = colnames(model_flex2)[-c(1,2,3)]
-data_IV = DoubleMLData$new(model_flex2, y_col = "net_tfa", d_cols = "p401", z_cols ="e401",x_cols=x_cols)
+data_IV_aux = DoubleMLData$new(model_flex2, y_col = "net_tfa", d_cols = "p401", z_cols ="e401",x_cols=x_cols)
 
 set.seed(123)
 lgr::get_logger("mlr3")$set_threshold("warn") 
-dml_MLIIVM = DoubleMLIIVM$new(data_IV, ml_g = lasso, 
+dml_MLIIVM = DoubleMLIIVM$new(data_IV_aux, ml_g = lasso, 
                        ml_m = lasso_class, ml_r = lasso_class,n_folds=3, subgroups = list(always_takers = FALSE, 
                                          never_takers = TRUE))
 dml_MLIIVM$fit(store_predictions=TRUE)
@@ -363,7 +400,7 @@ lasso_z_MLIIVM
 
 set.seed(123)
 lgr::get_logger("mlr3")$set_threshold("warn") 
-dml_MLIIVM = DoubleMLIIVM$new(data_IV, ml_g = randomForest, 
+dml_MLIIVM = DoubleMLIIVM$new(data_IV_aux, ml_g = randomForest, 
                        ml_m = randomForest_class, ml_r = randomForest_class,n_folds=3, subgroups = list(always_takers = FALSE, 
                                          never_takers = TRUE))
 dml_MLIIVM$fit(store_predictions=TRUE)
@@ -392,9 +429,10 @@ forest_d_MLIIVM
 forest_z_MLIIVM <- sqrt(mean((z-m_hat)^2)) 
 forest_z_MLIIVM
 
+
 ### trees ###
 
-dml_MLIIVM = DoubleMLIIVM$new(data_IV, ml_g = trees, 
+dml_MLIIVM = DoubleMLIIVM$new(data_IV_aux, ml_g = trees, 
                        ml_m = trees_class, ml_r = trees_class,n_folds=3, subgroups = list(always_takers = FALSE, 
                                          never_takers = TRUE))
 dml_MLIIVM$fit(store_predictions=TRUE)
@@ -424,8 +462,10 @@ tree_z_MLIIVM <- sqrt(mean((z-m_hat)^2))
 tree_z_MLIIVM
 
 
+
+
 ### boosting ###
-dml_MLIIVM = DoubleMLIIVM$new(data_IV, ml_g = boost, 
+dml_MLIIVM = DoubleMLIIVM$new(data_IV_aux, ml_g = boost, 
                        ml_m = boost_class, ml_r = boost_class,n_folds=3, subgroups = list(always_takers = FALSE, 
                                          never_takers = TRUE))
 dml_MLIIVM$fit(store_predictions=TRUE)
@@ -454,6 +494,7 @@ boost_d_MLIIVM
 boost_z_MLIIVM <- sqrt(mean((z-m_hat)^2)) 
 boost_z_MLIIVM
 
+# library(xtable)
 table <- matrix(0, 5, 4)
 table[1,1:4]   <- c(lasso_MLIIVM,forest_MLIIVM,tree_MLIIVM,boost_MLIIVM)
 table[2,1:4]   <- c(lasso_std_MLIIVM,forest_std_MLIIVM,tree_std_MLIIVM,boost_std_MLIIVM)
@@ -462,11 +503,12 @@ table[4,1:4]   <- c(lasso_d_MLIIVM,forest_d_MLIIVM,tree_d_MLIIVM,boost_d_MLIIVM)
 table[5,1:4]   <- c(lasso_z_MLIIVM,forest_z_MLIIVM,tree_z_MLIIVM,boost_z_MLIIVM)
 rownames(table) <- c("Estimate","Std.Error","RMSE Y","RMSE D","RMSE Z")
 colnames(table) <- c("Lasso","Random Forest","Trees","Boosting")
+# tab<- xtable(table, digits = 2)
 table
 
 set.seed(123)
 lgr::get_logger("mlr3")$set_threshold("warn") 
-dml_MLIIVM = DoubleMLIIVM$new(data_IV, ml_g = randomForest, 
+dml_MLIIVM = DoubleMLIIVM$new(data_IV_aux, ml_g = randomForest, 
                        ml_m = lasso_class, ml_r = lasso_class,n_folds=3, subgroups = list(always_takers = FALSE, 
                                          never_takers = TRUE))
 dml_MLIIVM$fit(store_predictions=TRUE)

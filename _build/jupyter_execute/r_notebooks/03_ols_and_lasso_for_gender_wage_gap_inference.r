@@ -3,6 +3,7 @@ librarian::shelf(tidyverse, sandwich, hdm, quiet = T)
 data <- read_csv("https://github.com/d2cml-ai/14.388_R/raw/main/Data/wage2015_subsample_inference.csv"
         , show_col_types = F)
 dim(data)
+attach(data)
 
 variables <- c("lwage","sex","shs","hsg","scl","clg","ad","ne","mw","so","we","exp1")
 
@@ -28,8 +29,8 @@ mean(data_female$lwage)-mean(data_male$lwage)
 
 nocontrol_fit <- lm(lwage ~ sex, data = Z)
 nocontrol_est <- summary(nocontrol_fit)$coef["sex",1]
-HCV.coefs <- vcovHC(nocontrol_fit, type = 'HC'); # HC - "heteroskedasticity cosistent"
-nocontrol_se <- sqrt(diag(HCV.coefs))[2] # Estimated std errors
+HCV_coefs <- vcovHC(nocontrol_fit, type = 'HC'); # HC - "heteroskedasticity cosistent"
+nocontrol_se <- sqrt(diag(HCV_coefs))[2] # Estimated std errors
 
 # print unconditional effect of gender and the corresponding standard error
 cat ("The estimated coefficient on the dummy for gender is",nocontrol_est,"\nand the corresponding robust standard error is", nocontrol_se) 
@@ -71,10 +72,10 @@ cat("Coefficient for D via partialling-out", partial_est)
 
 # standard error
 HCV_coefs <- vcovHC(partial_fit, type = 'HC')
-partial_se <- sqrt(diag(HCV.coefs))[2]
+partial_se <- sqrt(diag(HCV_coefs))[2]
 
 # confidence interval
-confint(partial.fit)[2,]
+confint(partial_fit)[2,]
 
 # Partialling-out using lasso
 
@@ -91,7 +92,7 @@ t_D <- rlasso(flex_d, data = data)$res
 
 # regression of Y on D after partialling-out the effect of W
 partial_lasso_fit <- lm(t_Y ~ t_D)
-partial_lassb_est <- summary(partial_lasso_fit)$coef[2,1]
+partial_lasso_est <- summary(partial_lasso_fit)$coef[2,1]
 
 cat("Coefficient for D via partialling-out using lasso", partial_lasso_est)
 
@@ -117,7 +118,7 @@ table
 extraflex <- lwage ~ sex + (exp1 + exp2 + exp3 + exp4 + shs + hsg + scl + clg + occ2 + ind2 + mw + so + we)^2
 
 control_fit <- lm(extraflex, data=data)
-#summary(control_fit)
+summary(control_fit)
 control_est <- summary(control_fit)$coef[2,1]
 
 cat("Number of Extra-Flex Controls", length(control_fit$coef) - 1, "\n")
@@ -126,7 +127,7 @@ cat("Coefficient for OLS with extra flex controls", control_est)
 
 HCV_coefs <- vcovHC(control_fit, type = 'HC');
 
-n= length(wage); p =length(control_fit$coef);
+n = length(wage); p =length(control_fit$coef);
 
 control_se <- sqrt(diag(HCV_coefs))[2] * sqrt( n / (n - p)) # Estimated std errors
 

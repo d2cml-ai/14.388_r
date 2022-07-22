@@ -127,7 +127,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="03_ols-and-lasso-for-gender-wage-gap-inference.html">
+  <a class="reference internal" href="03_ols_and_lasso_for_gender_wage_gap_inference.html">
    3. An inferential problem: The Gender Wage Gap
   </a>
  </li>
@@ -212,7 +212,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="20_dml-for-ate-and-late-of-401-k-on-wealth.html">
+  <a class="reference internal" href="20_pm5_401k.html">
    20. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
   </a>
  </li>
@@ -1003,47 +1003,7 @@ Verbal interpretation of sensitivity statistics:
 .list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
 </style>
 <ol class=list-inline><li>1276</li><li>7</li></ol>
-</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fold: 1  2  3  4  5  6  7  8  9  10  
-coef (se) = 0.0954474 (0.0246783)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Controls explain the following fraction of variance of Outcome&quot;
-[2] &quot;0.049195718972844&quot;                                             
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Controls explain the following fraction of variance of Treatment&quot;
-[2] &quot;0&quot;                                                               
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sensitivity Analysis to Unobserved Confounding
-
-Model Formula: resY ~ resD
-
-Null hypothesis: q = 1 and reduce = TRUE 
--- This means we are considering biases that reduce the absolute value of the current estimate.
--- The null hypothesis deemed problematic is H0:tau = 0 
-
-Unadjusted Estimates of &#39;resD&#39;: 
-  Coef. estimate: 0.0954 
-  Standard Error: 0.0181 
-  t-value (H0:tau = 0): 5.2599 
-
-Sensitivity Statistics:
-  Partial R2 of treatment with outcome: 0.0213 
-  Robustness Value, q = 1: 0.1369 
-  Robustness Value, q = 1, alpha = 0.05: 0.0882 
-
-Verbal interpretation of sensitivity statistics:
-
--- Partial R2 of the treatment with the outcome: an extreme confounder (orthogonal to the covariates) that explains 100% of the residual variance of the outcome, would need to explain at least 2.13% of the residual variance of the treatment to fully account for the observed estimated effect.
-
--- Robustness Value, q = 1: unobserved confounders (orthogonal to the covariates) that explain more than 13.69% of the residual variance of both the treatment and the outcome are strong enough to bring the point estimate to 0 (a bias of 100% of the original estimate). Conversely, unobserved confounders that do not explain more than 13.69% of the residual variance of both the treatment and the outcome are not strong enough to bring the point estimate to 0.
-
--- Robustness Value, q = 1, alpha = 0.05: unobserved confounders (orthogonal to the covariates) that explain more than 8.82% of the residual variance of both the treatment and the outcome are strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0 (a bias of 100% of the original estimate), at the significance level of alpha = 0.05. Conversely, unobserved confounders that do not explain more than 8.82% of the residual variance of both the treatment and the outcome are not strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0, at the significance level of alpha = 0.05.
-</pre></div>
-</div>
-<img alt="../_images/23_sensitivity-analysis-with-sensmakr-and-debiased-ml_16_5.png" src="../_images/23_sensitivity-analysis-with-sensmakr-and-debiased-ml_16_5.png" />
-</div>
+</div></div>
 </div>
 </section>
 </section>
