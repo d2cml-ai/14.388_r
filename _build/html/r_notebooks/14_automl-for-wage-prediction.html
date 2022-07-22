@@ -90,6 +90,11 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo_mit_r.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Inference on Causal and Structural Parametters Using ML and AI</h1>
@@ -230,13 +235,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="25_dml-for-ate-and-late-of-401-k-on-wealth.html">
-   25. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="26_r-weak-iv-experiments.html">
-   26. A Simple Example of Properties of IV estimator when Instruments are Weak
+   25. A Simple Example of Properties of IV estimator when Instruments are Weak
   </a>
  </li>
 </ul>
@@ -298,7 +298,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_R/master?urlpath=tree/_build/jupyter_execute/r_notebooks/14_automl-for-wage-prediction.ipynb"
+        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_r/master?urlpath=tree/_build/jupyter_execute/r_notebooks/14_automl-for-wage-prediction.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -316,7 +316,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_R/blob/master/_build/jupyter_execute/r_notebooks/14_automl-for-wage-prediction.ipynb"
+        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_r/blob/master/_build/jupyter_execute/r_notebooks/14_automl-for-wage-prediction.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -377,7 +377,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_R"
+        <a href="https://github.com/d2cml-ai/14.388_r"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -394,7 +394,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_R/issues/new?title=Issue%20on%20page%20%2Fr_notebooks/14_automl-for-wage-prediction.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/d2cml-ai/14.388_r/issues/new?title=Issue%20on%20page%20%2Fr_notebooks/14_automl-for-wage-prediction.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -411,7 +411,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_R/edit/master/_build/jupyter_execute/r_notebooks/14_automl-for-wage-prediction.ipynb"
+        <a href="https://github.com/d2cml-ai/14.388_r/edit/master/_build/jupyter_execute/r_notebooks/14_automl-for-wage-prediction.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -579,14 +579,14 @@ title="Print to PDF"
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>H2O is not running yet, starting it now...
 
 Note:  In case of errors look at the following log files:
-    /tmp/Rtmp39of4s/file26ad2042cb48/h2o_runner_started_from_r.out
-    /tmp/Rtmp39of4s/file26ad1a62a1db/h2o_runner_started_from_r.err
+    /tmp/RtmpKOLnNC/file29e230007c74/h2o_runner_started_from_r.out
+    /tmp/RtmpKOLnNC/file29e273c53df7/h2o_runner_started_from_r.err
 
 
 Starting H2O JVM and connecting: ... Connection successful!
 
 R is connected to the H2O cluster: 
-    H2O cluster uptime:         1 seconds 700 milliseconds 
+    H2O cluster uptime:         1 seconds 469 milliseconds 
     H2O cluster timezone:       UTC 
     H2O data parsing timezone:  UTC 
     H2O cluster version:        3.36.1.2 
@@ -726,15 +726,15 @@ R is connected to the H2O cluster:
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  |                                                                            
-  |=========                                                             |  14%
+  |=========                                                             |  13%
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  |                                                                            
-  |===========                                                           |  16%
+  |===========                                                           |  15%
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  |                                                                            
-  |============                                                          |  18%
+  |============                                                          |  17%
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  |                                                                            
@@ -755,6 +755,13 @@ R is connected to the H2O cluster:
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  |                                                                            
   |===================                                                   |  28%
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  |                                                                            
+  |=====================                                                 |  30%
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Job $03017f00000132d4ffffffff$_b4c56d17fb5a086365f920dcf1034f28 was cancelled.
 </pre></div>
 </div>
 </div>
@@ -957,7 +964,7 @@ rmsle                    0.129307   0.119074
     {
         requestKernel: true,
         binderOptions: {
-            repo: "d2cml-ai/14.388_R",
+            repo: "d2cml-ai/14.388_r",
             ref: "master",
         },
         codeMirrorConfig: {

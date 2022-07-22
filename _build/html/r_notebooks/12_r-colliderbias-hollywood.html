@@ -90,6 +90,11 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo_mit_r.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Inference on Causal and Structural Parametters Using ML and AI</h1>
@@ -230,13 +235,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="25_dml-for-ate-and-late-of-401-k-on-wealth.html">
-   25. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="26_r-weak-iv-experiments.html">
-   26. A Simple Example of Properties of IV estimator when Instruments are Weak
+   25. A Simple Example of Properties of IV estimator when Instruments are Weak
   </a>
  </li>
 </ul>
@@ -298,7 +298,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_R/master?urlpath=tree/_build/jupyter_execute/r_notebooks/12_r-colliderbias-hollywood.ipynb"
+        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_r/master?urlpath=tree/_build/jupyter_execute/r_notebooks/12_r-colliderbias-hollywood.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -316,7 +316,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_R/blob/master/_build/jupyter_execute/r_notebooks/12_r-colliderbias-hollywood.ipynb"
+        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_r/blob/master/_build/jupyter_execute/r_notebooks/12_r-colliderbias-hollywood.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -377,7 +377,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_R"
+        <a href="https://github.com/d2cml-ai/14.388_r"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -394,7 +394,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_R/issues/new?title=Issue%20on%20page%20%2Fr_notebooks/12_r-colliderbias-hollywood.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/d2cml-ai/14.388_r/issues/new?title=Issue%20on%20page%20%2Fr_notebooks/12_r-colliderbias-hollywood.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -411,7 +411,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_R/edit/master/_build/jupyter_execute/r_notebooks/12_r-colliderbias-hollywood.ipynb"
+        <a href="https://github.com/d2cml-ai/14.388_r/edit/master/_build/jupyter_execute/r_notebooks/12_r-colliderbias-hollywood.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -554,16 +554,16 @@ lm(formula = T ~ B)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--4.8970 -0.6734 -0.0008  0.6748  4.8049 
+-4.6622 -0.6741  0.0002  0.6744  4.8111 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept) 0.0007913  0.0009990   0.792    0.428
-B           0.0012579  0.0009990   1.259    0.208
+              Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept) -0.0014704  0.0010004   -1.47    0.142
+B            0.0004403  0.0010007    0.44    0.660
 
-Residual standard error: 0.999 on 999998 degrees of freedom
-Multiple R-squared:  1.585e-06,	Adjusted R-squared:  5.854e-07 
-F-statistic: 1.585 on 1 and 999998 DF,  p-value: 0.208
+Residual standard error: 1 on 999998 degrees of freedom
+Multiple R-squared:  1.936e-07,	Adjusted R-squared:  -8.064e-07 
+F-statistic: 0.1936 on 1 and 999998 DF,  p-value: 0.6599
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
@@ -571,19 +571,19 @@ lm(formula = T ~ B + C)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--3.2564 -0.4760  0.0005  0.4765  3.3179 
+-3.8724 -0.4770  0.0004  0.4762  3.3337 
 
 Coefficients:
-              Estimate Std. Error  t value Pr(&gt;|t|)    
-(Intercept)  0.0004564  0.0007067    0.646    0.518    
-B           -0.4992045  0.0008661 -576.396   &lt;2e-16 ***
-C            0.4993691  0.0004997  999.386   &lt;2e-16 ***
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -0.0007923  0.0007074   -1.12    0.263    
+B           -0.5003445  0.0008669 -577.20   &lt;2e-16 ***
+C            0.5000640  0.0005001 1000.02   &lt;2e-16 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 0.7067 on 999997 degrees of freedom
-Multiple R-squared:  0.4997,	Adjusted R-squared:  0.4997 
-F-statistic: 4.994e+05 on 2 and 999997 DF,  p-value: &lt; 2.2e-16
+Residual standard error: 0.7074 on 999997 degrees of freedom
+Multiple R-squared:    0.5,	Adjusted R-squared:    0.5 
+F-statistic: 5e+05 on 2 and 999997 DF,  p-value: &lt; 2.2e-16
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
@@ -591,18 +591,18 @@ lm(formula = T.H ~ B.H)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--3.9372 -0.5844 -0.0201  0.5641  4.4739 
+-4.4138 -0.5838 -0.0206  0.5621  4.5825 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  0.58542    0.00136   430.4   &lt;2e-16 ***
-B.H         -0.27052    0.00136  -198.9   &lt;2e-16 ***
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.585088   0.001364   429.0   &lt;2e-16 ***
+B.H         -0.270514   0.001363  -198.5   &lt;2e-16 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 0.8539 on 500288 degrees of freedom
-Multiple R-squared:  0.07328,	Adjusted R-squared:  0.07328 
-F-statistic: 3.956e+04 on 1 and 500288 DF,  p-value: &lt; 2.2e-16
+Residual standard error: 0.8548 on 499352 degrees of freedom
+Multiple R-squared:  0.07313,	Adjusted R-squared:  0.07313 
+F-statistic: 3.94e+04 on 1 and 499352 DF,  p-value: &lt; 2.2e-16
 </pre></div>
 </div>
 </div>
@@ -650,7 +650,7 @@ F-statistic: 3.956e+04 on 1 and 500288 DF,  p-value: &lt; 2.2e-16
     {
         requestKernel: true,
         binderOptions: {
-            repo: "d2cml-ai/14.388_R",
+            repo: "d2cml-ai/14.388_r",
             ref: "master",
         },
         codeMirrorConfig: {

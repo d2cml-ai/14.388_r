@@ -92,6 +92,11 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo_mit_r.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Inference on Causal and Structural Parametters Using ML and AI</h1>
@@ -232,13 +237,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="25_dml-for-ate-and-late-of-401-k-on-wealth.html">
-   25. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="26_r-weak-iv-experiments.html">
-   26. A Simple Example of Properties of IV estimator when Instruments are Weak
+   25. A Simple Example of Properties of IV estimator when Instruments are Weak
   </a>
  </li>
 </ul>
@@ -300,7 +300,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_R/master?urlpath=tree/_build/jupyter_execute/r_notebooks/23_sensitivity-analysis-with-sensmakr-and-debiased-ml.ipynb"
+        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_r/master?urlpath=tree/_build/jupyter_execute/r_notebooks/23_sensitivity-analysis-with-sensmakr-and-debiased-ml.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -318,7 +318,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_R/blob/master/_build/jupyter_execute/r_notebooks/23_sensitivity-analysis-with-sensmakr-and-debiased-ml.ipynb"
+        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_r/blob/master/_build/jupyter_execute/r_notebooks/23_sensitivity-analysis-with-sensmakr-and-debiased-ml.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -379,7 +379,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_R"
+        <a href="https://github.com/d2cml-ai/14.388_r"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -396,7 +396,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_R/issues/new?title=Issue%20on%20page%20%2Fr_notebooks/23_sensitivity-analysis-with-sensmakr-and-debiased-ml.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/d2cml-ai/14.388_r/issues/new?title=Issue%20on%20page%20%2Fr_notebooks/23_sensitivity-analysis-with-sensmakr-and-debiased-ml.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -413,7 +413,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_R/edit/master/_build/jupyter_execute/r_notebooks/23_sensitivity-analysis-with-sensmakr-and-debiased-ml.ipynb"
+        <a href="https://github.com/d2cml-ai/14.388_r/edit/master/_build/jupyter_execute/r_notebooks/23_sensitivity-analysis-with-sensmakr-and-debiased-ml.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -690,7 +690,7 @@ Residuals:
 
 Coefficients:
                   Estimate Cluster s.e. t value Pr(&gt;|t|)    
-(Intercept)     -7.428e-19    2.065e-17  -0.036  0.97131    
+(Intercept)     -3.757e-18    1.565e-17  -0.240  0.81032    
 directlyharmedR  9.732e-02    2.382e-02   4.085 4.68e-05 ***
 femaleR         -2.321e-01    2.444e-02  -9.495  &lt; 2e-16 ***
 ageR            -2.072e-03    7.441e-04  -2.784  0.00545 ** 
@@ -717,7 +717,7 @@ Residuals:
 
 Coefficients:
               Estimate Cluster s.e. t value Pr(&gt;|t|)    
-(Intercept) -1.375e-18    1.991e-17  -0.069  0.94496    
+(Intercept) -4.852e-18    1.516e-17  -0.320  0.74902    
 femaleR     -2.415e-01    2.536e-02  -9.522  &lt; 2e-16 ***
 ageR        -2.187e-03    7.453e-04  -2.934  0.00341 ** 
 farmerR     -4.071e-02    2.923e-02  -1.393  0.16390    
@@ -743,7 +743,7 @@ Residuals:
 
 Coefficients:
               Estimate Cluster s.e. t value Pr(&gt;|t|)  
-(Intercept) -8.331e-18    2.684e-17  -0.310   0.7563  
+(Intercept) -1.391e-17    2.052e-17  -0.678   0.4978  
 femaleR     -9.714e-02    5.129e-02  -1.894   0.0585 .
 ageR        -1.182e-03    1.151e-03  -1.028   0.3044  
 farmerR     -2.789e-03    4.280e-02  -0.065   0.9481  
@@ -798,7 +798,9 @@ F-statistic(proj model): 3.828 on 6 and 485 DF, p-value: 0.0009698
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Controls explain the following fraction of variance of Outcome&quot;
 [2] &quot;0.125108054898996&quot;                                             
-[1] &quot;Controls explain the following fraction of variance of Treatment&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Controls explain the following fraction of variance of Treatment&quot;
 [2] &quot;0.0119842379295265&quot;                                              
 </pre></div>
 </div>
@@ -811,7 +813,7 @@ Residuals:
 
 Coefficients:
              Estimate Cluster s.e. t value Pr(&gt;|t|)    
-(Intercept) 5.763e-18    1.594e-04   0.000        1    
+(Intercept) 1.057e-17    1.594e-04   0.000        1    
 resD        1.003e-01    2.443e-02   4.108 4.25e-05 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
@@ -1002,12 +1004,18 @@ Verbal interpretation of sensitivity statistics:
 </style>
 <ol class=list-inline><li>1276</li><li>7</li></ol>
 </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fold: 1  2  3  4  5  6  7  8  9  10  
-coef (se) = 0.097853 (0.0248297)
-[1] &quot;Controls explain the following fraction of variance of Outcome&quot;
-[2] &quot;0.0451160320722748&quot;                                            
-[1] &quot;Controls explain the following fraction of variance of Treatment&quot;
+coef (se) = 0.0954474 (0.0246783)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Controls explain the following fraction of variance of Outcome&quot;
+[2] &quot;0.049195718972844&quot;                                             
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Controls explain the following fraction of variance of Treatment&quot;
 [2] &quot;0&quot;                                                               
-Sensitivity Analysis to Unobserved Confounding
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sensitivity Analysis to Unobserved Confounding
 
 Model Formula: resY ~ resD
 
@@ -1016,25 +1024,25 @@ Null hypothesis: q = 1 and reduce = TRUE
 -- The null hypothesis deemed problematic is H0:tau = 0 
 
 Unadjusted Estimates of &#39;resD&#39;: 
-  Coef. estimate: 0.0979 
-  Standard Error: 0.0182 
-  t-value (H0:tau = 0): 5.3655 
+  Coef. estimate: 0.0954 
+  Standard Error: 0.0181 
+  t-value (H0:tau = 0): 5.2599 
 
 Sensitivity Statistics:
-  Partial R2 of treatment with outcome: 0.0221 
-  Robustness Value, q = 1: 0.1394 
-  Robustness Value, q = 1, alpha = 0.05: 0.0909 
+  Partial R2 of treatment with outcome: 0.0213 
+  Robustness Value, q = 1: 0.1369 
+  Robustness Value, q = 1, alpha = 0.05: 0.0882 
 
 Verbal interpretation of sensitivity statistics:
 
--- Partial R2 of the treatment with the outcome: an extreme confounder (orthogonal to the covariates) that explains 100% of the residual variance of the outcome, would need to explain at least 2.21% of the residual variance of the treatment to fully account for the observed estimated effect.
+-- Partial R2 of the treatment with the outcome: an extreme confounder (orthogonal to the covariates) that explains 100% of the residual variance of the outcome, would need to explain at least 2.13% of the residual variance of the treatment to fully account for the observed estimated effect.
 
--- Robustness Value, q = 1: unobserved confounders (orthogonal to the covariates) that explain more than 13.94% of the residual variance of both the treatment and the outcome are strong enough to bring the point estimate to 0 (a bias of 100% of the original estimate). Conversely, unobserved confounders that do not explain more than 13.94% of the residual variance of both the treatment and the outcome are not strong enough to bring the point estimate to 0.
+-- Robustness Value, q = 1: unobserved confounders (orthogonal to the covariates) that explain more than 13.69% of the residual variance of both the treatment and the outcome are strong enough to bring the point estimate to 0 (a bias of 100% of the original estimate). Conversely, unobserved confounders that do not explain more than 13.69% of the residual variance of both the treatment and the outcome are not strong enough to bring the point estimate to 0.
 
--- Robustness Value, q = 1, alpha = 0.05: unobserved confounders (orthogonal to the covariates) that explain more than 9.09% of the residual variance of both the treatment and the outcome are strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0 (a bias of 100% of the original estimate), at the significance level of alpha = 0.05. Conversely, unobserved confounders that do not explain more than 9.09% of the residual variance of both the treatment and the outcome are not strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0, at the significance level of alpha = 0.05.
+-- Robustness Value, q = 1, alpha = 0.05: unobserved confounders (orthogonal to the covariates) that explain more than 8.82% of the residual variance of both the treatment and the outcome are strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0 (a bias of 100% of the original estimate), at the significance level of alpha = 0.05. Conversely, unobserved confounders that do not explain more than 8.82% of the residual variance of both the treatment and the outcome are not strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0, at the significance level of alpha = 0.05.
 </pre></div>
 </div>
-<img alt="../_images/23_sensitivity-analysis-with-sensmakr-and-debiased-ml_16_2.png" src="../_images/23_sensitivity-analysis-with-sensmakr-and-debiased-ml_16_2.png" />
+<img alt="../_images/23_sensitivity-analysis-with-sensmakr-and-debiased-ml_16_5.png" src="../_images/23_sensitivity-analysis-with-sensmakr-and-debiased-ml_16_5.png" />
 </div>
 </div>
 </section>
@@ -1044,7 +1052,7 @@ Verbal interpretation of sensitivity statistics:
     {
         requestKernel: true,
         binderOptions: {
-            repo: "d2cml-ai/14.388_R",
+            repo: "d2cml-ai/14.388_r",
             ref: "master",
         },
         codeMirrorConfig: {
