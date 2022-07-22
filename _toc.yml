@@ -8,6 +8,7 @@ options:  # The options key will be applied to all chapters, but not sub-section
 chapters:
   - file: r_notebooks/01_r-notebook-linear-model-overfiting
   - file: r_notebooks/02_ols-and-lasso-for-wage-prediction
+  - file: r_notebooks/03_ols_and_lasso_for_gender_wage_gap_inference
   - file: r_notebooks/03_ols-and-lasso-for-gender-wage-gap-inference
   - file: r_notebooks/04_r-notebook-some-rct-examples
   - file: r_notebooks/05_r-notebook-analyzing-rct-with-precision
@@ -25,6 +26,7 @@ chapters:
   - file: r_notebooks/17_notebook-dosearch
   - file: r_notebooks/18_dml-inference-for-gun-ownership
   - file: r_notebooks/19_dml-inference-using-nn-for-gun-ownership
+  - file: r_notebooks/20_pm5_401k
   - file: r_notebooks/20_dml-for-ate-and-late-of-401-k-on-wealth
   - file: r_notebooks/21_identification-analysis-of-401-k-example-w-dags
   - file: r_notebooks/22_debiased-ml-for-partially-linear-model-in-r

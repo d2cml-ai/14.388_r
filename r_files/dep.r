@@ -38,7 +38,7 @@ librarian::shelf(
 
 install.packages("remotes")
 install.packages("dagitty")
-install.packages("ggdag")
+# install.packages("ggdag")
 
 remotes::install_github("IRkernel/IRkernel")
 remotes::install_github("cran/ORCI")
