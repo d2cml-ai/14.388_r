@@ -3,7 +3,7 @@
 
 title: Inference on Causal and Structural Parametters Using ML and AI
 author: Victor Chernozhukov
-logo: figs/logo_mit_r.png
+logo: figs/mit.png
 
 execute:
   execute_notebooks: force
