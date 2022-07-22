@@ -6,31 +6,28 @@ root: intro
 options:  # The options key will be applied to all chapters, but not sub-sections
   numbered: True
 chapters:
-  - file: r_notebooks/01_r-notebook-linear-model-overfiting
-  - file: r_notebooks/02_ols-and-lasso-for-wage-prediction
+  - file: r_notebooks/01_r_notebook_linear_model_overfiting
+  - file: r_notebooks/02_ols_and_lasso_for_wage_prediction
   - file: r_notebooks/03_ols_and_lasso_for_gender_wage_gap_inference
-  - file: r_notebooks/03_ols-and-lasso-for-gender-wage-gap-inference
-  - file: r_notebooks/04_r-notebook-some-rct-examples
-  - file: r_notebooks/05_r-notebook-analyzing-rct-with-precision
-  - file: r_notebooks/06_analyzing-rct-reemployment-experiment
-  - file: r_notebooks/07_r-notebook-linear-penalized-regs
-  - file: r_notebooks/08_ml-for-wage-prediction
-  - file: r_notebooks/09_r-notebook-experiment-on-orthogonal-learning (1)
-  - file: r_notebooks/10_double-lasso-for-the-convergence-hypothesis
-  - file: r_notebooks/11_heterogenous-wage-effects
-  - file: r_notebooks/12_r-colliderbias-hollywood
-  - file: r_notebooks/13_deep-neural-networks-for-wage-prediction
-  - file: r_notebooks/14_automl-for-wage-prediction
-  - file: r_notebooks/15_functional-approximation-by-nn-and-rf
-  - file: r_notebooks/16_notebook-dagitty
-  - file: r_notebooks/17_notebook-dosearch
-  - file: r_notebooks/18_dml-inference-for-gun-ownership
-  - file: r_notebooks/19_dml-inference-using-nn-for-gun-ownership
+  - file: r_notebooks/04_r_notebook_some_rct_examples
+  - file: r_notebooks/05_r_notebook_analyzing_rct_with_precision
+  - file: r_notebooks/06_analyzing_rct_reemployment_experiment
+  - file: r_notebooks/07_r_notebook_linear_penalized_regs
+  - file: r_notebooks/08_ml_for_wage_prediction
+  - file: r_notebooks/09_r_notebook_experiment_on_orthogonal_learning
+  - file: r_notebooks/10_double_lasso_for_the_convergence_hypothesis
+  - file: r_notebooks/11_heterogenous_wage_effects
+  - file: r_notebooks/12_r_colliderbias_hollywood
+  - file: r_notebooks/13_deep_neural_networks_for_wage_prediction
+  - file: r_notebooks/14_automl_for_wage_prediction
+  - file: r_notebooks/15_functional_approximation_by_nn_and_rf
+  - file: r_notebooks/16_notebook_dagitty
+  - file: r_notebooks/17_notebook_dosearch
+  - file: r_notebooks/18_dml_inference_for_gun_ownership
+  - file: r_notebooks/19_dml_inference_using_nn_for_gun_ownership
   - file: r_notebooks/20_pm5_401k
-  - file: r_notebooks/20_dml-for-ate-and-late-of-401-k-on-wealth
-  - file: r_notebooks/21_identification-analysis-of-401-k-example-w-dags
-  - file: r_notebooks/22_debiased-ml-for-partially-linear-model-in-r
-  - file: r_notebooks/23_sensitivity-analysis-with-sensmakr-and-debiased-ml
-  - file: r_notebooks/24_debiased-ml-for-partially-linear-iv-model-in-r
-  # - file: r_notebooks/25_dml-for-ate-and-late-of-401-k-on-wealth
-  - file: r_notebooks/26_r-weak-iv-experiments
+  - file: r_notebooks/21_identification_analysis_of_401_k_example_w_dags
+  - file: r_notebooks/22_debiased_ml_for_partially_linear_model_in_r
+  - file: r_notebooks/23_sensitivity_analysis_with_sensmakr_and_debiased_ml
+  - file: r_notebooks/24_debiased_ml_for_partially_linear_iv_model_in_r
+  - file: r_notebooks/25_r_weak_iv_experiments
