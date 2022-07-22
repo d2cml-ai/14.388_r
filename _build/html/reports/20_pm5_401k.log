@@ -32,15 +32,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-# Random Forest
-lgr::get_logger("mlr3")$set_threshold("warn") 
-randomForest <- lrn("regr.ranger")
-randomForest_class <- lrn("classif.ranger")
-
-dml_plr <- DoubleMLPLR$new(data_ml_aux, ml_g = randomForest, ml_m = randomForest_class, n_folds=3)
-dml_plr$fit(store_predictions=TRUE) # set store_predictions=TRUE to evaluate the model
-dml_plr$summary()
-forest_plr <- dml_plr$coef
-forest_std_plr <- dml_plr$se
+['install.packages("librarian")', 'librarian::shelf(', '  hdm, ggplot2, ', '  , DoubleML', '  , mlr3learners']
+...
+['library(hdm) ', 'library(ggplot2)', 'data(pension)', 'data <- pension ', 'dim(data)']
 -------------------
 

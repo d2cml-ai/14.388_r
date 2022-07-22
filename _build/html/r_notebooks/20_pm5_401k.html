@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>20. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
+    <title>20. DML for ATE and LATE of 401(k) on Wealth &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="21. Using Dagitty in the Analysis of Impact of 401(k) on Net Financial Wealth" href="21_identification-analysis-of-401-k-example-w-dags.html" />
-    <link rel="prev" title="19. The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets" href="19_dml-inference-using-nn-for-gun-ownership.html" />
+    <link rel="next" title="21. Debiased ML for Partially Linear Model in R" href="21_identification_analysis_of_401_k_example_w_dags.html" />
+    <link rel="prev" title="19. DML inference using NN for gun ownership" href="19_dml_inference_using_nn_for_gun_ownership.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -117,128 +117,128 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="01_r-notebook-linear-model-overfiting.html">
-   1. Simple Exercise on Overfitting
+  <a class="reference internal" href="01_r_notebook_linear_model_overfiting.html">
+   1. Linear Model Overfiting
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="02_ols-and-lasso-for-wage-prediction.html">
+  <a class="reference internal" href="02_ols_and_lasso_for_wage_prediction.html">
    2. OLS and lasso for wage prediction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_ols_and_lasso_for_gender_wage_gap_inference.html">
-   3. An inferential problem: The Gender Wage Gap
+   3. OLS and lasso for gender wage gap inference
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="04_r-notebook-some-rct-examples.html">
-   4. Polio RCT
+  <a class="reference internal" href="04_r_notebook_some_rct_examples.html">
+   4. Some RCT Examples
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="05_r-notebook-analyzing-rct-with-precision.html">
-   5. Analyzing RCT with Precision by Adjusting for Baseline Covariates
+  <a class="reference internal" href="05_r_notebook_analyzing_rct_with_precision.html">
+   5. Analyzing RCT reemployment experiment with Precision by Ajusting for Baseline Covariates
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="06_analyzing-rct-reemployment-experiment.html">
-   6. Analyzing RCT data with Precision Adjustment
+  <a class="reference internal" href="06_analyzing_rct_reemployment_experiment.html">
+   6. Analyzing RCT reemployment experiment
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="07_r-notebook-linear-penalized-regs.html">
-   7. Penalized Linear Regressions: A Simulation Experiment
+  <a class="reference internal" href="07_r_notebook_linear_penalized_regs.html">
+   7. Linear Penalized Regs
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="08_ml-for-wage-prediction.html">
-   8. Machine Learning Estimators for Wage Prediction
+  <a class="reference internal" href="08_ml_for_wage_prediction.html">
+   8. ML for wage prediction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="09_r-notebook-experiment-on-orthogonal-learning%20%281%29.html">
+  <a class="reference internal" href="09_r_notebook_experiment_on_orthogonal_learning.html">
    9. Experiment on orthogonal Learning
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="10_double-lasso-for-the-convergence-hypothesis.html">
-   10. Double Lasso for Testing the Convergence Hypothesis
+  <a class="reference internal" href="10_double_lasso_for_the_convergence_hypothesis.html">
+   10. Double Lasso for the convergence hypothesis
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="11_heterogenous-wage-effects.html">
-   11. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+  <a class="reference internal" href="11_heterogenous_wage_effects.html">
+   11. Heterogenous Wage Effects
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="12_r-colliderbias-hollywood.html">
-   12. Collider Bias
+  <a class="reference internal" href="12_r_colliderbias_hollywood.html">
+   12. ColliderBias Hollywood
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="13_deep-neural-networks-for-wage-prediction.html">
+  <a class="reference internal" href="13_deep_neural_networks_for_wage_prediction.html">
    13. Deep Neural Networks for Wage Prediction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="14_automl-for-wage-prediction.html">
-   14. Automatic Machine Learning with H2O AutoML
+  <a class="reference internal" href="14_automl_for_wage_prediction.html">
+   14. AutoML for wage prediction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="15_functional-approximation-by-nn-and-rf.html">
-   15. Functional Approximations by Trees and Neural Networks
+  <a class="reference internal" href="15_functional_approximation_by_nn_and_rf.html">
+   15. Functional Approximation By NN and RF
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="16_notebook-dagitty.html">
-   16. Causal Identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsifiability Tests
+  <a class="reference internal" href="16_notebook_dagitty.html">
+   16. Notebook-DAGitty
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="17_notebook-dosearch.html">
-   17. Dosearch for Causal Identification in DAGs.
+  <a class="reference internal" href="17_notebook_dosearch.html">
+   17. Notebook-Dosearch
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="18_dml-inference-for-gun-ownership.html">
-   18. A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+  <a class="reference internal" href="18_dml_inference_for_gun_ownership.html">
+   18. DML inference for gun ownership
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="19_dml-inference-using-nn-for-gun-ownership.html">
-   19. The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets
+  <a class="reference internal" href="19_dml_inference_using_nn_for_gun_ownership.html">
+   19. DML inference using NN for gun ownership
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   20. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
+   20. DML for ATE and LATE of 401(k) on Wealth
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="21_identification-analysis-of-401-k-example-w-dags.html">
-   21. Using Dagitty in the Analysis of Impact of 401(k) on Net Financial Wealth
+  <a class="reference internal" href="21_identification_analysis_of_401_k_example_w_dags.html">
+   21. Debiased ML for Partially Linear Model in R
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="22_debiased-ml-for-partially-linear-model-in-r.html">
-   22. Double/Debiased Machine Learning for the Partially Linear Regression Model.
+  <a class="reference internal" href="22_debiased_ml_for_partially_linear_model_in_r.html">
+   22. Debiased ML for Partially Linear Model in R
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="23_sensitivity-analysis-with-sensmakr-and-debiased-ml.html">
-   23. Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr
+  <a class="reference internal" href="23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">
+   23. Sensitivity Analysis with Sensmakr and Debiased ML
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-r.html">
-   24. Double/Debiased ML for Partially Linear IV Model
+  <a class="reference internal" href="24_debiased_ml_for_partially_linear_iv_model_in_r.html">
+   24. Debiased ML for Partially Linear IV Model in R
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="26_r-weak-iv-experiments.html">
-   25. A Simple Example of Properties of IV estimator when Instruments are Weak
+  <a class="reference internal" href="25_r_weak_iv_experiments.html">
+   25. Weak IV Experiments
   </a>
  </li>
 </ul>
@@ -570,7 +570,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models</h1>
+                <h1>DML for ATE and LATE of 401(k) on Wealth</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -651,8 +651,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="inference-on-predictive-and-causal-effects-in-high-dimensional-nonlinear-models">
-<h1><span class="section-number">20. </span>Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models<a class="headerlink" href="#inference-on-predictive-and-causal-effects-in-high-dimensional-nonlinear-models" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="dml-for-ate-and-late-of-401-k-on-wealth">
+<h1><span class="section-number">20. </span>DML for ATE and LATE of 401(k) on Wealth<a class="headerlink" href="#dml-for-ate-and-late-of-401-k-on-wealth" title="Permalink to this headline">#</a></h1>
 <section id="impact-of-401-k-on-financial-wealth">
 <h2><span class="section-number">20.1. </span>Impact of 401(k) on  Financial Wealth<a class="headerlink" href="#impact-of-401-k-on-financial-wealth" title="Permalink to this headline">#</a></h2>
 <p>As a practical illustration of the methods developed in this lecture, we consider estimation of the effect of 401(k) eligibility and participation
@@ -695,13 +695,7 @@ on accumulated assets. 401(k) plans are pension accounts sponsored by employers.
   It may take some time.
 </pre></div>
 </div>
-<div class="output text_html"><style>
-.list-inline {list-style: none; margin:0; padding: 0}
-.list-inline>li {display: inline-block}
-.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
-</style>
-<ol class=list-inline><li>9915</li><li>44</li></ol>
-</div></div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -960,40 +954,11 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 The redirection will be removed in a future version.”
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>Error in ranger::ranger(dependent.variable.name = task$target_names, data = task$data(), : User interrupt or internal error.
-Traceback:
-
-1. dml_plr$fit(store_predictions = TRUE)
-2. private$nuisance_est(private$get__smpls())
-3. dml_cv_predict(self$learner$ml_m, c(self$data$x_cols, self$data$other_treat_cols), 
- .     self$data$treat_col, self$data$data_model, nuisance_id = &quot;nuis_m&quot;, 
- .     smpls = smpls, est_params = self$get_params(&quot;ml_m&quot;), return_train_preds = FALSE, 
- .     task_type = private$task_type$ml_m, fold_specific_params = private$fold_specific_params)
-4. resample(task_pred, ml_learner, resampling_smpls, store_models = TRUE)
-5. future_map(n, workhorse, iteration = seq_len(n), learner = grid$learner, 
- .     mode = grid$mode, MoreArgs = list(task = task, resampling = resampling, 
- .         store_models = store_models, lgr_threshold = lgr_threshold, 
- .         pb = pb))   # at line 108-110 of file /tmp/RtmpSIaf0N/R.INSTALL1df074ab60df/mlr3/R/resample.R
-6. future.apply::future_mapply(FUN, ..., MoreArgs = MoreArgs, SIMPLIFY = FALSE, 
- .     USE.NAMES = FALSE, future.globals = FALSE, future.packages = &quot;mlr3&quot;, 
- .     future.seed = TRUE, future.scheduling = scheduling, future.chunk.size = chunk_size, 
- .     future.stdout = stdout)   # at line 36-39 of file /tmp/RtmpSIaf0N/R.INSTALL1df074ab60df/mlr3/R/helper_exec.R
-7. future_xapply(FUN = FUN, nX = nX, chunk_args = dots, MoreArgs = MoreArgs, 
- .     get_chunk = function(X, chunk) lapply(X, FUN = `[`, chunk), 
- .     expr = expr, envir = envir, future.envir = future.envir, 
- .     future.globals = future.globals, future.packages = future.packages, 
- .     future.scheduling = future.scheduling, future.chunk.size = future.chunk.size, 
- .     future.stdout = future.stdout, future.conditions = future.conditions, 
- .     future.seed = future.seed, future.label = future.label, fcn_name = fcn_name, 
- .     args_name = args_name, debug = debug)
-8. value(fs)
-9. value.list(fs)
-10. resolve(y, result = TRUE, stdout = stdout, signal = signal, force = TRUE)
-11. resolve.list(y, result = TRUE, stdout = stdout, signal = signal, 
-  .     force = TRUE)
-12. signalConditionsASAP(obj, resignal = FALSE, pos = ii)
-13. signalConditions(obj, exclude = getOption(&quot;future.relay.immediate&quot;, 
-  .     &quot;immediateCondition&quot;), resignal = resignal, ...)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimates and significance testing of the effect of target variables
+     Estimate. Std. Error t value Pr(&gt;|t|)    
+e401      8359       1267   6.599 4.14e-11 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 </pre></div>
 </div>
 </div>
@@ -1754,17 +1719,17 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="19_dml-inference-using-nn-for-gun-ownership.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="19_dml_inference_using_nn_for_gun_ownership.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">19. </span>The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets</p>
+            <p class="prev-next-title"><span class="section-number">19. </span>DML inference using NN for gun ownership</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="21_identification-analysis-of-401-k-example-w-dags.html" title="next page">
+    <a class='right-next' id="next-link" href="21_identification_analysis_of_401_k_example_w_dags.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">21. </span>Using Dagitty in the Analysis of Impact of 401(k) on Net Financial Wealth</p>
+        <p class="prev-next-title"><span class="section-number">21. </span>Debiased ML for Partially Linear Model in R</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
