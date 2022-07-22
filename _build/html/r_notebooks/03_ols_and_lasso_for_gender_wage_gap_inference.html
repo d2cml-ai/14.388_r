@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3. An inferential problem: The Gender Wage Gap &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
+    <title>3. OLS and lasso for gender wage gap inference &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4. Polio RCT" href="04_r-notebook-some-rct-examples.html" />
-    <link rel="prev" title="2. OLS and lasso for wage prediction" href="02_ols-and-lasso-for-wage-prediction.html" />
+    <link rel="next" title="4. Some RCT Examples" href="04_r_notebook_some_rct_examples.html" />
+    <link rel="prev" title="2. OLS and lasso for wage prediction" href="02_ols_and_lasso_for_wage_prediction.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -117,128 +117,128 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="01_r-notebook-linear-model-overfiting.html">
-   1. Simple Exercise on Overfitting
+  <a class="reference internal" href="01_r_notebook_linear_model_overfiting.html">
+   1. Linear Model Overfiting
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="02_ols-and-lasso-for-wage-prediction.html">
+  <a class="reference internal" href="02_ols_and_lasso_for_wage_prediction.html">
    2. OLS and lasso for wage prediction
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   3. An inferential problem: The Gender Wage Gap
+   3. OLS and lasso for gender wage gap inference
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="04_r-notebook-some-rct-examples.html">
-   4. Polio RCT
+  <a class="reference internal" href="04_r_notebook_some_rct_examples.html">
+   4. Some RCT Examples
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="05_r-notebook-analyzing-rct-with-precision.html">
-   5. Analyzing RCT with Precision by Adjusting for Baseline Covariates
+  <a class="reference internal" href="05_r_notebook_analyzing_rct_with_precision.html">
+   5. Analyzing RCT reemployment experiment with Precision by Ajusting for Baseline Covariates
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="06_analyzing-rct-reemployment-experiment.html">
-   6. Analyzing RCT data with Precision Adjustment
+  <a class="reference internal" href="06_analyzing_rct_reemployment_experiment.html">
+   6. Analyzing RCT reemployment experiment
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="07_r-notebook-linear-penalized-regs.html">
-   7. Penalized Linear Regressions: A Simulation Experiment
+  <a class="reference internal" href="07_r_notebook_linear_penalized_regs.html">
+   7. Linear Penalized Regs
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="08_ml-for-wage-prediction.html">
-   8. Machine Learning Estimators for Wage Prediction
+  <a class="reference internal" href="08_ml_for_wage_prediction.html">
+   8. ML for wage prediction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="09_r-notebook-experiment-on-orthogonal-learning%20%281%29.html">
+  <a class="reference internal" href="09_r_notebook_experiment_on_orthogonal_learning.html">
    9. Experiment on orthogonal Learning
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="10_double-lasso-for-the-convergence-hypothesis.html">
-   10. Double Lasso for Testing the Convergence Hypothesis
+  <a class="reference internal" href="10_double_lasso_for_the_convergence_hypothesis.html">
+   10. Double Lasso for the convergence hypothesis
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="11_heterogenous-wage-effects.html">
-   11. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+  <a class="reference internal" href="11_heterogenous_wage_effects.html">
+   11. Heterogenous Wage Effects
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="12_r-colliderbias-hollywood.html">
-   12. Collider Bias
+  <a class="reference internal" href="12_r_colliderbias_hollywood.html">
+   12. ColliderBias Hollywood
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="13_deep-neural-networks-for-wage-prediction.html">
+  <a class="reference internal" href="13_deep_neural_networks_for_wage_prediction.html">
    13. Deep Neural Networks for Wage Prediction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="14_automl-for-wage-prediction.html">
-   14. Automatic Machine Learning with H2O AutoML
+  <a class="reference internal" href="14_automl_for_wage_prediction.html">
+   14. AutoML for wage prediction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="15_functional-approximation-by-nn-and-rf.html">
-   15. Functional Approximations by Trees and Neural Networks
+  <a class="reference internal" href="15_functional_approximation_by_nn_and_rf.html">
+   15. Functional Approximation By NN and RF
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="16_notebook-dagitty.html">
-   16. Causal Identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsifiability Tests
+  <a class="reference internal" href="16_notebook_dagitty.html">
+   16. Notebook-DAGitty
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="17_notebook-dosearch.html">
-   17. Dosearch for Causal Identification in DAGs.
+  <a class="reference internal" href="17_notebook_dosearch.html">
+   17. Notebook-Dosearch
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="18_dml-inference-for-gun-ownership.html">
-   18. A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+  <a class="reference internal" href="18_dml_inference_for_gun_ownership.html">
+   18. DML inference for gun ownership
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="19_dml-inference-using-nn-for-gun-ownership.html">
-   19. The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets
+  <a class="reference internal" href="19_dml_inference_using_nn_for_gun_ownership.html">
+   19. DML inference using NN for gun ownership
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="20_pm5_401k.html">
-   20. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
+   20. DML for ATE and LATE of 401(k) on Wealth
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="21_identification-analysis-of-401-k-example-w-dags.html">
-   21. Using Dagitty in the Analysis of Impact of 401(k) on Net Financial Wealth
+  <a class="reference internal" href="21_identification_analysis_of_401_k_example_w_dags.html">
+   21. Debiased ML for Partially Linear Model in R
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="22_debiased-ml-for-partially-linear-model-in-r.html">
-   22. Double/Debiased Machine Learning for the Partially Linear Regression Model.
+  <a class="reference internal" href="22_debiased_ml_for_partially_linear_model_in_r.html">
+   22. Debiased ML for Partially Linear Model in R
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="23_sensitivity-analysis-with-sensmakr-and-debiased-ml.html">
-   23. Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr
+  <a class="reference internal" href="23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">
+   23. Sensitivity Analysis with Sensmakr and Debiased ML
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-r.html">
-   24. Double/Debiased ML for Partially Linear IV Model
+  <a class="reference internal" href="24_debiased_ml_for_partially_linear_iv_model_in_r.html">
+   24. Debiased ML for Partially Linear IV Model in R
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="26_r-weak-iv-experiments.html">
-   25. A Simple Example of Properties of IV estimator when Instruments are Weak
+  <a class="reference internal" href="25_r_weak_iv_experiments.html">
+   25. Weak IV Experiments
   </a>
  </li>
 </ul>
@@ -514,7 +514,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>An inferential problem: The Gender Wage Gap</h1>
+                <h1>OLS and lasso for gender wage gap inference</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -539,8 +539,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="an-inferential-problem-the-gender-wage-gap">
-<h1><span class="section-number">3. </span>An inferential problem: The Gender Wage Gap<a class="headerlink" href="#an-inferential-problem-the-gender-wage-gap" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="ols-and-lasso-for-gender-wage-gap-inference">
+<h1><span class="section-number">3. </span>OLS and lasso for gender wage gap inference<a class="headerlink" href="#ols-and-lasso-for-gender-wage-gap-inference" title="Permalink to this headline">#</a></h1>
 <p>In the previous lab, we analyzed data from the March Supplement of the U.S. Current Population Survey (2015) and answered the question of how to use job-relevant characteristics, such as education and experience, to best predict wages. Now, we focus on the following inference question:</p>
 <p>What is the difference in predicted wages between men and women with the same job-relevant characteristics?</p>
 <p>Thus, we analyze if there is a difference in the payment of men and women (<em>gender wage gap</em>). The gender wage gap may partly reflect <em>discrimination</em> against women in the labor market or may partly reflect a <em>selection effect</em>, namely that women are relatively more likely to take on occupations that pay somewhat less (for example, school teaching).</p>
@@ -1125,17 +1125,17 @@ sparsity, although other regularity conditions are needed.</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="02_ols-and-lasso-for-wage-prediction.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="02_ols_and_lasso_for_wage_prediction.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title"><span class="section-number">2. </span>OLS and lasso for wage prediction</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="04_r-notebook-some-rct-examples.html" title="next page">
+    <a class='right-next' id="next-link" href="04_r_notebook_some_rct_examples.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>Polio RCT</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Some RCT Examples</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
