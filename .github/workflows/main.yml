@@ -6,7 +6,7 @@ name: Jupyter
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" , "updates"]
+    branches: [ "main" , "updates", "data"]
   # pull_request:
     # branches: [ "main" ]
 
@@ -65,7 +65,8 @@ jobs:
       - id: R_book
         name: Rbuild 
         # run: jupyter execute 01_r-notebook-linear-model-overfiting.ipynb
-        run: jb clean -a . ; jb build .
+        # run: jb clean -a . ; jb build .
+        run: jb build .
         shell: bash
 
       - id: ghp
