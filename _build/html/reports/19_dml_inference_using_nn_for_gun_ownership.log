@@ -79,7 +79,7 @@ for(i in 1:length(varlist)){
 }
 ------------------
 
-Error in open.connection(structure(4L, class = c("curl", "connection"), conn_id = <pointer: 0x559>), : HTTP error 404.
+Error in open.connection(structure(4L, class = c("curl", "connection"), conn_id = <pointer: 0x558>), : HTTP error 404.
 Traceback:
 
 1. read_csv("https://raw.githubusercontent.com/d2cml-ai/14.388_R/main/Data/gun_clean.csv", 
@@ -103,9 +103,9 @@ Traceback:
  .     num_threads = num_threads, progress = progress)
 4. (function (con, ...) 
  . UseMethod("open"))(structure(4L, class = c("curl", "connection"
- . ), conn_id = <pointer: 0x559>), "rb")
-5. open.connection(structure(4L, class = c("curl", "connection"), conn_id = <pointer: 0x559>), 
+ . ), conn_id = <pointer: 0x558>), "rb")
+5. open.connection(structure(4L, class = c("curl", "connection"), conn_id = <pointer: 0x558>), 
  .     "rb")
-ERROR: Error in open.connection(structure(4L, class = c("curl", "connection"), conn_id = <pointer: 0x559>), : HTTP error 404.
+ERROR: Error in open.connection(structure(4L, class = c("curl", "connection"), conn_id = <pointer: 0x558>), : HTTP error 404.
 
 

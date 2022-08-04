@@ -33,7 +33,7 @@ Traceback:
 1. as_tibble(read.table("https://github.com/d2cml-ai/14.388_r/raw/main/Data/penn_jae.dat", 
  .     header = T))
 2. read.table("https://github.com/d2cml-ai/14.388_r/raw/main/Data/penn_jae.dat", 
- .     header = T)   # at line 60 of file /tmp/Rtmpk9TcSO/R.INSTALL1ddf2d22195e/tibble/R/as_tibble.R
+ .     header = T)
 3. file(file, "rt")
 ERROR: Error in file(file, "rt"): cannot open the connection to 'https://github.com/d2cml-ai/14.388_r/raw/main/Data/penn_jae.dat'
 

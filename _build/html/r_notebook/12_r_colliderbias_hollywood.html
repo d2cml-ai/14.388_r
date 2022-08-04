@@ -94,7 +94,7 @@ const thebe_selector_output = ".output, .cell_output"
         
       
       
-      <img src="../_static/mit.png" class="logo" alt="logo">
+      <img src="../_static/main_logo_ai_light.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Inference on Causal and Structural Parametters Using ML and AI</h1>
@@ -554,16 +554,18 @@ lm(formula = T ~ B)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--5.2518 -0.6760 -0.0001  0.6754  4.8052 
+-5.0478 -0.6743  0.0002  0.6741  4.5763 
 
 Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)  0.0003487  0.0010013   0.348    0.728
-B           -0.0013454  0.0010017  -1.343    0.179
+             Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept) 0.0024647  0.0010001   2.464   0.0137 *
+B           0.0004337  0.0010000   0.434   0.6645  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 1.001 on 999998 degrees of freedom
-Multiple R-squared:  1.804e-06,	Adjusted R-squared:  8.04e-07 
-F-statistic: 1.804 on 1 and 999998 DF,  p-value: 0.1792
+Residual standard error: 1 on 999998 degrees of freedom
+Multiple R-squared:  1.881e-07,	Adjusted R-squared:  -8.119e-07 
+F-statistic: 0.1881 on 1 and 999998 DF,  p-value: 0.6645
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
@@ -571,19 +573,19 @@ lm(formula = T ~ B + C)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--3.3554 -0.4773 -0.0001  0.4773  3.6313 
+-3.5422 -0.4772 -0.0002  0.4783  3.5504 
 
 Coefficients:
               Estimate Std. Error  t value Pr(&gt;|t|)    
-(Intercept)  0.0005331  0.0007082    0.753    0.452    
-B           -0.5010237  0.0008671 -577.785   &lt;2e-16 ***
-C            0.5003987  0.0005007  999.427   &lt;2e-16 ***
+(Intercept)  0.0017210  0.0007077    2.432    0.015 *  
+B           -0.4995561  0.0008669 -576.255   &lt;2e-16 ***
+C            0.4998933  0.0005007  998.480   &lt;2e-16 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 0.7082 on 999997 degrees of freedom
-Multiple R-squared:  0.4997,	Adjusted R-squared:  0.4997 
-F-statistic: 4.994e+05 on 2 and 999997 DF,  p-value: &lt; 2.2e-16
+Residual standard error: 0.7077 on 999997 degrees of freedom
+Multiple R-squared:  0.4992,	Adjusted R-squared:  0.4992 
+F-statistic: 4.985e+05 on 2 and 999997 DF,  p-value: &lt; 2.2e-16
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
@@ -591,18 +593,18 @@ lm(formula = T.H ~ B.H)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--3.6660 -0.5866 -0.0208  0.5643  4.5351 
+-3.7004 -0.5835 -0.0197  0.5657  4.1167 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  0.584478   0.001366   427.7   &lt;2e-16 ***
-B.H         -0.269302   0.001367  -197.0   &lt;2e-16 ***
+(Intercept)  0.586126   0.001361   430.7   &lt;2e-16 ***
+B.H         -0.269356   0.001361  -197.9   &lt;2e-16 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 0.8573 on 499566 degrees of freedom
-Multiple R-squared:  0.07207,	Adjusted R-squared:  0.07207 
-F-statistic: 3.88e+04 on 1 and 499566 DF,  p-value: &lt; 2.2e-16
+Residual standard error: 0.8551 on 501003 degrees of freedom
+Multiple R-squared:  0.07249,	Adjusted R-squared:  0.07249 
+F-statistic: 3.916e+04 on 1 and 501003 DF,  p-value: &lt; 2.2e-16
 </pre></div>
 </div>
 </div>
